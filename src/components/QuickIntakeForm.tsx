@@ -74,7 +74,7 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
         We'll review your submission and reply the same business day.
       </p>
     </div>
-    <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
+    <div className="quick-intake-ctas flex flex-col sm:flex-row gap-4 justify-center">
       <Button 
         variant="outline" 
         className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
@@ -463,7 +463,7 @@ Submitted: ${new Date().toLocaleString()}
 
                 {/* Secondary Actions */}
                 <div className="pt-4 border-t border-border">
-                  <div className="flex flex-col sm:flex-row gap-4 sm:justify-end mt-4">
+                  <div className="quick-intake-ctas flex flex-col sm:flex-row gap-4 justify-center mt-4">
                     <Button 
                       variant="outline" 
                       className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
