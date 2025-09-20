@@ -3,9 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, TrendingUp, Users, Clock, Shield } from "lucide-react";
 import { QuickIntakeForm } from "@/components/QuickIntakeForm";
 import heroImage from "@/assets/hero-real-estate.jpg";
-import sanAntonioFlip from "@/assets/san-antonio-flip.jpg";
-import houstonCompleted from "@/assets/houston-completed.webp";
-import houstonFlipInterior from "@/assets/houston-flip-interior.jpg";
+import sanAntonioFlip from "@/assets/san-antonio-flip-optimized.webp";
+import houstonCompleted from "@/assets/houston-completed-optimized.webp";
+import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
 const Index = () => {
   const credibilityItems = ["Former loan officer", "Nationwide lender network", "High close rate on accepted files", "Transparent terms"];
   const services = [{
