@@ -418,4 +418,24 @@
     background: var(--cta-band-hover-bg) !important;
     border-color: var(--cta-band-border) !important;
   }
+
+  /* Contact page right column buttons - match solid dark "Send Message" style */
+  .contact .card .button,
+  .contact .card a.button {
+    background: #0B0F19 !important;
+    color: #FFFFFF !important;
+    border: 2px solid #0B0F19 !important;
+    border-radius: 0.75rem !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 12px 18px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25) !important;
+    transition: background 160ms ease, color 160ms ease, border-color 160ms ease !important;
+  }
+  .contact .card .button:hover,
+  .contact .card a.button:hover {
+    background: #FFFFFF !important;
+    color: #0B0F19 !important;
+    border-color: #0B0F19 !important;
+  }
 }

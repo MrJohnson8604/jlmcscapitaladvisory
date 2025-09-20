@@ -145,7 +145,7 @@ const Contact = () => {
                     <p className="text-muted-foreground mb-4">
                       Book a direct consultation to discuss your specific financing needs.
                     </p>
-                    <Button className="btn-outline-light">
+                    <Button className="btn-amber">
                       <a 
                         href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                         target="_blank"
@@ -201,7 +201,7 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     Already know your numbers? Get pre-qualified instantly with our online form.
                   </p>
-                  <Button className="btn-outline-light">
+                  <Button className="btn-amber">
                     <a 
                       href="https://form.jotform.com/251521627688060"
                       target="_blank"
