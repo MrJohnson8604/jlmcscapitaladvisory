@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, TrendingUp, Users, Clock, Shield } from "lucide-react";
+import { QuickIntakeForm } from "@/components/QuickIntakeForm";
 import heroImage from "@/assets/hero-real-estate.jpg";
 import sanAntonioFlip from "@/assets/san-antonio-flip.jpg";
 import houstonCompleted from "@/assets/houston-completed.webp";
@@ -73,6 +74,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Quick Deal Intake */}
+      <QuickIntakeForm />
 
       {/* Services Snapshot */}
       <section className="py-20">
