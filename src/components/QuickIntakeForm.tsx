@@ -77,7 +77,7 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
     <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
       <Button 
         variant="outline" 
-        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
         asChild
       >
         <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
@@ -86,7 +86,7 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
       </Button>
       <Button 
         variant="outline" 
-        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
         asChild
       >
         <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
@@ -466,7 +466,7 @@ Submitted: ${new Date().toLocaleString()}
                   <div className="flex flex-col sm:flex-row gap-4 sm:justify-end mt-4">
                     <Button 
                       variant="outline" 
-                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
                       asChild
                     >
                       <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
@@ -475,7 +475,7 @@ Submitted: ${new Date().toLocaleString()}
                     </Button>
                     <Button 
                       variant="outline" 
-                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
                       asChild
                     >
                       <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">

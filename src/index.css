@@ -177,7 +177,50 @@
     box-shadow: var(--shadow-large);
   }
 
-  /* Keep outline button text white on dark backgrounds */
+  /* Global CTA Hover Styles */
+  
+  /* Outline buttons on light background */
+  .btn-outline-light, a.button.outline.light {
+    color: #111827 !important;
+    border-color: #111827 !important;
+    background: transparent !important;
+  }
+  .btn-outline-light:hover, a.button.outline.light:hover {
+    color: #F59E0B !important;
+    border-color: #111827 !important;
+    background: rgba(17,24,39,0.06) !important;
+  }
+
+  /* Outline buttons on dark background */
+  .btn-outline-dark, a.button.outline.dark {
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+    background: transparent !important;
+  }
+  .btn-outline-dark:hover, a.button.outline.dark:hover {
+    color: #F59E0B !important;
+    border-color: #FFFFFF !important;
+    background: rgba(255,255,255,0.10) !important;
+  }
+
+  /* Primary filled Amber buttons — invert on hover for contrast */
+  .btn-primary-amber, a.button.primary-amber {
+    background: #F59E0B !important;
+    color: #FFFFFF !important;
+    border-color: #F59E0B !important;
+  }
+  .btn-primary-amber:hover, a.button.primary-amber:hover {
+    background: #FFFFFF !important;
+    color: #F59E0B !important;
+    border-color: #F59E0B !important;
+  }
+
+  /* Global fallback: any button/CTA hover text turns Amber */
+  button:hover, .button:hover, a.button:hover {
+    color: #F59E0B !important;
+  }
+
+  /* Keep outline button text white on dark backgrounds (legacy) */
   .btn-outline,
   a.button.outline {
     color: #FFFFFF !important;
@@ -185,7 +228,7 @@
   }
   .btn-outline:hover,
   a.button.outline:hover {
-    color: #FFFFFF !important;
+    color: #F59E0B !important;
     border-color: #FFFFFF !important;
     background: rgba(255,255,255,0.10) !important;
   }
