@@ -76,17 +76,15 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
     </div>
     <div className="quick-intake-ctas flex flex-col sm:flex-row gap-4 justify-center">
       <Button 
-        variant="outline" 
-        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+        className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
         asChild
       >
         <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
-          Continue to full intake form
+          Continue to Full Intake Form
         </a>
       </Button>
       <Button 
-        variant="outline" 
-        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+        className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
         asChild
       >
         <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
@@ -465,17 +463,15 @@ Submitted: ${new Date().toLocaleString()}
                 <div className="pt-4 border-t border-border">
                   <div className="quick-intake-ctas flex flex-col sm:flex-row gap-4 justify-center mt-4">
                     <Button 
-                      variant="outline" 
-                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+                      className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
                       asChild
                     >
                       <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
-                        Continue to full intake form
+                        Continue to Full Intake Form
                       </a>
                     </Button>
                     <Button 
-                      variant="outline" 
-                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 hover:text-amber-500 active:bg-slate-800/12 active:text-amber-500 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+                      className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
                       asChild
                     >
                       <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
