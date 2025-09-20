@@ -71,6 +71,15 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Global CTA Band Tokens - Based on Home CTA */
+    --cta-band-bg: #111827;
+    --cta-band-text: #FFFFFF;
+    --cta-band-border: #FFFFFF;
+    --cta-band-hover-bg: rgba(255,255,255,0.10);
+    --cta-band-hover-text: #F59E0B;
+    --cta-band-gap: 16px;
+    --cta-band-radius: 0.75rem;
   }
 
   .dark {
@@ -233,153 +242,50 @@
     background: rgba(255,255,255,0.10) !important;
   }
 
-  /* CTA Strip buttons - ensure consistent outlined styling */
+  /* CTA Band Styling - Tokenized System */
+  
+  /* Home CTA band - uses tokens (no visual change) */
   .home-cta-strip .button,
   .home-cta-strip a.button {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 600 !important;
-    border: 2px solid #FFFFFF !important;
-    color: #FFFFFF !important;
+    border: 2px solid var(--cta-band-border) !important;
+    color: var(--cta-band-text) !important;
     background: transparent !important;
-    border-radius: 0.75rem !important;
+    border-radius: var(--cta-band-radius) !important;
   }
   .home-cta-strip .button:hover,
   .home-cta-strip a.button:hover {
-    color: #F59E0B !important;
-    background: rgba(255,255,255,0.10) !important;
-    border-color: #FFFFFF !important;
+    color: var(--cta-band-hover-text) !important;
+    background: var(--cta-band-hover-bg) !important;
+    border-color: var(--cta-band-border) !important;
   }
 
-  /* Dark-section CTA strips (global) */
-  .section-cta.dark .button, .section-cta.dark a.button {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 600 !important;
-    border: 2px solid #FFFFFF !important;
-    color: #FFFFFF !important;
-    background: transparent !important;
-    border-radius: 0.75rem !important;
-  }
-  .section-cta.dark .button:hover, .section-cta.dark a.button:hover {
-    color: #F59E0B !important;
-    background: rgba(255,255,255,0.10) !important;
-    border-color: #FFFFFF !important;
-  }
-
-  /* Light cards on Contact page */
-  .contact .card .button,
-  .contact .card a.button {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 600 !important;
-    border: 2px solid #111827 !important;
-    color: #111827 !important;
-    background: transparent !important;
-    border-radius: 0.75rem !important;
-  }
-  .contact .card .button:hover,
-  .contact .card a.button:hover {
-    color: #F59E0B !important;
-    background: rgba(17,24,39,0.06) !important;
-    border-color: #111827 !important;
-  }
-
-  /* Real Estate Financing CTA strip override */
-  .real-estate-financing .section-cta .button,
-  .real-estate-financing .section-cta a.button {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 600 !important;
-    border: 2px solid #FFFFFF !important;
-    color: #FFFFFF !important;
-    background: transparent !important;
-    border-radius: 0.75rem !important;
-  }
-  .real-estate-financing .section-cta .button:hover,
-  .real-estate-financing .section-cta a.button:hover {
-    color: #F59E0B !important;
-    background: rgba(255,255,255,0.10) !important;
-    border-color: #FFFFFF !important;
-  }
-
-  /* Unified CTA Band Styling - Remove visual separation */
-  
-  /* Real Estate Financing */
-  section:has(h2:contains("Ready to Move Forward?")) {
-    background: #111827 !important;
-    color: #FFFFFF !important;
-    text-align: center !important;
-    padding-top: 64px !important;
-    padding-bottom: 48px !important;
-    box-shadow: none !important;
-  }
-  section:has(h2:contains("Ready to Move Forward?")) + section {
-    background: #111827 !important;
-    color: #FFFFFF !important;
-    border-top: none !important;
-    box-shadow: none !important;
-    padding-top: 24px !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* About */
-  section:has(h2:contains("Ready to Get Started?")) {
-    background: #111827 !important;
-    color: #FFFFFF !important;
-    text-align: center !important;
-    padding-top: 64px !important;
-    padding-bottom: 48px !important;
-    box-shadow: none !important;
-  }
-  section:has(h2:contains("Ready to Get Started?")) + section {
-    background: #111827 !important;
-    color: #FFFFFF !important;
-    border-top: none !important;
-    box-shadow: none !important;
-    padding-top: 24px !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* FAQs - Use :not(:first-child) to avoid targeting hero section */
-  section:has(h2:contains("Ready to Move Forward?")):not(:first-child) {
-    background: #111827 !important;
-    color: #FFFFFF !important;
-    text-align: center !important;
-    padding-top: 64px !important;
-    padding-bottom: 48px !important;
-    box-shadow: none !important;
-  }
-  section:has(h2:contains("Ready to Move Forward?")):not(:first-child) + section {
-    background: #111827 !important;
-    color: #FFFFFF !important;
-    border-top: none !important;
-    box-shadow: none !important;
-    padding-top: 24px !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* CTA Band Styling - Match Home CTA exactly */
+  /* Global CTA sections using tokens */
   .section-cta button,
   .section-cta .btn-hero-white-outline {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 600 !important;
-    border: 2px solid #FFFFFF !important;
-    color: #FFFFFF !important;
+    border: 2px solid var(--cta-band-border) !important;
+    color: var(--cta-band-text) !important;
     background: transparent !important;
-    border-radius: 0.75rem !important;
+    border-radius: var(--cta-band-radius) !important;
     padding: 0.5rem 2rem !important;
     transition: all 0.2s ease-in-out !important;
   }
 
   .section-cta button:hover,
   .section-cta .btn-hero-white-outline:hover {
-    color: #F59E0B !important;
-    background: rgba(255,255,255,0.10) !important;
-    border-color: #FFFFFF !important;
+    color: var(--cta-band-hover-text) !important;
+    background: var(--cta-band-hover-bg) !important;
+    border-color: var(--cta-band-border) !important;
   }
 
   .section-cta button:active,
   .section-cta .btn-hero-white-outline:active {
-    color: #F59E0B !important;
+    color: var(--cta-band-hover-text) !important;
     background: rgba(255,255,255,0.16) !important;
-    border-color: #FFFFFF !important;
+    border-color: var(--cta-band-border) !important;
   }
 
   .section-cta button:focus-visible,
@@ -390,6 +296,104 @@
 
   /* Button container spacing */
   .section-cta .flex {
-    gap: 1rem !important; /* 16px gap */
+    gap: var(--cta-band-gap) !important;
+  }
+
+  /* Unified CTA Band Styling - Apply tokens to target pages */
+  
+  /* Real Estate Financing */
+  section:has(h2:contains("Ready to Move Forward?")) {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    text-align: center !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    box-shadow: none !important;
+  }
+  section:has(h2:contains("Ready to Move Forward?")) + section {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    border-top: none !important;
+    box-shadow: none !important;
+  }
+
+  /* About */
+  section:has(h2:contains("Ready to Get Started?")) {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    text-align: center !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    box-shadow: none !important;
+  }
+  section:has(h2:contains("Ready to Get Started?")) + section {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    border-top: none !important;
+    box-shadow: none !important;
+  }
+
+  /* FAQs - Use :not(:first-child) to avoid targeting hero section */
+  section:has(h2:contains("Ready to Move Forward?")):not(:first-child) {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    text-align: center !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    box-shadow: none !important;
+  }
+  section:has(h2:contains("Ready to Move Forward?")):not(:first-child) + section {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    border-top: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Class-based fallback styles */
+  .section-cta, .cta-band, .cta-strip { 
+    --cta-band-bg: #111827; 
+    --cta-band-text: #FFFFFF; 
+    --cta-band-border: #FFFFFF;
+    --cta-band-hover-bg: rgba(255,255,255,0.10); 
+    --cta-band-hover-text: #F59E0B;
+  }
+
+  .page-real-estate-financing .section-cta,
+  .page-about .section-cta,
+  .page-faqs .section-cta {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    box-shadow: none !important;
+    padding-top: 64px !important; 
+    padding-bottom: 64px !important;
+  }
+
+  .page-real-estate-financing .section-cta + section,
+  .page-about .section-cta + section,
+  .page-faqs .section-cta + section {
+    background: var(--cta-band-bg) !important;
+    color: var(--cta-band-text) !important;
+    border-top: none !important; 
+    box-shadow: none !important;
+  }
+
+  /* Buttons inside target CTA bands */
+  .page-real-estate-financing .section-cta .button,
+  .page-about .section-cta .button,
+  .page-faqs .section-cta .button {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    border: 2px solid var(--cta-band-border) !important;
+    color: var(--cta-band-text) !important;
+    background: transparent !important;
+    border-radius: var(--cta-band-radius) !important;
+  }
+
+  .page-real-estate-financing .section-cta .button:hover,
+  .page-about .section-cta .button:hover,
+  .page-faqs .section-cta .button:hover {
+    color: var(--cta-band-hover-text) !important;
+    background: var(--cta-band-hover-bg) !important;
+    border-color: var(--cta-band-border) !important;
   }
 }
