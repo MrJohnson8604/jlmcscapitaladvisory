@@ -76,7 +76,7 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
     </div>
     <div className="quick-intake-ctas flex flex-col sm:flex-row gap-4 justify-center">
       <Button 
-        className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
+        className="bg-amber-500 text-gray-900 border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/45 rounded-xl px-6 py-3 font-semibold" 
         asChild
       >
         <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
@@ -84,7 +84,7 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
         </a>
       </Button>
       <Button 
-        className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
+        className="bg-amber-500 text-gray-900 border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/45 rounded-xl px-6 py-3 font-semibold" 
         asChild
       >
         <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
@@ -454,7 +454,7 @@ Submitted: ${new Date().toLocaleString()}
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-amber hover:bg-amber-hover text-amber-foreground text-lg px-8 py-3 rounded-xl font-display font-semibold shadow-soft transition-all duration-300"
+                  className="w-full bg-amber-500 text-gray-900 border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/45 text-lg px-8 py-3 rounded-xl font-display font-semibold shadow-soft transition-all duration-300"
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </Button>
@@ -463,7 +463,7 @@ Submitted: ${new Date().toLocaleString()}
                 <div className="pt-4 border-t border-border">
                   <div className="quick-intake-ctas flex flex-col sm:flex-row gap-4 justify-center mt-4">
                     <Button 
-                      className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
+                      className="bg-amber-500 text-gray-900 border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/45 rounded-xl px-6 py-3 font-semibold" 
                       asChild
                     >
                       <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
@@ -471,7 +471,7 @@ Submitted: ${new Date().toLocaleString()}
                       </a>
                     </Button>
                     <Button 
-                      className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl px-6 py-3 font-semibold" 
+                      className="bg-amber-500 text-gray-900 border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/45 rounded-xl px-6 py-3 font-semibold" 
                       asChild
                     >
                       <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
