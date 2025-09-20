@@ -261,14 +261,17 @@ const Index = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
-              className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl"
+              className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl font-semibold"
               asChild
             >
               <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
                 Discuss Your Deal
               </a>
             </Button>
-            <Button className="btn-hero-outline font-semibold">
+            <Button 
+              className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl font-semibold"
+              asChild
+            >
               <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
                 Get Pre-Qualified
               </a>
