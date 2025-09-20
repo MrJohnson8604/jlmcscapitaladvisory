@@ -1,40 +1,29 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-
 const FAQs = () => {
-  const faqs = [
-    {
-      question: "Do you require appraisals or surveys?",
-      answer: "Some programs offer no appraisal/no survey; others use BPO (ordered by lender). Availability varies by lender, property, and state."
-    },
-    {
-      question: "Is VOE required?",
-      answer: "No. VOE is not required on the programs we present."
-    },
-    {
-      question: "How fast can we close?",
-      answer: "As fast as ~7 days when all docs are submitted promptly and title is clean."
-    },
-    {
-      question: "What credit profiles are considered?",
-      answer: "Tough-credit scenarios considered; asset-based focus means we look at the deal, not just credit scores."
-    },
-    {
-      question: "Who handles rehab draw planning?",
-      answer: "The lender's team guides you through their process and requirements for construction draws."
-    },
-    {
-      question: "Which states do you serve?",
-      answer: "Nationwide coverage through our extensive lender network."
-    },
-    {
-      question: "What fees should I expect?",
-      answer: "All fees disclosed up front before you sign—complete transparency, no surprises."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const faqs = [{
+    question: "Do you require appraisals or surveys?",
+    answer: "Some programs offer no appraisal/no survey; others use BPO (ordered by lender). Availability varies by lender, property, and state."
+  }, {
+    question: "Is VOE required?",
+    answer: "No. VOE is not required on the programs we present."
+  }, {
+    question: "How fast can we close?",
+    answer: "As fast as ~7 days when all docs are submitted promptly and title is clean."
+  }, {
+    question: "What credit profiles are considered?",
+    answer: "Tough-credit scenarios considered; asset-based focus means we look at the deal, not just credit scores."
+  }, {
+    question: "Who handles rehab draw planning?",
+    answer: "The lender's team guides you through their process and requirements for construction draws."
+  }, {
+    question: "Which states do you serve?",
+    answer: "Nationwide coverage through our extensive lender network."
+  }, {
+    question: "What fees should I expect?",
+    answer: "All fees disclosed up front before you sign—complete transparency, no surprises."
+  }];
+  return <div className="min-h-screen">
       {/* Hero Section */}
       <section className="bg-primary text-primary-foreground py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,23 +43,23 @@ const FAQs = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="w-full">
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-border">
+              {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`} className="border-border">
                   <AccordionTrigger className="text-left font-display font-semibold text-primary hover:text-amber">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
                     {faq.answer}
                   </AccordionContent>
-                </AccordionItem>
-              ))}
+                </AccordionItem>)}
             </Accordion>
           </div>
         </div>
       </section>
 
       {/* Still Have Questions */}
-      <section className="py-16 text-white" style={{ backgroundColor: '#111827' }}>
+      <section className="py-16 text-white" style={{
+      backgroundColor: '#111827'
+    }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-display font-bold mb-6">
@@ -80,19 +69,13 @@ const FAQs = () => {
               Every deal is unique. Let's discuss your specific situation and requirements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="btn-hero-white-outline">
-                <a 
-                  href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+              <Button className="btn-hero-white-outline text-base font-semibold">
+                <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
                   Schedule a Call
                 </a>
               </Button>
-              <Button className="btn-hero-white-outline">
-                <a 
-                  href="mailto:chris.johnson@jlmcsfunding.com"
-                >
+              <Button className="btn-hero-white-outline text-base font-semibold">
+                <a href="mailto:chris.johnson@jlmcsfunding.com">
                   Send an Email
                 </a>
               </Button>
@@ -100,8 +83,6 @@ const FAQs = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default FAQs;
