@@ -299,32 +299,60 @@
     border-color: #FFFFFF !important;
   }
 
-  /* Target the REF page CTA band by its heading */
+  /* Unified CTA Band Styling - Remove visual separation */
+  
+  /* Real Estate Financing */
   section:has(h2:contains("Ready to Move Forward?")) {
     background: #111827 !important;
     color: #FFFFFF !important;
     text-align: center !important;
     padding-top: 64px !important;
-    padding-bottom: 64px !important;
+    padding-bottom: 48px !important;
+    box-shadow: none !important;
   }
-  section:has(h2:contains("Ready to Move Forward?")) .button {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 600 !important;
-    border: 2px solid #FFFFFF !important;
+  section:has(h2:contains("Ready to Move Forward?")) + section {
+    background: #111827 !important;
     color: #FFFFFF !important;
-    background: transparent !important;
-    border-radius: 0.75rem !important;
-  }
-  section:has(h2:contains("Ready to Move Forward?")) .button:hover {
-    color: #F59E0B !important;
-    background: rgba(255,255,255,0.10) !important;
-    border-color: #FFFFFF !important;
+    border-top: none !important;
+    box-shadow: none !important;
+    padding-top: 24px !important;
+    padding-bottom: 0 !important;
   }
 
-  /* Optional: the band directly beneath this section (if it exists) */
-  section:has(h2:contains("Ready to Move Forward?")) + section {
-    background: #0B0F19 !important;
+  /* About */
+  section:has(h2:contains("Ready to Get Started?")) {
+    background: #111827 !important;
     color: #FFFFFF !important;
+    text-align: center !important;
+    padding-top: 64px !important;
+    padding-bottom: 48px !important;
+    box-shadow: none !important;
+  }
+  section:has(h2:contains("Ready to Get Started?")) + section {
+    background: #111827 !important;
+    color: #FFFFFF !important;
+    border-top: none !important;
+    box-shadow: none !important;
+    padding-top: 24px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* FAQs - Use :not(:first-child) to avoid targeting hero section */
+  section:has(h2:contains("Ready to Move Forward?")):not(:first-child) {
+    background: #111827 !important;
+    color: #FFFFFF !important;
+    text-align: center !important;
+    padding-top: 64px !important;
+    padding-bottom: 48px !important;
+    box-shadow: none !important;
+  }
+  section:has(h2:contains("Ready to Move Forward?")):not(:first-child) + section {
+    background: #111827 !important;
+    color: #FFFFFF !important;
+    border-top: none !important;
+    box-shadow: none !important;
+    padding-top: 24px !important;
+    padding-bottom: 0 !important;
   }
 
   /* CTA Band Styling - Match Home CTA exactly */
