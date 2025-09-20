@@ -70,17 +70,17 @@ const FAQs = () => {
       </section>
 
       {/* Still Have Questions */}
-      <section className="py-20 bg-muted/50">
+      <section className="py-16 text-white" style={{ backgroundColor: '#111827' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-display font-bold mb-6 text-primary">
+            <h2 className="text-3xl font-display font-bold mb-6">
               Still Have Questions?
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-xl mb-8 opacity-90">
               Every deal is unique. Let's discuss your specific situation and requirements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="btn-amber">
+              <Button className="btn-hero-white-outline">
                 <a 
                   href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                   target="_blank"
@@ -89,47 +89,14 @@ const FAQs = () => {
                   Schedule a Call
                 </a>
               </Button>
-              <Button variant="outline">
+              <Button className="btn-hero-white-outline">
                 <a 
                   href="mailto:chris.johnson@jlmcsfunding.com"
-                  className="text-primary hover:text-amber"
                 >
                   Send an Email
                 </a>
               </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-cta dark py-16 text-white" style={{ backgroundColor: '#111827' }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-display font-bold mb-6">
-            Ready to Move Forward?
-          </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Get your questions answered and start your financing process today.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="btn-hero-white-outline">
-              <a 
-                href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Discuss Your Deal
-              </a>
-            </Button>
-            <Button className="btn-hero-white-outline">
-              <a 
-                href="https://form.jotform.com/251521627688060"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Get Pre-Qualified
-              </a>
-            </Button>
           </div>
         </div>
       </section>
