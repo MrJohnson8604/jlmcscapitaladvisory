@@ -232,4 +232,21 @@
     border-color: #FFFFFF !important;
     background: rgba(255,255,255,0.10) !important;
   }
+
+  /* CTA Strip buttons - ensure consistent outlined styling */
+  .home-cta-strip .button,
+  .home-cta-strip a.button {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    border: 2px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    background: transparent !important;
+    border-radius: 0.75rem !important;
+  }
+  .home-cta-strip .button:hover,
+  .home-cta-strip a.button:hover {
+    color: #F59E0B !important;
+    background: rgba(255,255,255,0.10) !important;
+    border-color: #FFFFFF !important;
+  }
 }

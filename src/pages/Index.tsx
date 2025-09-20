@@ -251,7 +251,7 @@ const Index = () => {
       </section>
 
       {/* CTA Strip */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="home-cta-strip py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-display font-bold mb-6">
             Start your file today.
