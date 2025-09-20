@@ -53,7 +53,10 @@ const Index = () => {
               Asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—options including no-appraisal/no-survey or BPO-only (lender-ordered).
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button className="btn-hero-white-outline text-lg px-10 py-5">
+              <Button 
+                className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl text-lg px-10 py-5"
+                asChild
+              >
                 <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
                   Discuss Your Deal
                 </a>
@@ -254,7 +257,10 @@ const Index = () => {
             Get pre-qualified or schedule a consultation to discuss your specific project.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="btn-hero">
+            <Button 
+              className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl"
+              asChild
+            >
               <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
                 Discuss Your Deal
               </a>
