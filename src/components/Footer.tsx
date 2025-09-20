@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Footer = () => {
   return (
@@ -54,14 +55,19 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-primary-foreground/80 hover:text-amber transition-colors"
+                <Button 
+                  variant="outline"
+                  className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl text-sm h-auto px-4 py-2"
+                  asChild
                 >
-                  Schedule a Call
-                </a>
+                  <a 
+                    href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Discuss Your Deal
+                  </a>
+                </Button>
               </li>
               <li>
                 <a 
