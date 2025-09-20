@@ -165,83 +165,74 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Card 1: San Antonio Fix & Flip */}
+            {/* Card 1: San Antonio */}
             <Card className="shadow-large">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-amber bg-amber/10 rounded-full mb-3">
-                    Funded
-                  </span>
                   <h3 className="text-xl font-display font-semibold text-primary mb-1">
-                    Fix & Flip
+                    Funded
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm font-medium text-muted-foreground mb-4">
                     San Antonio, TX
                   </p>
                 </div>
                 <div className="mb-4">
                   <img 
                     src={sanAntonioFlip} 
-                    alt="Fix & Flip — San Antonio, TX — property exterior" 
+                    alt="Funded — San Antonio, TX — property exterior" 
                     className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
                   />
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                  Asset-based approval with no appraisal and no survey required by lender. New investor—funded.
+                <p className="text-sm text-foreground leading-relaxed line-clamp-2">
+                  Asset-based approval with no appraisal and no survey required. New investor—funded.
                 </p>
               </CardContent>
             </Card>
 
-            {/* Card 2: Houston Completed Deal */}
+            {/* Card 2: Houston */}
             <Card className="shadow-large">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-amber bg-amber/10 rounded-full mb-3">
-                    Funded
-                  </span>
                   <h3 className="text-xl font-display font-semibold text-primary mb-1">
-                    Completed Deal
+                    Funded
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm font-medium text-muted-foreground mb-4">
                     Houston, TX
                   </p>
                 </div>
                 <div className="mb-4">
                   <img 
                     src={houstonCompleted} 
-                    alt="Completed deal — Houston, TX — exterior" 
+                    alt="Funded — Houston, TX — exterior" 
                     className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
                   />
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                  Matched to a lender offering BPO (lender-ordered). Clean title and complete docs enabled a fast close.
+                <p className="text-sm text-foreground leading-relaxed line-clamp-2">
+                  Liquid reserves verified via screenshots; streamlined documentation through funding.
                 </p>
               </CardContent>
             </Card>
 
-            {/* Card 3: Houston Fix & Flip Interior */}
+            {/* Card 3: Houston Interior */}
             <Card className="shadow-large">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-amber bg-amber/10 rounded-full mb-3">
-                    Funded
-                  </span>
                   <h3 className="text-xl font-display font-semibold text-primary mb-1">
-                    Fix & Flip
+                    Funded
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm font-medium text-muted-foreground mb-4">
                     Houston, TX
                   </p>
                 </div>
                 <div className="mb-4">
                   <img 
                     src={houstonFlipInterior} 
-                    alt="Fix & Flip — Houston, TX — interior renovation" 
+                    alt="Funded — Houston, TX — interior renovation" 
                     className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
                   />
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                  Asset-based approval. Liquid reserves verified via screenshots; streamlined documentation through funding.
+                <p className="text-sm text-foreground leading-relaxed line-clamp-2">
+                  BPO (lender-ordered) and liquid reserves verified via screenshots; complete docs enabled a fast close.
                 </p>
               </CardContent>
             </Card>
