@@ -176,4 +176,17 @@
   .shadow-large {
     box-shadow: var(--shadow-large);
   }
+
+  /* Keep outline button text white on dark backgrounds */
+  .btn-outline,
+  a.button.outline {
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+  }
+  .btn-outline:hover,
+  a.button.outline:hover {
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+    background: rgba(255,255,255,0.10) !important;
+  }
 }

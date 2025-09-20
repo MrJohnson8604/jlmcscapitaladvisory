@@ -57,7 +57,7 @@ const Index = () => {
                   Discuss Your Deal
                 </a>
               </Button>
-              <Button className="btn-hero-outline text-lg px-10 py-5">
+              <Button className="btn-hero-white-outline text-lg px-10 py-5">
                 <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
                   Get Pre-Qualified
                 </a>
