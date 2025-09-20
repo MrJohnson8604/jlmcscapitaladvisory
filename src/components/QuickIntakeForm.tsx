@@ -74,13 +74,21 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
         We'll review your submission and reply the same business day.
       </p>
     </div>
-    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-      <Button className="btn-amber text-lg px-8 py-3">
+    <div className="flex flex-col sm:flex-row gap-4 sm:justify-end">
+      <Button 
+        variant="outline" 
+        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+        asChild
+      >
         <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
-          Start Full Application
+          Continue to full intake form
         </a>
       </Button>
-      <Button variant="outline" className="text-lg px-8 py-3">
+      <Button 
+        variant="outline" 
+        className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+        asChild
+      >
         <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
           Book a Call
         </a>
@@ -454,17 +462,22 @@ Submitted: ${new Date().toLocaleString()}
                 </Button>
 
                 {/* Secondary Actions */}
-                <div className="text-center space-y-2 pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Or continue with:
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Button variant="link" className="text-primary hover:text-primary/80" asChild>
+                <div className="pt-4 border-t border-border">
+                  <div className="flex flex-col sm:flex-row gap-4 sm:justify-end mt-4">
+                    <Button 
+                      variant="outline" 
+                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+                      asChild
+                    >
                       <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
-                        Continue to Full Application
+                        Continue to full intake form
                       </a>
                     </Button>
-                    <Button variant="link" className="text-primary hover:text-primary/80" asChild>
+                    <Button 
+                      variant="outline" 
+                      className="border-2 border-slate-800 text-slate-800 bg-transparent hover:bg-slate-800/6 active:bg-slate-800/12 focus:ring-slate-800/35 rounded-xl px-6 py-3" 
+                      asChild
+                    >
                       <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
                         Book a Call
                       </a>
