@@ -281,4 +281,21 @@
     background: rgba(17,24,39,0.06) !important;
     border-color: #111827 !important;
   }
+
+  /* Real Estate Financing CTA strip override */
+  .real-estate-financing .section-cta .button,
+  .real-estate-financing .section-cta a.button {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    border: 2px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    background: transparent !important;
+    border-radius: 0.75rem !important;
+  }
+  .real-estate-financing .section-cta .button:hover,
+  .real-estate-financing .section-cta a.button:hover {
+    color: #F59E0B !important;
+    background: rgba(255,255,255,0.10) !important;
+    border-color: #FFFFFF !important;
+  }
 }

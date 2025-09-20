@@ -23,7 +23,7 @@ const RealEstateFinancing = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen real-estate-financing">
       {/* Hero Section */}
       <section className="bg-primary text-primary-foreground py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
