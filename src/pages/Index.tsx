@@ -265,7 +265,7 @@ const Index = () => {
                 Discuss Your Deal
               </a>
             </Button>
-            <Button className="btn-hero-outline">
+            <Button className="btn-hero-outline font-semibold">
               <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
                 Get Pre-Qualified
               </a>
