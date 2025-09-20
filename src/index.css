@@ -298,4 +298,32 @@
     background: rgba(255,255,255,0.10) !important;
     border-color: #FFFFFF !important;
   }
+
+  /* Target the REF page CTA band by its heading */
+  section:has(h2:contains("Ready to Move Forward?")) {
+    background: #111827 !important;
+    color: #FFFFFF !important;
+    text-align: center !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+  section:has(h2:contains("Ready to Move Forward?")) .button {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    border: 2px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    background: transparent !important;
+    border-radius: 0.75rem !important;
+  }
+  section:has(h2:contains("Ready to Move Forward?")) .button:hover {
+    color: #F59E0B !important;
+    background: rgba(255,255,255,0.10) !important;
+    border-color: #FFFFFF !important;
+  }
+
+  /* Optional: the band directly beneath this section (if it exists) */
+  section:has(h2:contains("Ready to Move Forward?")) + section {
+    background: #0B0F19 !important;
+    color: #FFFFFF !important;
+  }
 }
