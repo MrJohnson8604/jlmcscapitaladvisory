@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import jlmcsLogo from "@/assets/jlmcs-logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +26,11 @@ const Header = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <span className="text-xl font-display font-bold text-primary">
-                JLMCS Capital Advisory
-              </span>
+              <img 
+                src={jlmcsLogo} 
+                alt="JLMCS Capital Advisory" 
+                className="h-8 w-auto"
+              />
             </Link>
           </div>
 
