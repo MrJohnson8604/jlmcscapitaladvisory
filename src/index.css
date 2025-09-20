@@ -353,6 +353,14 @@
   section:has(h2:contains("Still Have Questions?")) button,
   section:has(h2:contains("Still Have Questions?")) .btn-hero-white-outline {
     font-weight: 700 !important;
+    transition: background 160ms ease, color 160ms ease, border-color 160ms ease !important;
+  }
+
+  section:has(h2:contains("Still Have Questions?")) button:hover,
+  section:has(h2:contains("Still Have Questions?")) .btn-hero-white-outline:hover {
+    background: rgba(255,255,255,0.14) !important;
+    border-color: #FFFFFF !important;
+    color: #F59E0B !important;
   }
 
   /* Class-based fallback styles */
