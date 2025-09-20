@@ -136,7 +136,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section-cta dark py-20 bg-primary text-primary-foreground">
+      <section className="section-cta dark py-16 text-white" style={{ backgroundColor: '#111827' }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-display font-bold mb-6">
             Ready to Get Started?
