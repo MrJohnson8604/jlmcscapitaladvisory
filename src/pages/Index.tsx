@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, TrendingUp, Users, Clock, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-real-estate.jpg";
-import charlotteBefore from "@/assets/charlotte-before.jpg";
-import charlotteAfter from "@/assets/charlotte-after.jpg";
-import phoenixRental from "@/assets/phoenix-rental.jpg";
+import sanAntonioFlip from "@/assets/san-antonio-flip.jpg";
+import houstonCompleted from "@/assets/houston-completed.webp";
+import houstonFlipInterior from "@/assets/houston-flip-interior.jpg";
 const Index = () => {
   const credibilityItems = ["Former loan officer", "Nationwide lender network", "High close rate on accepted files", "Transparent terms"];
   const services = [{
@@ -152,7 +152,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Case Gallery */}
+      {/* Success Stories */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -164,45 +164,85 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Case 1: Fix & Flip Charlotte */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1: San Antonio Fix & Flip */}
             <Card className="shadow-large">
-              <CardContent className="p-0">
-                <div className="p-6">
-                  <h3 className="text-2xl font-display font-semibold mb-4 text-primary">Fix & Flip — Houston, TX</h3>
-                </div>
-                <div className="grid md:grid-cols-2 gap-4 p-6 pt-0">
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">BEFORE</p>
-                    <img src={charlotteBefore} alt="Charlotte NC Fix & Flip kitchen before renovation" className="w-full h-48 object-cover rounded-lg" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">AFTER</p>
-                    <img src={charlotteAfter} alt="Charlotte NC Fix & Flip kitchen after renovation" className="w-full h-48 object-cover rounded-lg" />
-                  </div>
-                </div>
-                <div className="p-6 pt-0">
-                  <p className="text-muted-foreground">
-                    Needed no-appraisal option; lender ordered BPO; closed in ~7 days with clean title.
+              <CardContent className="p-6 text-center">
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 text-xs font-semibold text-amber bg-amber/10 rounded-full mb-3">
+                    Funded
+                  </span>
+                  <h3 className="text-xl font-display font-semibold text-primary mb-1">
+                    Fix & Flip
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    San Antonio, TX
                   </p>
                 </div>
+                <div className="mb-4">
+                  <img 
+                    src={sanAntonioFlip} 
+                    alt="Fix & Flip — San Antonio, TX — property exterior" 
+                    className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                  Asset-based approval with no appraisal and no survey required by lender. New investor—funded.
+                </p>
               </CardContent>
             </Card>
 
-            {/* Case 2: DSCR Phoenix */}
+            {/* Card 2: Houston Completed Deal */}
             <Card className="shadow-large">
-              <CardContent className="p-0">
-                <div className="p-6">
-                  <h3 className="text-2xl font-display font-semibold mb-4 text-primary">
-                    DSCR Rental — Phoenix, AZ
+              <CardContent className="p-6 text-center">
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 text-xs font-semibold text-amber bg-amber/10 rounded-full mb-3">
+                    Funded
+                  </span>
+                  <h3 className="text-xl font-display font-semibold text-primary mb-1">
+                    Completed Deal
                   </h3>
-                </div>
-                <div className="p-6 pt-0">
-                  <img src={phoenixRental} alt="Phoenix AZ DSCR rental renovated exterior after funding" className="w-full h-64 object-cover rounded-lg mb-4" />
-                  <p className="text-muted-foreground">
-                    Asset-based DSCR approval; transparent terms; lender-guided process.
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Houston, TX
                   </p>
                 </div>
+                <div className="mb-4">
+                  <img 
+                    src={houstonCompleted} 
+                    alt="Completed deal — Houston, TX — exterior" 
+                    className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                  Matched to a lender offering BPO (lender-ordered). Clean title and complete docs enabled a fast close.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Card 3: Houston Fix & Flip Interior */}
+            <Card className="shadow-large">
+              <CardContent className="p-6 text-center">
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 text-xs font-semibold text-amber bg-amber/10 rounded-full mb-3">
+                    Funded
+                  </span>
+                  <h3 className="text-xl font-display font-semibold text-primary mb-1">
+                    Fix & Flip
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Houston, TX
+                  </p>
+                </div>
+                <div className="mb-4">
+                  <img 
+                    src={houstonFlipInterior} 
+                    alt="Fix & Flip — Houston, TX — interior renovation" 
+                    className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                  Asset-based approval. Liquid reserves verified via screenshots; streamlined documentation through funding.
+                </p>
               </CardContent>
             </Card>
           </div>
