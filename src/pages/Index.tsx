@@ -44,6 +44,13 @@ const Index = () => {
       <section className="relative bg-primary text-primary-foreground py-32 bg-cover bg-center" style={{
       backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.7)), url(${heroImage})`
     }}>
+        {/* Preload hero image for LCP optimization */}
+        <img 
+          src={heroImage} 
+          alt="Real estate investment property background" 
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover -z-10 opacity-0" 
+        />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
