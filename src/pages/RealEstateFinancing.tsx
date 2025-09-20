@@ -35,7 +35,7 @@ const RealEstateFinancing = () => {
               Asset-based options for acquisitions, rehabs, rentals, ground-up, and transitional assets—built around speed and clarity.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="btn-hero">
+              <Button className="btn-hero-outline-white">
                 <a 
                   href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                   target="_blank"
@@ -44,7 +44,7 @@ const RealEstateFinancing = () => {
                   Discuss Your Deal
                 </a>
               </Button>
-              <Button className="btn-hero-outline">
+              <Button className="btn-hero-outline-white">
                 <a 
                   href="https://form.jotform.com/251521627688060"
                   target="_blank"
