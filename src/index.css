@@ -349,6 +349,12 @@
     box-shadow: none !important;
   }
 
+  /* FAQ "Still Have Questions?" section buttons - bold typography */
+  section:has(h2:contains("Still Have Questions?")) button,
+  section:has(h2:contains("Still Have Questions?")) .btn-hero-white-outline {
+    font-weight: 700 !important;
+  }
+
   /* Class-based fallback styles */
   .section-cta, .cta-band, .cta-strip { 
     --cta-band-bg: #111827; 
