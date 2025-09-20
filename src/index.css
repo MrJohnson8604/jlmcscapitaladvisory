@@ -150,6 +150,11 @@
     transition: var(--transition-smooth);
   }
 
+  .btn-hero-white-outline {
+    @apply border-2 border-white text-white bg-transparent hover:bg-white/10 hover:border-white hover:text-white rounded-xl px-8 py-4 font-display font-semibold;
+    transition: var(--transition-smooth);
+  }
+
   /* Section Backgrounds */
   .bg-gradient-dark {
     background: var(--gradient-dark);

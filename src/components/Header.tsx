@@ -14,6 +14,7 @@ const Header = () => {
     { name: "Business Working Capital", href: "/business-working-capital" },
     { name: "About", href: "/about" },
     { name: "FAQs", href: "/faqs" },
+    { name: "Refer a Deal", href: "/refer-deal" },
     { name: "Contact", href: "/contact" },
   ];
 
