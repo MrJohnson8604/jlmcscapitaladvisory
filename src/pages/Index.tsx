@@ -130,7 +130,7 @@ const Index = () => {
               Streamlined approach from application to closing.
             </p>
             <p className="text-sm text-muted-foreground">
-              7-day closings depend on complete docs and clean title.
+              Close in as little as <strong>7 days</strong>, subject to complete documentation and a <strong>clear title</strong>.
             </p>
           </div>
 
