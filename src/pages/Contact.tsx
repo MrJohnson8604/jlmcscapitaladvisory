@@ -128,7 +128,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Information */}
-            <div>
+            <div className="contact">
               <h2 className="text-3xl font-display font-bold mb-6 text-primary">
                 Get in Touch
               </h2>
@@ -145,7 +145,7 @@ const Contact = () => {
                     <p className="text-muted-foreground mb-4">
                       Book a direct consultation to discuss your specific financing needs.
                     </p>
-                    <Button className="btn-amber">
+                    <Button className="btn-outline-light">
                       <a 
                         href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                         target="_blank"
@@ -201,7 +201,7 @@ const Contact = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     Already know your numbers? Get pre-qualified instantly with our online form.
                   </p>
-                  <Button variant="outline" className="border-amber text-amber hover:bg-amber hover:text-amber-foreground">
+                  <Button className="btn-outline-light">
                     <a 
                       href="https://form.jotform.com/251521627688060"
                       target="_blank"

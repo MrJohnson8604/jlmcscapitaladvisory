@@ -103,7 +103,7 @@ const FAQs = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="section-cta dark py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-display font-bold mb-6">
             Ready to Move Forward?
@@ -111,15 +111,26 @@ const FAQs = () => {
           <p className="text-xl mb-8 opacity-90">
             Get your questions answered and start your financing process today.
           </p>
-          <Button className="btn-hero">
-            <a 
-              href="https://form.jotform.com/251521627688060"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Get Pre-Qualified
-            </a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="btn-hero-white-outline">
+              <a 
+                href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Discuss Your Deal
+              </a>
+            </Button>
+            <Button className="btn-hero-white-outline">
+              <a 
+                href="https://form.jotform.com/251521627688060"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Get Pre-Qualified
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
     </div>

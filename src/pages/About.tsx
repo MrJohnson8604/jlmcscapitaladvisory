@@ -136,7 +136,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="section-cta dark py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-display font-bold mb-6">
             Ready to Get Started?
@@ -145,7 +145,7 @@ const About = () => {
             Experience the difference of working with a former loan officer who knows what it takes to close.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="btn-hero">
+            <Button className="btn-hero-white-outline">
               <a 
                 href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                 target="_blank"
@@ -154,7 +154,7 @@ const About = () => {
                 Discuss Your Deal
               </a>
             </Button>
-            <Button className="btn-hero-outline">
+            <Button className="btn-hero-white-outline">
               <a 
                 href="https://form.jotform.com/251521627688060"
                 target="_blank"

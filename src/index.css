@@ -249,4 +249,36 @@
     background: rgba(255,255,255,0.10) !important;
     border-color: #FFFFFF !important;
   }
+
+  /* Dark-section CTA strips (global) */
+  .section-cta.dark .button, .section-cta.dark a.button {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    border: 2px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    background: transparent !important;
+    border-radius: 0.75rem !important;
+  }
+  .section-cta.dark .button:hover, .section-cta.dark a.button:hover {
+    color: #F59E0B !important;
+    background: rgba(255,255,255,0.10) !important;
+    border-color: #FFFFFF !important;
+  }
+
+  /* Light cards on Contact page */
+  .contact .card .button,
+  .contact .card a.button {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 600 !important;
+    border: 2px solid #111827 !important;
+    color: #111827 !important;
+    background: transparent !important;
+    border-radius: 0.75rem !important;
+  }
+  .contact .card .button:hover,
+  .contact .card a.button:hover {
+    color: #F59E0B !important;
+    background: rgba(17,24,39,0.06) !important;
+    border-color: #111827 !important;
+  }
 }
