@@ -13,7 +13,7 @@ const BusinessWorkingCapital = () => {
             <p className="text-xl mb-8 opacity-90">
               Available upon request—useful for establishing business credit when appropriate. Share your objective; we'll route you to a suitable program.
             </p>
-            <Button className="btn-hero">
+            <Button className="btn-outline-white-hero">
               <a 
                 href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                 target="_blank"
