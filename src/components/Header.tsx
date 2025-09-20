@@ -29,7 +29,7 @@ const Header = () => {
               <img 
                 src={jlmcsLogo} 
                 alt="JLMCS Capital Advisory" 
-                className="h-8 w-auto"
+                className="h-8 w-auto mx-2"
               />
             </Link>
           </div>
