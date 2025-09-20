@@ -349,18 +349,26 @@
     box-shadow: none !important;
   }
 
-  /* FAQ "Still Have Questions?" section buttons - bold typography */
+  /* FAQ "Still Have Questions?" section buttons - comprehensive fallback */
+  section:has(h2:contains("Still Have Questions?")) .button,
+  section:has(h2:contains("Still Have Questions?")) a.button,
   section:has(h2:contains("Still Have Questions?")) button,
   section:has(h2:contains("Still Have Questions?")) .btn-hero-white-outline {
-    font-weight: 700 !important;
     transition: background 160ms ease, color 160ms ease, border-color 160ms ease !important;
+    border: 2px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    background: transparent !important;
+    border-radius: 0.75rem !important;
+    font-weight: 700 !important;
   }
 
+  section:has(h2:contains("Still Have Questions?")) .button:hover,
+  section:has(h2:contains("Still Have Questions?")) a.button:hover,
   section:has(h2:contains("Still Have Questions?")) button:hover,
   section:has(h2:contains("Still Have Questions?")) .btn-hero-white-outline:hover {
     background: rgba(255,255,255,0.14) !important;
-    border-color: #FFFFFF !important;
     color: #F59E0B !important;
+    border-color: #FFFFFF !important;
   }
 
   /* Class-based fallback styles */
