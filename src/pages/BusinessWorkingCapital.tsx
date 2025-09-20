@@ -41,7 +41,7 @@ const BusinessWorkingCapital = () => {
               To explore available options, please schedule a consultation where we can discuss your business needs 
               and connect you with the most appropriate program for your situation.
             </p>
-            <Button className="btn-amber">
+            <Button className="btn-outline-dark">
               <a 
                 href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                 target="_blank"
