@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, Users, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ReferDeal = () => {
   const { toast } = useToast();
@@ -19,18 +20,59 @@ const ReferDeal = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Referral Submitted!",
-      description: "Thanks! We'll contact your referral within 1 business day.",
-    });
-    
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
-    setAgreedToTerms(false);
-    setNotCompensated(false);
+    try {
+      // Get form data
+      const formData = new FormData(e.target as HTMLFormElement);
+      const referralData = {
+        yourName: formData.get("yourName") as string,
+        yourEmail: formData.get("yourEmail") as string,
+        yourPhone: formData.get("yourPhone") as string,
+        leadName: formData.get("leadName") as string,
+        leadContact: formData.get("leadContact") as string,
+        dealType: formData.get("dealType") as string,
+        propertyState: formData.get("propertyState") as string,
+        loanAmount: formData.get("loanAmount") as string,
+        notes: formData.get("notes") as string,
+      };
+
+      console.log("Submitting referral data:", referralData);
+
+      // Call the edge function
+      const { data, error } = await supabase.functions.invoke("submit-referral", {
+        body: referralData,
+      });
+
+      if (error) {
+        console.error("Supabase function error:", error);
+        throw new Error(error.message);
+      }
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to submit referral");
+      }
+
+      console.log("Referral submitted successfully:", data);
+      
+      toast({
+        title: "Referral Submitted!",
+        description: "Thanks! We'll contact your referral within 1 business day and send you confirmation.",
+      });
+
+      // Reset form
+      (e.target as HTMLFormElement).reset();
+      setAgreedToTerms(false);
+      setNotCompensated(false);
+
+    } catch (error: any) {
+      console.error("Error submitting referral:", error);
+      toast({
+        title: "Submission Failed",
+        description: error.message || "There was an error submitting your referral. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const usStates = [
