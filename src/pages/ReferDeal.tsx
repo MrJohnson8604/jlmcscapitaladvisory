@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,35 +13,61 @@ import { DollarSign, Users, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
+const referralSchema = z.object({
+  yourName: z.string().min(2, "Name is required"),
+  yourEmail: z.string().email("Valid email is required"),
+  yourPhone: z.string().optional(),
+  leadName: z.string().min(2, "Lead name is required"),
+  leadContact: z.string().min(1, "Lead contact is required"),
+  dealType: z.string().optional(),
+  propertyState: z.string().optional(),
+  loanAmount: z.string().optional(),
+  notes: z.string().optional(),
+  agreedToTerms: z.boolean().refine(val => val === true, "You must agree to the terms"),
+  notCompensated: z.boolean().refine(val => val === true, "You must confirm you are not being compensated"),
+});
+
+type ReferralFormData = z.infer<typeof referralSchema>;
+
 const ReferDeal = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [notCompensated, setNotCompensated] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors }, 
+    setValue,
+    watch,
+    reset
+  } = useForm<ReferralFormData>({
+    resolver: zodResolver(referralSchema),
+    defaultValues: {
+      agreedToTerms: false,
+      notCompensated: false
+    }
+  });
+
+  const onSubmit = async (data: ReferralFormData) => {
     setIsSubmitting(true);
     
     try {
-      // Get form data
-      const formData = new FormData(e.target as HTMLFormElement);
       const referralData = {
-        yourName: formData.get("yourName") as string,
-        yourEmail: formData.get("yourEmail") as string,
-        yourPhone: formData.get("yourPhone") as string,
-        leadName: formData.get("leadName") as string,
-        leadContact: formData.get("leadContact") as string,
-        dealType: formData.get("dealType") as string,
-        propertyState: formData.get("propertyState") as string,
-        loanAmount: formData.get("loanAmount") as string,
-        notes: formData.get("notes") as string,
+        yourName: data.yourName,
+        yourEmail: data.yourEmail,
+        yourPhone: data.yourPhone || "",
+        leadName: data.leadName,
+        leadContact: data.leadContact,
+        dealType: data.dealType || "",
+        propertyState: data.propertyState || "",
+        loanAmount: data.loanAmount || "",
+        notes: data.notes || "",
       };
 
       console.log("Submitting referral data:", referralData);
 
       // Call the edge function
-      const { data, error } = await supabase.functions.invoke("submit-referral", {
+      const { data: result, error } = await supabase.functions.invoke("submit-referral", {
         body: referralData,
       });
 
@@ -47,11 +76,11 @@ const ReferDeal = () => {
         throw new Error(error.message);
       }
 
-      if (!data.success) {
-        throw new Error(data.error || "Failed to submit referral");
+      if (!result.success) {
+        throw new Error(result.error || "Failed to submit referral");
       }
 
-      console.log("Referral submitted successfully:", data);
+      console.log("Referral submitted successfully:", result);
       
       toast({
         title: "Referral Submitted!",
@@ -59,9 +88,7 @@ const ReferDeal = () => {
       });
 
       // Reset form
-      (e.target as HTMLFormElement).reset();
-      setAgreedToTerms(false);
-      setNotCompensated(false);
+      reset();
 
     } catch (error: any) {
       console.error("Error submitting referral:", error);
@@ -136,7 +163,7 @@ const ReferDeal = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Your Information */}
                   <div>
                     <h3 className="text-lg font-display font-semibold mb-4 text-primary">
@@ -145,16 +172,22 @@ const ReferDeal = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="yourName">Your Name *</Label>
-                        <Input id="yourName" name="yourName" required />
+                        <Input id="yourName" {...register('yourName')} />
+                        {errors.yourName && (
+                          <p className="text-sm text-destructive">{errors.yourName.message}</p>
+                        )}
                       </div>
                       <div>
                         <Label htmlFor="yourEmail">Your Email *</Label>
-                        <Input id="yourEmail" name="yourEmail" type="email" required />
+                        <Input id="yourEmail" {...register('yourEmail')} type="email" />
+                        {errors.yourEmail && (
+                          <p className="text-sm text-destructive">{errors.yourEmail.message}</p>
+                        )}
                       </div>
                     </div>
                     <div className="mt-4">
                       <Label htmlFor="yourPhone">Your Phone (optional)</Label>
-                      <Input id="yourPhone" name="yourPhone" type="tel" />
+                      <Input id="yourPhone" {...register('yourPhone')} type="tel" />
                     </div>
                   </div>
 
@@ -166,11 +199,17 @@ const ReferDeal = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="leadName">Lead's Name *</Label>
-                        <Input id="leadName" name="leadName" required />
+                        <Input id="leadName" {...register('leadName')} />
+                        {errors.leadName && (
+                          <p className="text-sm text-destructive">{errors.leadName.message}</p>
+                        )}
                       </div>
                       <div>
                         <Label htmlFor="leadContact">Lead's Email or Phone *</Label>
-                        <Input id="leadContact" name="leadContact" required />
+                        <Input id="leadContact" {...register('leadContact')} />
+                        {errors.leadContact && (
+                          <p className="text-sm text-destructive">{errors.leadContact.message}</p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -183,7 +222,7 @@ const ReferDeal = () => {
                     <div className="grid md:grid-cols-2 gap-4 mb-4">
                       <div>
                         <Label htmlFor="dealType">Deal Type</Label>
-                        <Select name="dealType">
+                        <Select onValueChange={(value) => setValue('dealType', value)}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select deal type" />
                           </SelectTrigger>
@@ -198,7 +237,7 @@ const ReferDeal = () => {
                       </div>
                       <div>
                         <Label htmlFor="propertyState">Property State</Label>
-                        <Select name="propertyState">
+                        <Select onValueChange={(value) => setValue('propertyState', value)}>
                           <SelectTrigger>
                             <SelectValue placeholder="Select state" />
                           </SelectTrigger>
@@ -217,7 +256,7 @@ const ReferDeal = () => {
                       <Label htmlFor="loanAmount">Estimated Loan Amount</Label>
                       <Input 
                         id="loanAmount" 
-                        name="loanAmount" 
+                        {...register('loanAmount')}
                         type="number" 
                         placeholder="250000"
                       />
@@ -227,7 +266,7 @@ const ReferDeal = () => {
                       <Label htmlFor="notes">Notes (max 240 characters)</Label>
                       <Textarea 
                         id="notes" 
-                        name="notes" 
+                        {...register('notes')}
                         maxLength={240}
                         placeholder="Additional details about the deal..."
                       />
@@ -239,32 +278,34 @@ const ReferDeal = () => {
                     <div className="flex items-start space-x-3">
                       <Checkbox 
                         id="notCompensated"
-                        checked={notCompensated}
-                        onCheckedChange={(checked) => setNotCompensated(checked === true)}
-                        required
+                        onCheckedChange={(checked) => setValue('notCompensated', !!checked)}
                       />
                       <Label htmlFor="notCompensated" className="text-sm">
                         I am not being compensated in this transaction. *
                       </Label>
                     </div>
+                    {errors.notCompensated && (
+                      <p className="text-sm text-destructive">{errors.notCompensated.message}</p>
+                    )}
 
                     <div className="flex items-start space-x-3">
                       <Checkbox 
                         id="consent"
-                        checked={agreedToTerms}
-                        onCheckedChange={(checked) => setAgreedToTerms(checked === true)}
-                        required
+                        onCheckedChange={(checked) => setValue('agreedToTerms', !!checked)}
                       />
                       <Label htmlFor="consent" className="text-sm">
                         I consent to JLMCS Capital Advisory contacting this referral and understand 
                         that referral fees are paid only upon funding and where permitted by law. *
                       </Label>
                     </div>
+                    {errors.agreedToTerms && (
+                      <p className="text-sm text-destructive">{errors.agreedToTerms.message}</p>
+                    )}
                   </div>
 
                   <Button 
                     type="submit" 
-                    disabled={isSubmitting || !agreedToTerms || !notCompensated}
+                    disabled={isSubmitting}
                     className="btn-amber w-full"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Referral"}
