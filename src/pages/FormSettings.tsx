@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,10 +7,16 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, FormInput, Users, BarChart3 } from "lucide-react";
+import { Settings, FormInput, Users, BarChart3, LogOut, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import SubmissionsDashboard from "@/components/SubmissionsDashboard";
+import type { User } from "@supabase/supabase-js";
 
 const FormSettings = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
   const [quickIntakeSettings, setQuickIntakeSettings] = useState({
     enabled: true,
     title: "Quick Deal Intake",
@@ -30,6 +37,47 @@ const FormSettings = () => {
     enableAnalytics: true,
   });
 
+  useEffect(() => {
+    // Check authentication
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate("/auth");
+        return;
+      }
+      setUser(session.user);
+      setLoading(false);
+    };
+
+    checkAuth();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/auth");
+      } else {
+        setUser(session.user);
+        setLoading(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        toast.error("Error signing out: " + error.message);
+      } else {
+        toast.success("Successfully signed out");
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred");
+    }
+  };
+
   const handleSaveQuickIntake = () => {
     // TODO: Save to database or local storage
     toast.success("Quick Intake form settings saved successfully!");
@@ -40,21 +88,50 @@ const FormSettings = () => {
     toast.success("Referral form settings saved successfully!");
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-muted/50 flex items-center justify-center">
+        <div className="flex items-center gap-3">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <span className="text-lg">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null; // Will redirect to auth
+  }
+
   return (
     <div className="min-h-screen bg-muted/50">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <Settings className="h-8 w-8 text-primary" />
-              <h1 className="text-4xl font-display font-bold text-primary">
-                Form Settings
-              </h1>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3 mb-2">
+                <Settings className="h-8 w-8 text-primary" />
+                <div>
+                  <h1 className="text-4xl font-display font-bold text-primary">
+                    Form Settings
+                  </h1>
+                  <p className="text-muted-foreground text-lg">
+                    Configure your form behavior, content, and analytics settings.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <div className="text-sm text-muted-foreground">Signed in as</div>
+                  <div className="font-medium">{user.email}</div>
+                </div>
+                <Button variant="outline" onClick={handleSignOut}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
             </div>
-            <p className="text-muted-foreground text-lg">
-              Configure your form behavior, content, and analytics settings.
-            </p>
           </div>
 
           <Tabs defaultValue="quick-intake" className="space-y-6">
@@ -281,23 +358,7 @@ const FormSettings = () => {
 
             {/* Submissions Tab */}
             <TabsContent value="submissions" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Form Submissions Dashboard</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-12">
-                    <BarChart3 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">Submissions Dashboard</h3>
-                    <p className="text-muted-foreground mb-6">
-                      View and manage all form submissions in one place. Authentication required to access sensitive data.
-                    </p>
-                    <Button variant="outline">
-                      Set Up Authentication First
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <SubmissionsDashboard />
             </TabsContent>
 
             {/* Analytics Tab */}
