@@ -10,6 +10,7 @@ import About from "./pages/About";
 import FAQs from "./pages/FAQs";
 import Contact from "./pages/Contact";
 import ReferDeal from "./pages/ReferDeal";
+import FormSettings from "./pages/FormSettings";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -33,6 +34,7 @@ const App = () => (
               <Route path="/faqs" element={<FAQs />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/refer-deal" element={<ReferDeal />} />
+              <Route path="/form-settings" element={<FormSettings />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
