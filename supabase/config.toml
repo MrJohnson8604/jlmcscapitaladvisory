@@ -2,3 +2,6 @@ project_id = "zfypycrqovozdegxcooz"
 
 [functions.submit-referral]
 verify_jwt = false
+
+[functions.submit-quick-intake]
+verify_jwt = false
