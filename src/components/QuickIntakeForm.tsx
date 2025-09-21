@@ -200,30 +200,20 @@ export const QuickIntakeForm = () => {
     setLastSubmissionTime(now);
 
     try {
-      // Prepare email data
-      const emailData = {
-        to: 'chris.johnson@jlmcsfunding.com',
-        subject: 'Quick Deal Intake Submission',
-        body: `
-New Quick Deal Intake Submission
+      // Submit to edge function
+      const response = await fetch(`https://zfypycrqovozdegxcooz.supabase.co/functions/v1/submit-quick-intake`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-Full Name: ${data.fullName}
-Best Contact: ${data.bestContact}
-Property State: ${data.propertyState}
-Deal Type: ${data.dealType}
-Estimated Loan Amount: $${data.estimatedLoanAmount}
-Timeline to Close: ${data.timelineToClose}
+      const result = await response.json();
 
-UTM Data:
-- Source: ${data.utmSource || 'N/A'}
-- Medium: ${data.utmMedium || 'N/A'}
-- Campaign: ${data.utmCampaign || 'N/A'}
-- Term: ${data.utmTerm || 'N/A'}
-- Content: ${data.utmContent || 'N/A'}
-
-Submitted: ${new Date().toLocaleString()}
-        `
-      };
+      if (!response.ok) {
+        throw new Error(result.error || 'Submission failed');
+      }
 
       // Analytics tracking
       if (typeof (window as any).gtag !== 'undefined') {
@@ -236,9 +226,6 @@ Submitted: ${new Date().toLocaleString()}
           timeline: data.timelineToClose
         });
       }
-
-      // For now, we'll just show success (email integration would need backend)
-      console.log('Form submission:', emailData);
       
       toast({
         title: "Success!",
