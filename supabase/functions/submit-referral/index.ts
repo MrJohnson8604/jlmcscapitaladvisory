@@ -75,38 +75,124 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Referral saved to database:", referral.id);
 
-    // Send email notification
+    // Send email notification to business owner
+    const formatDealType = (dealType: string) => {
+      const types: { [key: string]: string } = {
+        'fix_flip': 'Fix & Flip',
+        'dscr_rental': 'DSCR Rental',
+        'new_construction': 'New Construction',
+        'commercial_bridge': 'Commercial Bridge'
+      };
+      return types[dealType] || dealType;
+    };
+
     const emailHtml = `
-      <h2>New Referral Submission</h2>
-      
-      <h3>Referrer Information:</h3>
-      <ul>
-        <li><strong>Name:</strong> ${formData.yourName}</li>
-        <li><strong>Email:</strong> ${formData.yourEmail}</li>
-        ${formData.yourPhone ? `<li><strong>Phone:</strong> ${formData.yourPhone}</li>` : ''}
-      </ul>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #1f2937; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">
+          🎯 New Referral Submission
+        </h2>
+        
+        <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #374151; margin-top: 0;">👤 Lead Information</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; width: 120px;">Name:</td>
+              <td style="padding: 8px 0;">${formData.leadName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold;">Contact:</td>
+              <td style="padding: 8px 0;">
+                <a href="mailto:${formData.leadContact}" style="color: #f59e0b; text-decoration: none;">
+                  ${formData.leadContact}
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
 
-      <h3>Lead Information:</h3>
-      <ul>
-        <li><strong>Name:</strong> ${formData.leadName}</li>
-        <li><strong>Contact:</strong> ${formData.leadContact}</li>
-      </ul>
+        <div style="background-color: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #374151; margin-top: 0;">💼 Deal Details</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            ${formData.dealType ? `
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; width: 120px;">Deal Type:</td>
+              <td style="padding: 8px 0;">${formatDealType(formData.dealType)}</td>
+            </tr>` : ''}
+            ${formData.propertyState ? `
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold;">State:</td>
+              <td style="padding: 8px 0;">${formData.propertyState}</td>
+            </tr>` : ''}
+            ${formData.loanAmount ? `
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold;">Loan Amount:</td>
+              <td style="padding: 8px 0; color: #059669; font-weight: bold;">
+                $${parseFloat(formData.loanAmount).toLocaleString()}
+              </td>
+            </tr>` : ''}
+          </table>
+          ${formData.notes ? `
+          <div style="margin-top: 15px;">
+            <strong>Additional Notes:</strong>
+            <div style="background-color: white; padding: 10px; border-radius: 4px; margin-top: 5px; border-left: 4px solid #f59e0b;">
+              ${formData.notes}
+            </div>
+          </div>` : ''}
+        </div>
 
-      <h3>Deal Information:</h3>
-      <ul>
-        ${formData.dealType ? `<li><strong>Deal Type:</strong> ${formData.dealType}</li>` : ''}
-        ${formData.propertyState ? `<li><strong>Property State:</strong> ${formData.propertyState}</li>` : ''}
-        ${formData.loanAmount ? `<li><strong>Estimated Loan Amount:</strong> $${parseFloat(formData.loanAmount).toLocaleString()}</li>` : ''}
-        ${formData.notes ? `<li><strong>Notes:</strong> ${formData.notes}</li>` : ''}
-      </ul>
+        <div style="background-color: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #374151; margin-top: 0;">🤝 Referred By</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; width: 120px;">Name:</td>
+              <td style="padding: 8px 0;">${formData.yourName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold;">Email:</td>
+              <td style="padding: 8px 0;">
+                <a href="mailto:${formData.yourEmail}" style="color: #f59e0b; text-decoration: none;">
+                  ${formData.yourEmail}
+                </a>
+              </td>
+            </tr>
+            ${formData.yourPhone ? `
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold;">Phone:</td>
+              <td style="padding: 8px 0;">
+                <a href="tel:${formData.yourPhone}" style="color: #f59e0b; text-decoration: none;">
+                  ${formData.yourPhone}
+                </a>
+              </td>
+            </tr>` : ''}
+          </table>
+        </div>
 
-      <p><small>Submitted on: ${new Date().toLocaleString()}</small></p>
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="mailto:${formData.leadContact}" 
+             style="background-color: #f59e0b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
+            📧 Contact Lead Now
+          </a>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+        <p style="color: #6b7280; font-size: 14px; text-align: center;">
+          Submitted on ${new Date().toLocaleString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric', 
+            hour: 'numeric', 
+            minute: '2-digit',
+            timeZoneName: 'short'
+          })}
+        </p>
+      </div>
     `;
 
     const { error: emailError } = await resend.emails.send({
-      from: "JLMCS Capital Advisory <onboarding@resend.dev>",
-      to: [formData.yourEmail], // You can change this to your business email
-      subject: "New Referral Submission - JLMCS Capital Advisory",
+      from: "JLMCS Referral System <onboarding@resend.dev>",
+      to: ["chris.johnson@jlmcsfunding.com"],
+      subject: `🎯 New Referral: ${formData.leadName} - ${formData.dealType ? formatDealType(formData.dealType) : 'Deal'} ${formData.loanAmount ? `($${parseFloat(formData.loanAmount).toLocaleString()})` : ''}`,
       html: emailHtml,
     });
 
