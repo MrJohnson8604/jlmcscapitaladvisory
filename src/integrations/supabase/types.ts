@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      referrals: {
+        Row: {
+          created_at: string
+          deal_type: string | null
+          id: string
+          lead_contact: string
+          lead_name: string
+          loan_amount: number | null
+          notes: string | null
+          property_state: string | null
+          updated_at: string
+          your_email: string
+          your_name: string
+          your_phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          deal_type?: string | null
+          id?: string
+          lead_contact: string
+          lead_name: string
+          loan_amount?: number | null
+          notes?: string | null
+          property_state?: string | null
+          updated_at?: string
+          your_email: string
+          your_name: string
+          your_phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          deal_type?: string | null
+          id?: string
+          lead_contact?: string
+          lead_name?: string
+          loan_amount?: number | null
+          notes?: string | null
+          property_state?: string | null
+          updated_at?: string
+          your_email?: string
+          your_name?: string
+          your_phone?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
