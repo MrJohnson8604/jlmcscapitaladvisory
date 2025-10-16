@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Your Page Imports
 import Index from "./pages/Index";
 import RealEstateFinancing from "./pages/RealEstateFinancing";
 import BusinessWorkingCapital from "./pages/BusinessWorkingCapital";
@@ -13,8 +15,13 @@ import ReferDeal from "./pages/ReferDeal";
 import FormSettings from "./pages/FormSettings";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import ToolLandingPage from "./pages/ToolLandingPage";
+import CalculatorPage from "./pages/CalculatorPage";
+
+// Your Component Imports
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AnnouncementBar from "./components/AnnouncementBar"; // <-- 1. IMPORT THE NEW COMPONENT
 
 const queryClient = new QueryClient();
 
@@ -25,6 +32,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <div className="min-h-screen flex flex-col">
+          <AnnouncementBar /> {/* <-- 2. ADD THE BANNER HERE, ABOVE THE HEADER */}
           <Header />
           <main className="flex-1">
             <Routes>
@@ -37,7 +45,12 @@ const App = () => (
               <Route path="/refer-deal" element={<ReferDeal />} />
               <Route path="/form-settings" element={<FormSettings />} />
               <Route path="/auth" element={<Auth />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              
+              {/* Tool Routes */}
+              <Route path="/resources/roi-calculator" element={<ToolLandingPage />} />
+              <Route path="/tools/roi-calculator" element={<CalculatorPage />} />
+
+              {/* Catch-all Not Found Route */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
@@ -49,3 +62,4 @@ const App = () => (
 );
 
 export default App;
+

@@ -12,6 +12,7 @@ const Header = () => {
     { name: "Home", href: "/" },
     { name: "Real Estate Financing", href: "/real-estate-financing" },
     { name: "Business Working Capital", href: "/business-working-capital" },
+    { name: "Resources", href: "/resources/roi-calculator" },
     { name: "About", href: "/about" },
     { name: "FAQs", href: "/faqs" },
     { name: "Refer a Deal", href: "/refer-deal" },
@@ -27,9 +28,9 @@ const Header = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <img 
-                src={jlmcsLogo} 
-                alt="JLMCS Capital Advisory" 
+              <img
+                src={jlmcsLogo}
+                alt="JLMCS Capital Advisory"
                 className="h-8 w-auto mx-2"
               />
             </Link>
@@ -37,27 +38,47 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${
-                    isActive(item.href)
-                      ? "text-amber border-b-2 border-amber"
-                      : "text-foreground hover:text-amber"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+            {/* FIX: Reduced spacing from space-x-4 to space-x-2 for a better fit */}
+            <div className="ml-10 flex items-baseline space-x-2">
+              {navigation.map((item) => {
+                const active = isActive(item.href);
+                // FIX: Add special styling for the Resources link to make it stand out
+                if (item.name === "Resources") {
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className={`px-3 py-2 text-sm font-medium transition-colors rounded-full ${
+                        active
+                          ? "bg-amber text-primary-foreground"
+                          : "bg-amber/10 text-amber hover:bg-amber/20"
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`px-3 py-2 text-sm font-medium transition-colors ${
+                      active
+                        ? "text-amber border-b-2 border-amber"
+                        : "text-foreground hover:text-amber"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button className="btn-amber">
-              <a 
+              <a
                 href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -87,7 +108,7 @@ const Header = () => {
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium transition-colors ${
+                  className={`block px-3 py-2 text-base font-medium transition-colors rounded-md ${
                     isActive(item.href)
                       ? "text-amber bg-muted"
                       : "text-foreground hover:text-amber"
@@ -98,7 +119,7 @@ const Header = () => {
               ))}
               <div className="px-3 py-2">
                 <Button className="btn-amber w-full">
-                  <a 
+                  <a
                     href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -116,3 +137,4 @@ const Header = () => {
 };
 
 export default Header;
+

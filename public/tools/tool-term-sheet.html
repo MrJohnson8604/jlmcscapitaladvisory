@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Term-Sheet Normalizer — ROI Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+    body { margin: 0; background:#f5f5f5; color:#1a1a1a; scroll-behavior: smooth; }
+    .header { background: white; border-bottom: 3px solid #f59e0b; padding: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .header-content { max-width: 980px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; }
+    .logo { height: 60px; width: auto; }
+    .header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+    .wrap { max-width: 980px; margin: 24px auto; padding: 24px; }
+    .card { background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 24px; }
+    h2 { margin: 24px 0 16px; font-size: 16px; border-bottom: 2px solid #f59e0b; padding-bottom: 10px; color: #1a1a1a; font-weight: 600; }
+    label { display:block; font-size:14px; margin: 12px 0 6px; color:#555; font-weight: 500; }
+    input[type="text"], input[type="email"], select, input[type="number"] {
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid #ddd; background:white; color:#1a1a1a; box-sizing: border-box;
+    }
+    input[readonly] { background-color: #f9fafb; color: #6b7280; cursor: not-allowed; }
+    input[type="text"]:focus, input[type="email"]:focus, select:focus, input[type="number"]:focus {
+      outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+    }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .row.three { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; }
+    .row.four { display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; }
+    .muted { color:#98a3b3; font-size:12px; }
+    .actions { display:flex; gap:8px; margin-top:24px; flex-wrap: wrap; }
+    button { padding:10px 14px; border:0; border-radius:8px; cursor:pointer; background:#f59e0b; color:white; font-weight:600; transition: background 0.2s; }
+    button:hover { background:#d97706; }
+    button.secondary { background:#f0f0f0; color:#1a1a1a; border:1px solid #ddd; }
+    button.secondary:hover { background:#e0e0e0; }
+    .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:12px; }
+    @media (max-width: 768px) { .grid, .row, .row.three, .row.four { grid-template-columns: 1fr; } }
+    .pill { background:#f9f9f9; border:1px solid #e0e0e0; padding:12px; border-radius:10px; }
+    .pill strong { color:#1a1a1a; display:block; margin-bottom: 4px; }
+    .ok { color:#059669; font-weight: 600; }
+    .warn { color:#d97706; font-weight: 600; }
+    .tab-buttons { display: flex; gap: 8px; margin-bottom: 16px; border-bottom: 2px solid #e0e0e0; }
+    .tab-btn { padding: 12px 16px; background: none; border: none; border-bottom: 3px solid transparent; color: #666; cursor: pointer; transition: all 0.2s; font-weight: 500; }
+    .tab-btn.active { border-bottom-color: #f59e0b; color: #1a1a1a; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
+    .comparison-card { background: #f9f9f9; border: 1px solid #e0e0e0; padding: 16px; border-radius: 10px; }
+    .comparison-card h3 { margin: 0 0 12px; font-size: 18px; color: #1a1a1a; }
+    .comparison-card .metric { font-size: 14px; display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eee; }
+    .comparison-card .metric:last-child { border-bottom: none; }
+    .comparison-card .metric span:first-child { color: #555; }
+    .comparison-card .metric span:last-child { font-weight: 600; }
+    .legend-container { border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; margin-top: 16px; }
+    .legend-item { border-bottom: 1px solid #e0e0e0; }
+    .legend-item:last-child { border-bottom: none; }
+    .legend-title { padding: 14px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #f9f9f9; transition: background 0.2s; }
+    .legend-title:hover { background: #f0f0f0; }
+    .legend-title::after { content: '+'; font-size: 20px; color: #888; transition: transform 0.2s; }
+    .legend-item.active .legend-title::after { transform: rotate(45deg); }
+    .legend-content { padding: 0 16px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; background: white; line-height: 1.6; }
+    .legend-item.active .legend-content { padding: 16px; max-height: 200px; }
+    .qualification-result { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 16px; margin-top: 16px; text-align: center; }
+    .qualification-result strong { display: block; font-size: 18px; color: #b45309; margin-bottom: 8px; }
+    .qualification-result span { display: block; font-size: 24px; font-weight: 700; color: #92400e; margin: 8px 0 16px; }
+    .disclaimer-box { background: #fefce8; border: 1px solid #fde047; border-radius: 8px; padding: 12px; margin-top: 24px; display: flex; align-items: center; gap: 12px; font-size: 13px; color: #713f12; }
+    .disclaimer-box svg { flex-shrink: 0; }
+    .info-toggle { font-size: 12px; color: #f59e0b; cursor: pointer; text-decoration: underline; display: inline-block; margin-left: 8px; }
+    .info-box { display: none; background: #f3f4f6; padding: 10px; border-radius: 6px; margin-top: 8px; font-size: 13px; line-height: 1.5; }
+    .info-box strong { color: #1f2937; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h2>Loan Qualification Calculator</h2>
+      <p class="muted" style="margin-top:-12px; margin-bottom:12px;">Use this tool to find the max loan amount a lender will offer based on their rules.</p>
+      <div class="row three">
+        <div><label>Purchase Price ($)</label><input type="text" id="q_purchasePrice" value="150,000" oninput="formatCurrency(this)" /></div>
+        <div><label>Rehab Budget ($)</label><input type="text" id="q_rehabBudget" value="40,000" oninput="formatCurrency(this)" /></div>
+        <div><label>After-Repair Value (ARV) ($)</label><input type="text" id="q_arv" value="250,000" oninput="formatCurrency(this)" /></div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Max Loan-to-Cost (LTC %)</label><input type="number" id="q_ltc" value="90" step="0.01" />
+          <div style="margin-top: 8px;">
+            <label style="display:inline-block; margin-right: 16px; font-size: 13px;"><input type="radio" name="ltcBase" value="purchase" style="width:auto; margin-right: 4px;"> On Purchase Only</label>
+            <label style="display:inline-block; font-size: 13px;"><input type="radio" name="ltcBase" value="purchase_rehab" style="width:auto; margin-right: 4px;" checked> On Purchase + Rehab</label>
+          </div>
+        </div>
+        <div><label>Max Loan-to-Value (ARV %)</label><input type="number" id="q_arv_pct" value="75" step="0.01" /></div>
+      </div>
+      <div class="actions"><button type="button" id="qualifyBtn">Calculate & Copy to ROI Tool</button></div>
+      <div id="qualifyResult" style="display:none;"></div>
+    </div>
+    <div class="card" id="roi-calculator-card">
+      <div class="bg-amber-50 border border-amber-200 rounded-lg p-5 mb-8">
+        <h3 class="text-lg font-semibold text-amber-800 mb-2">How to Use The ROI Calculator</h3>
+        <ol class="list-decimal list-inside text-amber-700 space-y-1 text-sm">
+          <li>Enter your specific deal and loan details into the fields below.</li>
+          <li>Select the correct <strong>Interest Method</strong> based on your lender's term sheet.</li>
+          <li>Add all holding and selling costs to get an accurate profit projection.</li>
+          <li>Click <strong>"Calculate ROI"</strong> to see a full breakdown and scenario comparison.</li>
+        </ol>
+      </div>
+      <div class="tab-buttons">
+        <button type="button" class="tab-btn active" data-tab="input">Input</button>
+        <button type="button" class="tab-btn" data-tab="results">Results</button>
+      </div>
+      <div id="input" class="tab-content active">
+        <form id="tsForm">
+          <h2>Deal & Loan Info</h2>
+          <div class="row">
+            <div><label>Lender Name</label><input type="text" id="lenderName" placeholder="e.g., JLMCS Funding" required /></div>
+          </div>
+          <div class="row four">
+            <div><label>Contract Purchase Price ($)</label><input type="text" id="purchasePrice" value="150,000" oninput="formatCurrency(this)" required /></div>
+            <div>
+              <label>Assignment Fee ($) <span class="info-toggle" id="assignmentInfoToggle">What's this?</span></label>
+              <input type="text" id="assignmentFee" value="0" oninput="formatCurrency(this)" />
+               <div id="assignmentInfoBox" class="info-box">
+                <strong>Investors:</strong> If your purchase price already includes this fee, leave this at $0.<br><br>
+                <strong>Wholesalers:</strong> Enter your desired fee here.
+              </div>
+            </div>
+            <div><label>After-Repair Value ($)</label><input type="text" id="arv" value="250,000" oninput="formatCurrency(this)" required /></div>
+            <div><label>Loan Amount ($)</label><input type="text" id="loanAmount" value="170,000" oninput="formatCurrency(this)" required /></div>
+          </div>
+          <div class="row four">
+            <div><label>Base Rehab Budget ($)</label><input type="text" id="rehabBudget" value="40,000" oninput="formatCurrency(this); updateTotalRehab();" required /></div>
+            <div><label>Rehab Contingency (%)</label><input type="number" id="rehabContingency" value="10" step="0.01" oninput="updateTotalRehab()" /></div>
+            <div><label>Total Rehab (w/ Contingency)</label><input type="text" id="totalRehab" readonly /></div>
+            <div><label>Rehab Financed ($)</label><input type="text" id="rehabFinanced" value="40,000" oninput="formatCurrency(this)" required /></div>
+          </div>
+          <h2>Loan Terms & Fees</h2>
+          <div class="row three">
+            <div>
+              <label for="interestMethod">Interest Method <span class="info-toggle" id="interestInfoToggle">What's this?</span></label>
+              <select id="interestMethod">
+                <option value="drawn">On Drawn Balance (Standard)</option>
+                <option value="dutch">On Full Commitment (Dutch)</option>
+              </select>
+              <div id="interestInfoBox" class="info-box">
+                <strong>Drawn:</strong> Interest is charged only on the funds you have used. Cheaper for you.<br><br>
+                <strong>Dutch:</strong> Interest is charged on the <u>entire loan amount</u> from day one. More expensive.
+              </div>
+            </div>
+            <div><label>Interest Rate (% APR)</label><input type="number" id="rateAPR" value="12" step="0.01" required /></div>
+            <div><label>Term (months)</label><input type="number" id="termMonths" value="12" required /></div>
+          </div>
+          <div class="row four">
+            <div><label>Points (%)</label><input type="number" id="pointsPct" value="2" step="0.01" required /></div>
+            <div><label>Origination Fee ($)</label><input type="text" id="origFee" value="1,000" oninput="formatCurrency(this)" /></div>
+            <div><label>Draw Fee ($)</label><input type="text" id="drawFee" value="150" oninput="formatCurrency(this)" /></div>
+            <div><label>Draw Count (estimate)</label><input type="number" id="drawCount" value="4" /></div>
+          </div>
+          <h2>Holding & Selling Costs</h2>
+          <div class="row three">
+            <div><label>Utilities per Month ($)</label><input type="text" id="utilsPerMo" value="200" step="1" oninput="formatCurrency(this)" /></div>
+            <div><label>Insurance per Month ($)</label><input type="text" id="insPerMo" value="120" step="1" oninput="formatCurrency(this)" /></div>
+            <div><label>Other Monthly Costs ($)</label><input type="text" id="otherPerMo" value="0" step="1" oninput="formatCurrency(this)" /></div>
+          </div>
+          <div class="row">
+            <div><label>Agent Commissions (%)</label><input type="number" id="agentPct" value="6" step="0.01" /></div>
+            <div><label>Other Closing Costs (%)</label><input type="number" id="closingPct" value="1.5" step="0.01" /></div>
+          </div>
+          <h2>Scenarios</h2>
+          <div class="row">
+            <div><label>Calculate Scenarios For (months)</label><select id="scenarioMonths"><option value="6,9,12">6, 9, 12 months</option><option value="6,12,24">6, 12, 24 months</option><option value="custom">Custom</option></select></div>
+            <div><label id="customMonthsLabel" style="display:none;">Custom Hold Periods</label><input type="text" id="customMonthsInput" placeholder="6,9,12" style="display:none;" /></div>
+          </div>
+          <div class="disclaimer-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style="width: 32px; height: 32px;"><path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0ZM8.94 6.94a.75.75 0 1 1-1.06-1.061l2.5 2.5a.75.75 0 0 1 0 1.061l-2.5 2.5a.75.75 0 1 1-1.06-1.061L10.378 10 8.94 8.56Z" clip-rule="evenodd" /></svg>
+            <div><strong>Tip:</strong> For the most accurate results, use the figures directly from your lender's term sheet. If you're missing a number, ask your loan officer or broker for details.</div>
+          </div>
+          <div class="actions"><button type="submit" id="submitBtn">Calculate ROI</button><button type="button" class="secondary" id="resetBtn">Reset</button></div>
+        </form>
+      </div>
+      <div id="results" class="tab-content">
+        <div id="resultsContent"><p class="muted">Enter details and click "Calculate ROI" to see results.</p></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => document.querySelectorAll(selector);
+    function fmt(n) { if (isNaN(n)) return '$0'; return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }); }
+    function fmtPct(n) { if (isNaN(n)) return '0.0%'; return n.toFixed(1) + '%'; }
+    
+    function formatCurrency(input) {
+        let value = input.value.replace(/[^0-9]/g, '');
+        if (value) {
+            const numberValue = parseInt(value, 10);
+            input.value = numberValue.toLocaleString('en-US');
+        } else {
+            input.value = '';
+        }
+    }
+
+    function unformatCurrency(value) {
+        return Number(value.replace(/,/g, '')) || 0;
+    }
+
+    function updateTotalRehab() {
+        const baseRehab = unformatCurrency($('#rehabBudget').value);
+        const contingency = Number($('#rehabContingency').value) || 0;
+        const total = baseRehab * (1 + contingency / 100);
+        $('#totalRehab').value = total.toLocaleString('en-US');
+        // CHANGE: Auto-populate Rehab Financed field
+        $('#rehabFinanced').value = total.toLocaleString('en-US');
+    }
+
+    function calculateMaxLoan() {
+        const purchase = unformatCurrency($('#q_purchasePrice').value);
+        const rehab = unformatCurrency($('#q_rehabBudget').value);
+        const arv = unformatCurrency($('#q_arv').value);
+        const ltcPct = Number($('#q_ltc').value) || 0;
+        const arvPct = Number($('#q_arv_pct').value) || 0;
+        const ltcBaseType = $('input[name="ltcBase"]:checked').value;
+        const ltcBaseAmount = ltcBaseType === 'purchase' ? purchase : purchase + rehab;
+        const maxLoanFromLTC = ltcBaseAmount * (ltcPct / 100);
+        const maxLoanFromARV = arv * (arvPct / 100);
+        const qualifyingLoanAmount = Math.min(maxLoanFromLTC, maxLoanFromARV);
+        const resultDiv = $('#qualifyResult');
+        resultDiv.innerHTML = `<div class="qualification-result"><p style="margin:0;">Max loan from LTC (${fmtPct(ltcPct)}): <strong>${fmt(maxLoanFromLTC)}</strong></p><p style="margin:4px 0;">Max loan from ARV (${fmtPct(arvPct)}): <strong>${fmt(maxLoanFromARV)}</strong></p><strong>This Lender Will Offer Up To:</strong><span>${fmt(qualifyingLoanAmount)}</span><button type="button" id="useLoanAmountBtn">Copy to Calculator Below</button></div>`;
+        resultDiv.style.display = 'block';
+        $('#useLoanAmountBtn').addEventListener('click', () => {
+            $('#purchasePrice').value = purchase.toLocaleString('en-US');
+            $('#rehabBudget').value = rehab.toLocaleString('en-US');
+            updateTotalRehab(); // Update total rehab and financed amount
+            $('#arv').value = arv.toLocaleString('en-US');
+            $('#loanAmount').value = qualifyingLoanAmount.toLocaleString('en-US');
+            // No longer need to separately calculate rehab financed here, updateTotalRehab handles it
+            $('#roi-calculator-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    function getFormValues() {
+        const ids = ['lenderName', 'purchasePrice', 'rehabBudget', 'arv', 'loanAmount', 'rehabFinanced', 'interestMethod', 'rehabContingency', 'assignmentFee', 'rateAPR', 'termMonths', 'pointsPct', 'origFee', 'drawFee', 'drawCount', 'utilsPerMo', 'insPerMo', 'otherPerMo', 'agentPct', 'closingPct', 'scenarioMonths'];
+        const values = {};
+        ids.forEach(id => {
+            const el = $(`#${id}`);
+            if (id === 'scenarioMonths') {
+                values[id] = el.value;
+            } else {
+                values[id] = el.value.replace(/,/g, '');
+            }
+        });
+        return values;
+    }
+
+    function calculate(formData) {
+        const purchasePrice = Number(formData.purchasePrice) || 0, baseRehab = Number(formData.rehabBudget) || 0, arv = Number(formData.arv) || 0;
+        const loanAmt = Number(formData.loanAmount) || 0, rehabFinanced = Number(formData.rehabFinanced) || 0, interestMethod = formData.interestMethod;
+        const rehabContingency = Number(formData.rehabContingency) || 0, assignmentFee = Number(formData.assignmentFee) || 0;
+        const rateAPR = Number(formData.rateAPR) || 0, pointsPct = Number(formData.pointsPct) || 0, origFee = Number(formData.origFee) || 0;
+        const drawFee = Number(formData.drawFee) || 0, drawCount = Number(formData.drawCount) || 0, utilsPerMo = Number(formData.utilsPerMo) || 0;
+        const insPerMo = Number(formData.insPerMo) || 0, otherPerMo = Number(formData.otherPerMo) || 0, agentPct = Number(formData.agentPct) || 0, closingPct = Number(formData.closingPct) || 0;
+        
+        const totalRehab = baseRehab * (1 + rehabContingency / 100);
+        const totalPurchase = purchasePrice + assignmentFee;
+
+        const pointsFee = loanAmt * (pointsPct / 100), totalDrawFees = drawFee * drawCount, totalUpfrontFees = pointsFee + origFee + totalDrawFees;
+        const holdingCostPerMo = utilsPerMo + insPerMo + otherPerMo;
+        const cashToClose = (totalPurchase + totalRehab + totalUpfrontFees) - loanAmt;
+        let scenarioMonthsList = formData.scenarioMonths === 'custom' ? ($('#customMonthsInput').value.trim().split(',').map(m => parseInt(m.trim())).filter(m => m > 0 && !isNaN(m))) : formData.scenarioMonths.split(',').map(m => parseInt(m.trim()));
+        if (scenarioMonthsList.length === 0) scenarioMonthsList = [6, 9, 12];
+        const scenarios = scenarioMonthsList.map(months => {
+            const monthlyRate = rateAPR / 100 / 12;
+            let interestForPeriod = 0;
+            if (interestMethod === 'dutch') { interestForPeriod = loanAmt * monthlyRate * months; } 
+            else { const purchasePortion = loanAmt - rehabFinanced; interestForPeriod = (purchasePortion * monthlyRate * months) + (rehabFinanced * monthlyRate * (months / 2)); }
+            const totalHoldingCosts = holdingCostPerMo * months, totalProjectCost = totalPurchase + totalRehab + interestForPeriod + totalUpfrontFees + totalHoldingCosts;
+            const sellingCosts = arv * ((agentPct + closingPct) / 100), netProfit = arv - totalProjectCost - sellingCosts;
+            const roi = cashToClose > 0 ? (netProfit / cashToClose) * 100 : 0, costOfCapital = interestForPeriod + totalUpfrontFees;
+            const cocAsPercentOfLoan = loanAmt > 0 ? (costOfCapital / loanAmt) * 100 : 0;
+            const profitOnARV = arv > 0 ? (netProfit / arv) * 100 : 0;
+            const annualizedROI = (roi / months) * 12;
+            return { months, netProfit, roi, costOfCapital, cocAsPercentOfLoan, profitOnARV, annualizedROI };
+        });
+        return { inputs: formData, summary: { cashToClose, ltc: ((totalPurchase + totalRehab) > 0) ? loanAmt / (totalPurchase + totalRehab) * 100 : 0, ltv: arv > 0 ? loanAmt / arv * 100 : 0 }, scenarios };
+    }
+    function renderResults(result) {
+        let html = `<h2>${result.inputs.lenderName} - Analysis</h2><div class="grid"><div class="pill"><strong>Cash to Close:</strong> <span class="warn">${fmt(result.summary.cashToClose)}</span></div><div class="pill"><strong>Loan-to-Cost (LTC):</strong> ${fmtPct(result.summary.ltc)}</div><div class="pill"><strong>Loan-to-Value (LTV):</strong> ${fmtPct(result.summary.ltv)}</div></div><h2>Scenario Comparison</h2><div class="comparison-grid">`;
+        result.scenarios.forEach(s => { html += `<div class="comparison-card"><h3>${s.months} Month Hold</h3><div class="metric"><span>Net Profit</span> <span class="ok">${fmt(s.netProfit)}</span></div><div class="metric"><span>ROI (on cash)</span> <span class="ok">${fmtPct(s.roi)}</span></div><div class="metric"><span>Annualized ROI</span> <span class="ok">${fmtPct(s.annualizedROI)}</span></div><div class="metric"><span>Profit on ARV</span> <span class="ok">${fmtPct(s.profitOnARV)}</span></div><div class="metric"><span>Cost of Capital</span> <span class="warn">${fmt(s.costOfCapital)}</span></div></div>`; });
+        html += `</div><h2>Results Legend</h2><div class="legend-container">
+            <div class="legend-item"><div class="legend-title">Net Profit</div><div class="legend-content"><p>Your "take-home" profit after all costs are paid. It's the truest measure of a deal's success.</p></div></div>
+            <div class="legend-item"><div class="legend-title">ROI (on cash)</div><div class="legend-content"><p>Return on Investment (Net Profit ÷ Cash to Close). A higher ROI means you're generating more profit from your personal cash investment.</p></div></div>
+            <div class="legend-item"><div class="legend-title">Annualized ROI</div><div class="legend-content"><p>Standardizes your ROI to a yearly figure, making it easier to compare projects with different hold times. A 50% ROI in 6 months (100% Annualized) is better than 50% in 12 months.</p></div></div>
+            <div class="legend-item"><div class="legend-title">Profit on ARV</div><div class="legend-content"><p>Your profit as a percentage of the After-Repair Value (ARV). Many experienced investors look for a margin of at least 15-20% as a sign of a healthy deal.</p></div></div>
+            <div class="legend-item"><div class="legend-title">Cost of Capital (COC)</div><div class="legend-content"><p>The total amount you pay to use the lender's money, including all interest and fees.</p></div></div>
+            <div class="legend-item"><div class="legend-title">Dutch vs. Drawn Interest</div><div class="legend-content"><p><strong>Drawn:</strong> Interest is charged only on money you've used. This is cheaper.<br><strong>Dutch:</strong> Interest is charged on the <u>entire loan amount</u> from day one. This is more expensive.</p></div></div>
+            <div class="legend-item"><div class="legend-title">Cash to Close</div><div class="legend-content"><p>The cash you need for closing. Calculated as: (Purchase + Rehab + Fees) - Loan Amount.</p></div></div>
+        </div>`;
+        $('#resultsContent').innerHTML = html;
+    }
+    
+    // --- Event Listeners ---
+    document.addEventListener('DOMContentLoaded', updateTotalRehab);
+    $('#qualifyBtn').addEventListener('click', calculateMaxLoan);
+    $$('.tab-btn').forEach(btn => btn.addEventListener('click', (e) => {
+      $$('.tab-btn, .tab-content').forEach(el => el.classList.remove('active'));
+      e.target.classList.add('active');
+      $(`#${e.target.dataset.tab}`).classList.add('active');
+    }));
+    $('#scenarioMonths').addEventListener('change', (e) => {
+      const isCustom = e.target.value === 'custom';
+      $('#customMonthsInput').style.display = isCustom ? 'block' : 'none';
+      $('#customMonthsLabel').style.display = isCustom ? 'block' : 'none';
+    });
+    $('#tsForm').addEventListener('submit', (e) => { 
+      e.preventDefault(); 
+      renderResults(calculate(getFormValues())); 
+      $('[data-tab="results"]').click();
+      $('#results').closest('.card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    $('#resetBtn').addEventListener('click', () => { 
+      $('#tsForm').reset(); 
+      updateTotalRehab();
+      ['q_purchasePrice', 'q_rehabBudget', 'q_arv', 'purchasePrice', 'rehabBudget', 'arv', 'loanAmount', 'rehabFinanced', 'origFee', 'drawFee', 'utilsPerMo', 'insPerMo', 'otherPerMo', 'assignmentFee'].forEach(id => {
+          const el = $(`#${id}`);
+          if (el) formatCurrency(el);
+      });
+      $('#resultsContent').innerHTML = `<p class="muted">Enter details and click "Calculate ROI" to see results.</p>`; 
+    });
+    $('#results').addEventListener('click', (e) => {
+        if (e.target.classList.contains('legend-title')) {
+            e.target.parentElement.classList.toggle('active');
+        }
+    });
+    $('#interestInfoToggle').addEventListener('click', () => {
+        const infoBox = $('#interestInfoBox');
+        infoBox.style.display = infoBox.style.display === 'block' ? 'none' : 'block';
+    });
+     $('#assignmentInfoToggle').addEventListener('click', () => {
+        const infoBox = $('#assignmentInfoBox');
+        infoBox.style.display = infoBox.style.display === 'block' ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
+
