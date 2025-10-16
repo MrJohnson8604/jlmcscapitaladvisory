@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox"; // Import the Checkbox component
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -12,28 +12,57 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+// Get your Supabase URL from your environment variables
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+
+// A standard email validation function
+const validateEmail = (email: string) => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).toLowerCase());
+};
+
 const ToolLandingPage = () => {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState(""); // <-- ADDED: State for Last Name
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  const [marketingConsent, setMarketingConsent] = useState(false); // State for the checkbox
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!firstName || !email || !role) {
+    setError(""); // Reset error on new submission
+
+    // --- UPDATED VALIDATION LOGIC ---
+    if (!firstName || !lastName || !email || !role) { // <-- ADDED: lastName check
       setError("Please fill out all required fields.");
       return;
     }
-    // In a real app, you'd send this data to your marketing/CRM system
-    console.log({ firstName, email, role, marketingConsent });
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    // ---------------------------------
 
-    // Unlock the tool for the user
-    localStorage.setItem("hasCalculatorAccess", "true");
+    setIsLoading(true);
 
-    // Redirect the user to the calculator page
-    navigate("/tools/roi-calculator");
+    try {
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firstName, lastName, email, role, marketingConsent }), // <-- ADDED: lastName to payload
+      });
+      console.log("Subscription function called.");
+    } catch (err) {
+      console.error("Failed to call subscribe function:", err);
+    } finally {
+      localStorage.setItem("hasCalculatorAccess", "true");
+      navigate("/tools/roi-calculator");
+    }
   };
 
   return (
@@ -64,34 +93,26 @@ const ToolLandingPage = () => {
         <div className="bg-background p-8 rounded-lg border shadow-sm">
           <h2 className="text-2xl font-semibold text-center text-foreground">Get Free Access Now</h2>
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            <div>
-              <Label htmlFor="firstName">First Name</Label>
-              <Input
-                id="firstName"
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                placeholder="John"
-                required
-              />
+            {/* --- ADDED: Grid for side-by-side name fields --- */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="firstName">First Name</Label>
+                <Input id="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="John" required />
+              </div>
+              <div>
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Doe" required />
+              </div>
             </div>
+            {/* ---------------------------------------------------- */}
             <div>
               <Label htmlFor="email">Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
-                required
-              />
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" required />
             </div>
             <div>
               <Label htmlFor="role">I am a...</Label>
               <Select onValueChange={setRole} required>
-                <SelectTrigger id="role">
-                  <SelectValue placeholder="Select your primary role" />
-                </SelectTrigger>
+                <SelectTrigger id="role"><SelectValue placeholder="Select your primary role" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="investor">Real Estate Investor</SelectItem>
                   <SelectItem value="wholesaler">Wholesaler</SelectItem>
@@ -102,7 +123,6 @@ const ToolLandingPage = () => {
               </Select>
             </div>
             
-            {/* NEW: Explicit marketing opt-in checkbox */}
             <div className="flex items-center space-x-2 pt-2">
               <Checkbox id="marketing" onCheckedChange={(checked) => setMarketingConsent(checked as boolean)} />
               <Label htmlFor="marketing" className="text-sm font-normal text-muted-foreground">
@@ -112,8 +132,8 @@ const ToolLandingPage = () => {
 
             {error && <p className="text-sm text-red-600 pt-2">{error}</p>}
             
-            <Button type="submit" className="w-full btn-amber">
-              Access the Calculator
+            <Button type="submit" className="w-full btn-amber" disabled={isLoading}>
+              {isLoading ? 'Accessing...' : 'Access the Calculator'}
             </Button>
           </form>
         </div>
