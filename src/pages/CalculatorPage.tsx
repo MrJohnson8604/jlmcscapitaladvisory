@@ -13,12 +13,12 @@ const CalculatorPage = () => {
   }, [navigate]);
 
   return (
-    // FIX: This container is now set to fill the available space, making it flexible.
-    <div className="h-full">
+    // FIX: This container now absolutely fills its parent (<main>)
+    <div className="absolute inset-0">
       <iframe
         src="/tools/tool-term-sheet.html"
         title="ROI & Term Sheet Calculator"
-        // FIX: The iframe now takes 100% of its container's height instead of a fixed value.
+        // FIX: The iframe fills its container, which now has the correct full height
         className="w-full h-full border-0"
       />
     </div>

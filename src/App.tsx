@@ -22,7 +22,7 @@ import CalculatorPage from "./pages/CalculatorPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AnnouncementBar from "./components/AnnouncementBar";
-import ScrollToTop from "./components/ScrollToTop"; // <-- 1. IMPORT THE NEW COMPONENT
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -32,12 +32,12 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        {/* 2. WRAP YOUR ENTIRE LAYOUT WITH THE SCROLLTOTOP COMPONENT */}
         <ScrollToTop>
           <div className="min-h-screen flex flex-col">
             <AnnouncementBar />
             <Header />
-            <main className="flex-1">
+            {/* FIX: Added `relative` class to allow the iframe to fill this space */}
+            <main className="flex-1 relative">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/real-estate-financing" element={<RealEstateFinancing />} />
