@@ -38,40 +38,23 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
-            {/* FIX: Reduced spacing from space-x-4 to space-x-2 for a better fit */}
+            {/* Using a slightly reduced space for a better fit */}
             <div className="ml-10 flex items-baseline space-x-2">
-              {navigation.map((item) => {
-                const active = isActive(item.href);
-                // FIX: Add special styling for the Resources link to make it stand out
-                if (item.name === "Resources") {
-                  return (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className={`px-3 py-2 text-sm font-medium transition-colors rounded-full ${
-                        active
-                          ? "bg-amber text-primary-foreground"
-                          : "bg-amber/10 text-amber hover:bg-amber/20"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  );
-                }
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`px-3 py-2 text-sm font-medium transition-colors ${
-                      active
-                        ? "text-amber border-b-2 border-amber"
-                        : "text-foreground hover:text-amber"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
+              {navigation.map((item) => (
+                // FIX: Removed the special styling for the "Resources" link.
+                // It will now render like all other navigation items.
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive(item.href)
+                      ? "text-amber border-b-2 border-amber"
+                      : "text-foreground hover:text-amber"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </nav>
 

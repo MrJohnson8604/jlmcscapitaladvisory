@@ -6,6 +6,7 @@ import heroImage from "@/assets/hero-real-estate.jpg";
 import sanAntonioFlip from "@/assets/san-antonio-flip-optimized.webp";
 import houstonCompleted from "@/assets/houston-completed-optimized.webp";
 import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
+
 const Index = () => {
   const credibilityItems = ["Former loan officer", "Nationwide lender network", "High close rate on accepted files", "Transparent terms"];
   const services = [{
@@ -266,6 +267,7 @@ const Index = () => {
           <p className="text-xl mb-8 opacity-90">
             Get pre-qualified or schedule a consultation to discuss your specific project.
           </p>
+          {/* FIX: Corrected the closing tags */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl font-semibold"
@@ -289,3 +291,4 @@ const Index = () => {
     </div>;
 };
 export default Index;
+

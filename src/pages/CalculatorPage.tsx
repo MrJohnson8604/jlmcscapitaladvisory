@@ -13,19 +13,17 @@ const CalculatorPage = () => {
   }, [navigate]);
 
   return (
-    <div>
-      {/* This iframe will securely embed your standalone HTML calculator */}
+    // FIX: This container is now set to fill the available space, making it flexible.
+    <div className="h-full">
       <iframe
         src="/tools/tool-term-sheet.html"
         title="ROI & Term Sheet Calculator"
-        style={{
-          width: '100%',
-          height: 'calc(100vh - 64px)', // Adjust 64px to your header's height
-          border: 'none',
-        }}
+        // FIX: The iframe now takes 100% of its container's height instead of a fixed value.
+        className="w-full h-full border-0"
       />
     </div>
   );
 };
 
 export default CalculatorPage;
+
