@@ -9,7 +9,9 @@ import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
 const heroVideoUrl = "https://res.cloudinary.com/diq674e5s/video/upload/v1760745832/Real_Estate_Investor_Broker_kouehd.mp4";
 
 const Index = () => {
-  const credibilityItems = ["Former loan officer", "Nationwide lender network", "High close rate on accepted files", "Transparent terms"];
+  // --- UPDATED: Credibility items are now capitalized and more benefit-oriented ---
+  const credibilityItems = ["Expert Guidance", "Nationwide Lender Network", "Fast, Reliable Closings", "Transparent Terms"];
+
   const services = [{
     title: "Fix & Flip / Bridge",
     description: "Purchase + rehab financing; asset-based approvals; program-dependent no appraisal/no survey or BPO-only options.",
@@ -44,9 +46,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* --- HERO SECTION - MOBILE OPTIMIZED --- */}
-      <section className="relative h-[80vh] md:h-[70vh] min-h-[550px] flex items-center justify-center text-center overflow-hidden">
-        {/* FIX: Replaced video classes for proper object-cover behavior */}
+      {/* --- HERO SECTION - LAYOUT CORRECTED --- */}
+      <section className="relative h-[80vh] md:h-[70vh] min-h-[550px] flex flex-col items-center justify-center text-center overflow-hidden">
         <video
           autoPlay
           loop
@@ -57,9 +58,9 @@ const Index = () => {
         />
         <div className="absolute top-0 left-0 w-full h-full bg-primary/70 z-10"></div>
 
-        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* FIX: Wrapped content in a flex container to ensure robust centering */}
+        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex flex-col justify-center">
           <div className="max-w-4xl mx-auto">
-            {/* FIX: Added responsive font sizes for mobile */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-6 text-white">
               Funding that matches your timeline.
             </h1>
@@ -96,7 +97,6 @@ const Index = () => {
 
       <QuickIntakeForm />
 
-      {/* FIX: Adjusted padding for better mobile spacing */}
       <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
