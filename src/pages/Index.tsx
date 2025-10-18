@@ -9,9 +9,7 @@ import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
 const heroVideoUrl = "https://res.cloudinary.com/diq674e5s/video/upload/v1760745832/Real_Estate_Investor_Broker_kouehd.mp4";
 
 const Index = () => {
-  // --- UPDATED: Credibility items are now capitalized and more benefit-oriented ---
   const credibilityItems = ["Expert Guidance", "Nationwide Lender Network", "Fast, Reliable Closings", "Transparent Terms"];
-
   const services = [{
     title: "Fix & Flip / Bridge",
     description: "Purchase + rehab financing; asset-based approvals; program-dependent no appraisal/no survey or BPO-only options.",
@@ -46,7 +44,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* --- HERO SECTION - LAYOUT CORRECTED --- */}
+      {/* --- HERO SECTION - LAYOUT AND COPY CORRECTED --- */}
       <section className="relative h-[80vh] md:h-[70vh] min-h-[550px] flex flex-col items-center justify-center text-center overflow-hidden">
         <video
           autoPlay
@@ -58,11 +56,12 @@ const Index = () => {
         />
         <div className="absolute top-0 left-0 w-full h-full bg-primary/70 z-10"></div>
 
-        {/* FIX: Wrapped content in a flex container to ensure robust centering */}
-        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex flex-col justify-center">
+        {/* FIX: Added vertical padding (py-12) to prevent content from being cut off on mobile */}
+        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex flex-col justify-center py-12">
           <div className="max-w-4xl mx-auto">
+            {/* CHANGE: New, more attention-grabbing headline */}
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-6 text-white">
-              Funding that matches your timeline.
+              Get Your Next Real Estate Deal Funded. Fast.
             </h1>
             <p className="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto">
               Asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—options including no-appraisal/no-survey or BPO-only (lender-ordered).
