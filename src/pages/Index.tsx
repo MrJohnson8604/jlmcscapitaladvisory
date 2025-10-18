@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, TrendingUp, Users, Clock, Shield } from "lucide-react";
 import { QuickIntakeForm } from "@/components/QuickIntakeForm";
-// heroImage is no longer needed, but we keep the others
 import sanAntonioFlip from "@/assets/san-antonio-flip-optimized.webp";
 import houstonCompleted from "@/assets/houston-completed-optimized.webp";
 import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
@@ -45,28 +44,26 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* --- HERO SECTION HEIGHT ADJUSTED --- */}
-      {/* Changed h-[80vh] to h-[70vh] and min-h-[600px] to min-h-[550px] for a shorter, "zoomed-out" feel */}
-      <section className="relative h-[70vh] min-h-[550px] flex items-center justify-center text-center overflow-hidden">
-        {/* Looping background video */}
+      {/* --- HERO SECTION - MOBILE OPTIMIZED --- */}
+      <section className="relative h-[80vh] md:h-[70vh] min-h-[550px] flex items-center justify-center text-center overflow-hidden">
+        {/* FIX: Replaced video classes for proper object-cover behavior */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0"
           src={heroVideoUrl}
         />
-        {/* Dark overlay to ensure text is readable */}
         <div className="absolute top-0 left-0 w-full h-full bg-primary/70 z-10"></div>
 
-        {/* Hero content remains on top */}
         <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 text-white">
+            {/* FIX: Added responsive font sizes for mobile */}
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-6 text-white">
               Funding that matches your timeline.
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto">
               Asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—options including no-appraisal/no-survey or BPO-only (lender-ordered).
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -88,7 +85,6 @@ const Index = () => {
               </Button>
             </div>
             
-            {/* Credibility Bar */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
               {credibilityItems.map((item, index) => <div key={index} className="bg-black/20 rounded-lg p-4">
                   <span className="text-sm font-medium opacity-90 text-white">{item}</span>
@@ -98,16 +94,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* --- ALL ORIGINAL SECTIONS BELOW ARE PRESERVED --- */}
       <QuickIntakeForm />
 
-      <section className="py-20">
+      {/* FIX: Adjusted padding for better mobile spacing */}
+      <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-6 text-primary">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold mb-6 text-primary">
               Financing Solutions
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
               Comprehensive asset-based lending programs designed for real estate investors.
             </p>
           </div>
@@ -128,10 +124,10 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-muted/50">
+      <section className="py-16 sm:py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-display font-bold text-center mb-16 text-primary">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-12 sm:mb-16 text-primary">
               Why JLMCS Capital Advisory
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -144,13 +140,13 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-6 text-primary">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold mb-6 text-primary">
               Our Process
             </h2>
-            <p className="text-lg text-muted-foreground mb-4">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-4">
               Streamlined approach from application to closing.
             </p>
             <p className="text-sm text-muted-foreground">
@@ -176,13 +172,13 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-muted/50">
+      <section className="py-16 sm:py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-6 text-primary">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold mb-6 text-primary">
               Success Stories
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg sm:text-xl text-muted-foreground">
               Real results from our financing programs.
             </p>
           </div>
@@ -262,10 +258,10 @@ const Index = () => {
 
       <section className="home-cta-strip py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-display font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold mb-6">
             Start your file today.
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-lg sm:text-xl mb-8 opacity-90">
             Get pre-qualified or schedule a consultation to discuss your specific project.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
