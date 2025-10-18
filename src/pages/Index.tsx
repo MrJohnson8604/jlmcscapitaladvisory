@@ -2,10 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, TrendingUp, Users, Clock, Shield } from "lucide-react";
 import { QuickIntakeForm } from "@/components/QuickIntakeForm";
-import heroImage from "@/assets/hero-real-estate.jpg";
+// heroImage is no longer needed, but we keep the others
 import sanAntonioFlip from "@/assets/san-antonio-flip-optimized.webp";
 import houstonCompleted from "@/assets/houston-completed-optimized.webp";
 import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
+
+const heroVideoUrl = "https://res.cloudinary.com/diq674e5s/video/upload/v1760745832/Real_Estate_Investor_Broker_kouehd.mp4";
 
 const Index = () => {
   const credibilityItems = ["Former loan officer", "Nationwide lender network", "High close rate on accepted files", "Transparent terms"];
@@ -40,24 +42,31 @@ const Index = () => {
     title: "Clear to Close",
     description: "Title/doc checklist to finish"
   }];
-  return <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-primary text-primary-foreground py-32 bg-cover bg-center" style={{
-      backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.7)), url(${heroImage})`
-    }}>
-        {/* Preload hero image for LCP optimization */}
-        <img 
-          src={heroImage} 
-          alt="Real estate investment property background" 
-          fetchPriority="high"
-          className="absolute inset-0 w-full h-full object-cover -z-10 opacity-0" 
+
+  return (
+    <div className="min-h-screen">
+      {/* --- HERO SECTION HEIGHT ADJUSTED --- */}
+      {/* Changed h-[80vh] to h-[70vh] and min-h-[600px] to min-h-[550px] for a shorter, "zoomed-out" feel */}
+      <section className="relative h-[70vh] min-h-[550px] flex items-center justify-center text-center overflow-hidden">
+        {/* Looping background video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
+          src={heroVideoUrl}
         />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6">
+        {/* Dark overlay to ensure text is readable */}
+        <div className="absolute top-0 left-0 w-full h-full bg-primary/70 z-10"></div>
+
+        {/* Hero content remains on top */}
+        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 text-white">
               Funding that matches your timeline.
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto">
               Asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—options including no-appraisal/no-survey or BPO-only (lender-ordered).
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -82,17 +91,16 @@ const Index = () => {
             {/* Credibility Bar */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
               {credibilityItems.map((item, index) => <div key={index} className="bg-black/20 rounded-lg p-4">
-                  <span className="text-sm font-medium opacity-90">{item}</span>
+                  <span className="text-sm font-medium opacity-90 text-white">{item}</span>
                 </div>)}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Quick Deal Intake */}
+      {/* --- ALL ORIGINAL SECTIONS BELOW ARE PRESERVED --- */}
       <QuickIntakeForm />
 
-      {/* Services Snapshot */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -120,7 +128,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why JLMCS */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
@@ -137,7 +144,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Process */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -170,7 +176,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Success Stories */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -183,7 +188,6 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Card 1: San Antonio */}
             <Card className="shadow-large">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
@@ -207,7 +211,6 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            {/* Card 2: Houston */}
             <Card className="shadow-large">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
@@ -231,7 +234,6 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            {/* Card 3: Houston Interior */}
             <Card className="shadow-large">
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
@@ -258,7 +260,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Strip */}
       <section className="home-cta-strip py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-display font-bold mb-6">
@@ -267,7 +268,6 @@ const Index = () => {
           <p className="text-xl mb-8 opacity-90">
             Get pre-qualified or schedule a consultation to discuss your specific project.
           </p>
-          {/* FIX: Corrected the closing tags */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl font-semibold"
@@ -288,7 +288,8 @@ const Index = () => {
           </div>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
 export default Index;
 
