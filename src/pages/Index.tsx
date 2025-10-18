@@ -88,12 +88,10 @@ const Index = () => {
               </Button>
             </div>
             
-            {/* --- FONT STYLES UNIFIED --- */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
               {credibilityItems.map((item, index) => (
                 <div key={index} className="bg-black/20 rounded-lg p-4 flex flex-col justify-center">
                   <span className="text-lg text-white">{item.title}</span>
-                  {/* The font size and color now match the line above */}
                   <span className="text-lg text-white">{item.subtitle}</span>
                 </div>
               ))}

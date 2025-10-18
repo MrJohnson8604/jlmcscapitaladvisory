@@ -31,22 +31,19 @@ const Header = () => {
               <img
                 src={jlmcsLogo}
                 alt="JLMCS Capital Advisory"
-                className="h-8 w-auto mx-2"
+                className="h-8 w-auto"
               />
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block">
-            {/* Using a slightly reduced space for a better fit */}
+          {/* Desktop Navigation (for large screens) */}
+          <nav className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-2">
               {navigation.map((item) => (
-                // FIX: Removed the special styling for the "Resources" link.
-                // It will now render like all other navigation items.
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`px-3 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
                     isActive(item.href)
                       ? "text-amber border-b-2 border-amber"
                       : "text-foreground hover:text-amber"
@@ -58,9 +55,9 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="btn-amber">
+          {/* CTA Button (for large screens) */}
+          <div className="hidden lg:block">
+            <Button className="btn-amber whitespace-nowrap">
               <a
                 href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                 target="_blank"
@@ -71,50 +68,51 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile & Tablet menu button */}
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-amber focus:outline-none focus:ring-2 focus:ring-amber"
             >
+              <span className="sr-only">Open main menu</span>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium transition-colors rounded-md ${
-                    isActive(item.href)
-                      ? "text-amber bg-muted"
-                      : "text-foreground hover:text-amber"
-                  }`}
+      {/* Mobile & Tablet Navigation */}
+      {isOpen && (
+        <div className="lg:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                onClick={() => setIsOpen(false)}
+                className={`block px-3 py-2 text-base font-medium transition-colors rounded-md ${
+                  isActive(item.href)
+                    ? "text-amber bg-muted"
+                    : "text-foreground hover:text-amber"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="px-3 py-2">
+              <Button className="btn-amber w-full">
+                <a
+                  href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="px-3 py-2">
-                <Button className="btn-amber w-full">
-                  <a
-                    href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Discuss Your Deal
-                  </a>
-                </Button>
-              </div>
+                  Discuss Your Deal
+                </a>
+              </Button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 };
