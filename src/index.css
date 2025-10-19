@@ -524,3 +524,12 @@ h1, h2, h3, [id] {
     scroll-margin-top: 5rem; /* ~80px on md+ */
   }
 }
+
+/* ADDED: Mobile responsive fix for the Tool Landing Page grid */
+@media (max-width: 768px) {
+  /* This selector specifically targets the two-column grid on the Tool Landing Page */
+  .grid.md\\:grid-cols-2 {
+    grid-template-columns: 1fr; /* Stacks the columns vertically */
+    gap: 2rem; /* Reduces the space between the stacked items for a cleaner look */
+  }
+}
