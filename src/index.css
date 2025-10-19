@@ -513,3 +513,14 @@
     outline-offset: 2px !important;
   }
 }
+/* === Sticky header safety for in-page anchors === */
+h1, h2, h3, [id] {
+  /* Leave breathing room so anchors are not hidden under the sticky header + announcement bar */
+  scroll-margin-top: 6rem; /* ~96px on small screens */
+}
+
+@media (min-width: 768px) {
+  h1, h2, h3, [id] {
+    scroll-margin-top: 5rem; /* ~80px on md+ */
+  }
+}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom"; // No longer needed
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,9 +12,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// Get your Supabase URL from your environment variables
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-
 // A standard email validation function
 const validateEmail = (email: string) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,9 +19,8 @@ const validateEmail = (email: string) => {
 };
 
 const ToolLandingPage = () => {
-  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState(""); // <-- ADDED: State for Last Name
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [marketingConsent, setMarketingConsent] = useState(false);
@@ -33,10 +29,9 @@ const ToolLandingPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(""); // Reset error on new submission
+    setError("");
 
-    // --- UPDATED VALIDATION LOGIC ---
-    if (!firstName || !lastName || !email || !role) { // <-- ADDED: lastName check
+    if (!firstName || !lastName || !email || !role) {
       setError("Please fill out all required fields.");
       return;
     }
@@ -44,24 +39,32 @@ const ToolLandingPage = () => {
       setError("Please enter a valid email address.");
       return;
     }
-    // ---------------------------------
 
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/subscribe`, {
+      const response = await fetch('https://eyetvmkjjyqnwomqkhvl.supabase.co/functions/v1/submit-calculator-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName, lastName, email, role, marketingConsent }), // <-- ADDED: lastName to payload
+        body: JSON.stringify({ firstName, lastName, email, role, marketingConsent }),
       });
-      console.log("Subscription function called.");
-    } catch (err) {
-      console.error("Failed to call subscribe function:", err);
-    } finally {
+
+      if (!response.ok) {
+        throw new Error('Submission failed on the server.');
+      }
+
+      // --- Success Case ---
       localStorage.setItem("hasCalculatorAccess", "true");
-      navigate("/tools/roi-calculator");
+      window.location.href = "/tools/roi-calculator";
+
+    } catch (err) {
+      // It's better to log the actual error object for more details
+      console.error("Caught an error during form submission:", err);
+      setError("Submission failed. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -93,7 +96,6 @@ const ToolLandingPage = () => {
         <div className="bg-background p-8 rounded-lg border shadow-sm">
           <h2 className="text-2xl font-semibold text-center text-foreground">Get Free Access Now</h2>
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            {/* --- ADDED: Grid for side-by-side name fields --- */}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="firstName">First Name</Label>
@@ -104,7 +106,6 @@ const ToolLandingPage = () => {
                 <Input id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Doe" required />
               </div>
             </div>
-            {/* ---------------------------------------------------- */}
             <div>
               <Label htmlFor="email">Email Address</Label>
               <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" required />
@@ -114,15 +115,15 @@ const ToolLandingPage = () => {
               <Select onValueChange={setRole} required>
                 <SelectTrigger id="role"><SelectValue placeholder="Select your primary role" /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="investor">Real Estate Investor</SelectItem>
-                  <SelectItem value="wholesaler">Wholesaler</SelectItem>
-                  <SelectItem value="agent">Real Estate Agent</SelectItem>
-                  <SelectItem value="broker">Mortgage Broker</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="Real Estate Investor">Real Estate Investor</SelectItem>
+                  <SelectItem value="Wholesaler">Wholesaler</SelectItem>
+                  <SelectItem value="Real Estate Agent">Real Estate Agent</SelectItem>
+                  <SelectItem value="Mortgage Broker">Mortgage Broker</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="flex items-center space-x-2 pt-2">
               <Checkbox id="marketing" onCheckedChange={(checked) => setMarketingConsent(checked as boolean)} />
               <Label htmlFor="marketing" className="text-sm font-normal text-muted-foreground">
@@ -131,7 +132,7 @@ const ToolLandingPage = () => {
             </div>
 
             {error && <p className="text-sm text-red-600 pt-2">{error}</p>}
-            
+
             <Button type="submit" className="w-full btn-amber" disabled={isLoading}>
               {isLoading ? 'Accessing...' : 'Access the Calculator'}
             </Button>
@@ -150,4 +151,3 @@ const CheckIcon = () => (
 );
 
 export default ToolLandingPage;
-

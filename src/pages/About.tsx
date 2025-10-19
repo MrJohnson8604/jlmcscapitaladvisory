@@ -1,166 +1,129 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2 } from "lucide-react";
+import { Target, Users, Zap, Search } from "lucide-react";
+
+const founderImageUrl = "https://res.cloudinary.com/diq674e5s/image/upload/v1758350123/20230914_205411558_iOS_sjy1rw.jpg";
 
 const About = () => {
   const differentiators = [
-    "Asset-based focus",
-    "No VOE required",
-    "No-appraisal/no-survey or BPO-only options",
-    "Nationwide lender network",
-    "Responsive communication"
+    {
+      icon: Target,
+      title: "Asset-Based Focus",
+      description: "I specialize in the story of the asset, not just personal credit, allowing for more flexible and creative funding solutions.",
+    },
+    {
+      icon: Users,
+      title: "Nationwide Lender Network",
+      description: "Gain access to a curated network of trusted private and institutional lenders, ensuring the right fit for your specific deal.",
+    },
+    {
+      icon: Zap,
+      title: "Speed and Responsiveness",
+      description: "I provide same-day scenario reads whenever possible, because I know that speed is critical in a competitive market.",
+    },
+    {
+      icon: Search,
+      title: "Underwriting Insight",
+      description: "With a background as a loan officer, I know how to package your deal to meet underwriter expectations, increasing your probability of closing.",
+    },
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-primary text-primary-foreground py-20">
+    <div className="min-h-screen bg-background">
+      {/* 1. Hero Section */}
+      <section className="py-20 md:py-28 text-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              About JLMCS Capital Advisory
-            </h1>
-            <p className="text-xl mb-8 opacity-90">
-              Funding the deal and the build.
-            </p>
-          </div>
+          <h1 className="text-4xl md:text-6xl font-display font-bold text-primary">
+            The Expertise Behind Your Next Funded Deal.
+          </h1>
+          <p className="mt-4 text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            I bridge the gap between ambitious real estate investors and the right capital, turning complex financing into confident decisions.
+          </p>
         </div>
       </section>
 
-      {/* Origin Story */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-display font-bold mb-6 text-primary">
-                  Our Origin
-                </h2>
-                <p className="text-lg text-muted-foreground mb-6">
-                  Built by a former loan officer who understands lender expectations, required documentation, 
-                  and how to package a file that clears underwriting. We submit only what we know fits a lender's criteria.
-                </p>
-                <p className="text-base text-muted-foreground">
-                  This inside knowledge of the lending process allows us to streamline approvals and set realistic 
-                  expectations from day one—no surprises, just clear paths to closing.
-                </p>
-              </div>
-              <div className="bg-muted/50 rounded-lg p-8">
-                <h3 className="text-xl font-display font-semibold mb-4 text-primary">
-                  Our Promise
-                </h3>
-                <p className="text-muted-foreground text-lg font-medium">
-                  Exceptional service and transparent terms—no surprises.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Differentiators */}
+      {/* 2. Founder / Mission Section */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-display font-bold mb-12 text-primary">
-              What Sets Us Apart
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {differentiators.map((item, index) => (
-                <Card key={index} className="shadow-soft">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-3">
-                      <CheckCircle2 className="h-6 w-6 text-amber flex-shrink-0" />
-                      <span className="font-medium text-foreground">{item}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience & Approach */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-display font-bold mb-6 text-primary">
-                Our Approach
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Direct, pragmatic, action-oriented—no fluff, just results.
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+              <h2 className="text-3xl font-display font-bold text-primary">My Mission</h2>
+              <p className="mt-4 text-lg text-foreground/80">
+                After years in both retail and private lending, I saw too many quality deals fail not because of a lack of capital, but because investors couldn't connect with the right lender for their specific strategy.
+              </p>
+              <p className="mt-3 text-lg text-foreground/80">
+                I built JLMCS to solve that. My focus is matching your deal to the lender whose programs fit your goals—not forcing your deal to fit a lender's narrow box. My mission is to make investor financing transparent, fast, and strategy-first.
               </p>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="shadow-medium">
-                <CardContent className="p-8 text-center">
-                  <div className="text-2xl font-display font-bold text-amber mb-4">01</div>
-                  <h3 className="text-xl font-display font-semibold mb-4 text-primary">
-                    Clear Communication
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Plain-English explanations of terms, process, and next steps—no industry jargon.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-medium">
-                <CardContent className="p-8 text-center">
-                  <div className="text-2xl font-display font-bold text-amber mb-4">02</div>
-                  <h3 className="text-xl font-display font-semibold mb-4 text-primary">
-                    Strategic Matching
-                  </h3>
-                  <p className="text-muted-foreground">
-                    We only submit files to lenders where they fit—maximizing approval chances.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-medium">
-                <CardContent className="p-8 text-center">
-                  <div className="text-2xl font-display font-bold text-amber mb-4">03</div>
-                  <h3 className="text-xl font-display font-semibold mb-4 text-primary">
-                    Responsive Service
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Same-day responses on weekdays and clear timelines throughout the process.
-                  </p>
-                </CardContent>
-              </Card>
+            {/* START: MODIFIED IMAGE SECTION */}
+            <div className="order-1 md:order-2 flex justify-center items-center">
+              <figure className="w-full max-w-xs sm:max-w-sm">
+                <img
+                  src={founderImageUrl}
+                  alt="Christopher Johnson, Founder of JLMCS Capital Advisory"
+                  className="rounded-lg shadow-xl aspect-square object-cover w-full object-top"
+                />
+                <figcaption className="mt-4 text-center font-display font-bold text-primary tracking-wide">
+                  Principal Owner - Chris Johnson
+                </figcaption>
+              </figure>
             </div>
+            {/* END: MODIFIED IMAGE SECTION */}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-cta dark py-16 text-white" style={{ backgroundColor: '#111827' }}>
+      {/* 3. "Why Choose Us" Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-display font-bold text-primary">A Brokerage Built for Investors</h2>
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+              Practical advantages you’ll experience from working directly with an expert.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {differentiators.map((item) => (
+              <Card key={item.title} className="shadow-soft h-full border-0 bg-transparent text-center">
+                <CardContent className="p-6">
+                  <div className="flex justify-center mb-4">
+                    <item.icon className="h-10 w-10 text-amber" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-lg font-display font-semibold text-primary">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Final CTA Section */}
+      <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-display font-bold mb-6">
-            Ready to Get Started?
+          <h2 className="text-3xl md:text-4xl font-display font-bold">
+            Ready To See If Your Deal Fits?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Experience the difference of working with a former loan officer who knows what it takes to close.
+          <p className="mt-4 text-lg opacity-90 max-w-2xl mx-auto">
+            Send the basics. I’ll come back with a plan — a real path, not a pitch.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="btn-hero-white-outline">
-              <a 
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button asChild className="btn-hero-outline-white">
+              <a
                 href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Discuss Your Deal
+                Book A Call
               </a>
             </Button>
-            <Button className="btn-hero-white-outline">
-              <a 
+            <Button asChild className="btn-hero-outline-white">
+              <a
                 href="https://form.jotform.com/251521627688060"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Get Pre-Qualified
+                Quick Intake Form
               </a>
             </Button>
           </div>

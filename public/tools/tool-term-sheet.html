@@ -282,14 +282,14 @@
         let html = `<h2>${result.inputs.lenderName} - Analysis</h2><div class="grid"><div class="pill"><strong>Cash to Close:</strong> <span class="warn">${fmt(result.summary.cashToClose)}</span></div><div class="pill"><strong>Loan-to-Cost (LTC):</strong> ${fmtPct(result.summary.ltc)}</div><div class="pill"><strong>Loan-to-Value (LTV):</strong> ${fmtPct(result.summary.ltv)}</div></div><h2>Scenario Comparison</h2><div class="comparison-grid">`;
         result.scenarios.forEach(s => { html += `<div class="comparison-card"><h3>${s.months} Month Hold</h3><div class="metric"><span>Net Profit</span> <span class="ok">${fmt(s.netProfit)}</span></div><div class="metric"><span>ROI (on cash)</span> <span class="ok">${fmtPct(s.roi)}</span></div><div class="metric"><span>Annualized ROI</span> <span class="ok">${fmtPct(s.annualizedROI)}</span></div><div class="metric"><span>Profit on ARV</span> <span class="ok">${fmtPct(s.profitOnARV)}</span></div><div class="metric"><span>Cost of Capital</span> <span class="warn">${fmt(s.costOfCapital)}</span></div></div>`; });
         html += `</div><h2>Results Legend</h2><div class="legend-container">
-            <div class="legend-item"><div class="legend-title">Net Profit</div><div class="legend-content"><p>Your "take-home" profit after all costs are paid. It's the truest measure of a deal's success.</p></div></div>
-            <div class="legend-item"><div class="legend-title">ROI (on cash)</div><div class="legend-content"><p>Return on Investment (Net Profit ÷ Cash to Close). A higher ROI means you're generating more profit from your personal cash investment.</p></div></div>
-            <div class="legend-item"><div class="legend-title">Annualized ROI</div><div class="legend-content"><p>Standardizes your ROI to a yearly figure, making it easier to compare projects with different hold times. A 50% ROI in 6 months (100% Annualized) is better than 50% in 12 months.</p></div></div>
-            <div class="legend-item"><div class="legend-title">Profit on ARV</div><div class="legend-content"><p>Your profit as a percentage of the After-Repair Value (ARV). Many experienced investors look for a margin of at least 15-20% as a sign of a healthy deal.</p></div></div>
-            <div class="legend-item"><div class="legend-title">Cost of Capital (COC)</div><div class="legend-content"><p>The total amount you pay to use the lender's money, including all interest and fees.</p></div></div>
-            <div class="legend-item"><div class="legend-title">Dutch vs. Drawn Interest</div><div class="legend-content"><p><strong>Drawn:</strong> Interest is charged only on money you've used. This is cheaper.<br><strong>Dutch:</strong> Interest is charged on the <u>entire loan amount</u> from day one. This is more expensive.</p></div></div>
-            <div class="legend-item"><div class="legend-title">Cash to Close</div><div class="legend-content"><p>The cash you need for closing. Calculated as: (Purchase + Rehab + Fees) - Loan Amount.</p></div></div>
-        </div>`;
+                <div class="legend-item"><div class="legend-title">Net Profit</div><div class="legend-content"><p>Your "take-home" profit after all costs are paid. It's the truest measure of a deal's success.</p></div></div>
+                <div class="legend-item"><div class="legend-title">ROI (on cash)</div><div class="legend-content"><p>Return on Investment (Net Profit ÷ Cash to Close). A higher ROI means you're generating more profit from your personal cash investment.</p></div></div>
+                <div class="legend-item"><div class="legend-title">Annualized ROI</div><div class="legend-content"><p>Standardizes your ROI to a yearly figure, making it easier to compare projects with different hold times. A 50% ROI in 6 months (100% Annualized) is better than 50% in 12 months.</p></div></div>
+                <div class="legend-item"><div class="legend-title">Profit on ARV</div><div class="legend-content"><p>Your profit as a percentage of the After-Repair Value (ARV). Many experienced investors look for a margin of at least 15-20% as a sign of a healthy deal.</p></div></div>
+                <div class="legend-item"><div class="legend-title">Cost of Capital (COC)</div><div class="legend-content"><p>The total amount you pay to use the lender's money, including all interest and fees.</p></div></div>
+                <div class="legend-item"><div class="legend-title">Dutch vs. Drawn Interest</div><div class="legend-content"><p><strong>Drawn:</strong> Interest is charged only on money you've used. This is cheaper.<br><strong>Dutch:</strong> Interest is charged on the <u>entire loan amount</u> from day one. This is more expensive.</p></div></div>
+                <div class="legend-item"><div class="legend-title">Cash to Close</div><div class="legend-content"><p>The cash you need for closing. Calculated as: (Purchase + Rehab + Fees) - Loan Amount.</p></div></div>
+            </div>`;
         $('#resultsContent').innerHTML = html;
     }
     
@@ -335,6 +335,24 @@
         infoBox.style.display = infoBox.style.display === 'block' ? 'none' : 'block';
     });
   </script>
+
+  <script>
+    // This function sends the content's height to the parent page
+    const sendHeight = () => {
+      // We use scrollHeight to get the full height of the content
+      const height = document.body.scrollHeight;
+      // 'parent.postMessage' sends a message to the window that contains the iframe
+      parent.postMessage({ type: 'resize', payload: { height: height } }, '*');
+    };
+
+    // Send the height when the page first loads
+    window.addEventListener('load', sendHeight);
+
+    // Use a ResizeObserver to detect any changes in content size (like opening an accordion)
+    // and send the new height automatically.
+    const resizeObserver = new ResizeObserver(sendHeight);
+    resizeObserver.observe(document.body);
+  </script>
+
 </body>
 </html>
-
