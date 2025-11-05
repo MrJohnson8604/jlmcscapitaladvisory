@@ -77,7 +77,9 @@ const RealEstateFinancing = () => {
               {services.map((service, index) => (
                 <Card key={index} className="shadow-medium">
                   <CardContent className="p-8">
-                    <h3 className="text-2xl font-display font-semibold mb-4 text-primary">
+                    {/* FIX: Replaced text-primary with text-foreground.
+                    */}
+                    <h3 className="text-2xl font-display font-semibold mb-4 text-foreground">
                       {service.title}
                     </h3>
                     <p className="text-muted-foreground">
@@ -94,7 +96,9 @@ const RealEstateFinancing = () => {
         <section className="py-20 bg-muted/50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-display font-bold text-center mb-12 text-primary">
+              {/* FIX: Replaced text-primary with text-foreground.
+              */}
+              <h2 className="text-3xl font-display font-bold text-center mb-12 text-foreground">
                 Program Features
               </h2>
               

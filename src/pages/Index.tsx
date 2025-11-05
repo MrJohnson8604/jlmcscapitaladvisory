@@ -84,7 +84,7 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-2">
                 {/* FIX: RESTORED the "btn-primary-amber" class.
-                  This will now have the correct hover effect (amber bg -> white bg, dark text -> amber text).
+                  This now has the correct hover (amber bg -> white bg).
                 */}
                 <Button 
                   className="btn-primary-amber border-2 border-amber-500 rounded-xl text-base sm:text-lg px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto"
@@ -133,7 +133,10 @@ const Index = () => {
               {services.map((service, index) => <Card key={index} className="shadow-medium hover:shadow-large transition-shadow">
                   <CardContent className="p-6 sm:p-8 text-center">
                     <service.icon className="h-10 w-10 sm:h-12 sm:w-12 text-amber mx-auto mb-4 sm:mb-6" />
-                    <h3 className="text-lg sm:text-xl font-display font-semibold mb-3 sm:mb-4 text-primary">
+                    {/* FIX: Replaced text-primary with text-foreground.
+                      This will now correctly be light text in dark mode.
+                    */}
+                    <h3 className="text-lg sm:text-xl font-display font-semibold mb-3 sm:mb-4 text-foreground">
                       {service.title}
                     </h3>
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -167,7 +170,7 @@ const Index = () => {
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold mb-4 sm:mb-6 text-primary px-2">
                 Our Process
               </h2>
-              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-3 sm:mb-4 px-4">
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
                 Streamlined approach from application to closing.
               </p>
               <p className="text-sm sm:text-base text-muted-foreground px-4">
@@ -181,7 +184,9 @@ const Index = () => {
                     <div className="text-3xl sm:text-4xl font-display font-bold text-amber mb-4 sm:mb-6">
                       {step.step}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-display font-semibold mb-3 sm:mb-4 text-primary">
+                    {/* FIX: Replaced text-primary with text-foreground.
+                    */}
+                    <h3 className="text-xl sm:text-2xl font-display font-semibold mb-3 sm:mb-4 text-foreground">
                       {step.title}
                     </h3>
                     <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
@@ -208,7 +213,9 @@ const Index = () => {
               <Card className="shadow-large">
                 <CardContent className="p-5 sm:p-6 text-center">
                   <div className="mb-4">
-                    <h3 className="text-lg sm:text-xl font-display font-semibold text-primary mb-1">
+                    {/* FIX: Replaced text-primary with text-foreground.
+                    */}
+                    <h3 className="text-lg sm:text-xl font-display font-semibold text-foreground mb-1">
                       Funded
                     </h3>
                     <p className="text-sm font-medium text-muted-foreground mb-4">
@@ -222,7 +229,7 @@ const Index = () => {
                       className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
                     />
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed line-clamp-2">
+                  <p className="text-sm text-foreground/90 leading-relaxed line-clamp-2">
                     Asset-based approval with no appraisal and no survey required. New investor—funded.
                   </p>
                 </CardContent>
@@ -231,7 +238,9 @@ const Index = () => {
               <Card className="shadow-large">
                 <CardContent className="p-5 sm:p-6 text-center">
                   <div className="mb-4">
-                    <h3 className="text-lg sm:text-xl font-display font-semibold text-primary mb-1">
+                    {/* FIX: Replaced text-primary with text-foreground.
+                    */}
+                    <h3 className="text-lg sm:text-xl font-display font-semibold text-foreground mb-1">
                       Funded
                     </h3>
                     <p className="text-sm font-medium text-muted-foreground mb-4">
@@ -245,7 +254,7 @@ const Index = () => {
                       className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
                     />
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed line-clamp-2">
+                  <p className="text-sm text-foreground/90 leading-relaxed line-clamp-2">
                     Liquid reserves verified via screenshots; streamlined documentation through funding.
                   </p>
                 </CardContent>
@@ -254,7 +263,9 @@ const Index = () => {
               <Card className="shadow-large">
                 <CardContent className="p-5 sm:p-6 text-center">
                   <div className="mb-4">
-                    <h3 className="text-lg sm:text-xl font-display font-semibold text-primary mb-1">
+                    {/* FIX: Replaced text-primary with text-foreground.
+                    */}
+                    <h3 className="text-lg sm:text-xl font-display font-semibold text-foreground mb-1">
                       Funded
                     </h3>
                     <p className="text-sm font-medium text-muted-foreground mb-4">
@@ -268,7 +279,7 @@ const Index = () => {
                       className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
                     />
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed line-clamp-2">
+                  <p className="text-sm text-foreground/90 leading-relaxed line-clamp-2">
                     BPO (lender-ordered) and liquid reserves verified via screenshots; complete docs enabled a fast close.
                   </p>
                 </CardContent>
@@ -287,7 +298,6 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
               {/* FIX: RESTORED the "btn-hero-outline-white" class.
-                This will now have the correct hover effect.
               */}
               <Button 
                 className="btn-hero-outline-white text-base px-6 py-4 w-full sm:w-auto"
