@@ -42,25 +42,18 @@ const BusinessWorkingCapital = () => {
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              {/* FIX: Replaced text-primary with text-foreground.
-              */}
-              <h2 className="text-3xl font-display font-bold mb-6 text-foreground">
+              <h2 className="text-3xl font-display font-bold mb-6 text-primary">
                 Request Information
               </h2>
-              {/* FIX: Replaced text-muted-foreground with text-foreground/80 for better readability.
-              */}
-              <p className="text-lg text-foreground/80 mb-8">
+              <p className="text-lg text-muted-foreground mb-8">
                 Business working capital solutions are available on a case-by-case basis. 
                 These programs can be valuable for establishing business credit profiles when aligned with your specific objectives.
               </p>
-              <p className="text-base text-foreground/80 mb-8">
+              <p className="text-base text-muted-foreground mb-8">
                 To explore available options, please schedule a consultation where we can discuss your business needs 
                 and connect you with the most appropriate program for your situation.
               </p>
-              {/* FIX: Replaced btn-outline-dark with standard button variants.
-                It will now be a white button with black text, hovering to gray.
-              */}
-              <Button variant="outline" className="text-foreground">
+              <Button className="btn-outline-dark">
                 <a 
                   href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
                   target="_blank"

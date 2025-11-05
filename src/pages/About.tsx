@@ -101,9 +101,7 @@ const About = () => {
                     <div className="flex justify-center mb-4">
                       <item.icon className="h-10 w-10 text-amber" aria-hidden="true" />
                     </div>
-                    {/* FIX: Replaced text-primary with text-foreground.
-                    */}
-                    <h3 className="text-lg font-display font-semibold text-foreground">{item.title}</h3>
+                    <h3 className="text-lg font-display font-semibold text-primary">{item.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
                   </CardContent>
                 </Card>
@@ -122,8 +120,7 @@ const About = () => {
               Send the basics. I’ll come back with a plan — a real path, not a pitch.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              {/* FIX: RESTORED the "btn-hero-outline-white" class.
-              */}
+              {/* RESTORED original classes */}
               <Button asChild className="btn-hero-outline-white">
                 <a
                   href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"

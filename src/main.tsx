@@ -6,8 +6,8 @@ import { ThemeProvider } from "next-themes";
 
 createRoot(document.getElementById("root")!).render(
   <HelmetProvider>
-    {/* This forces the dark theme and removes the system check */}
-    <ThemeProvider attribute="class" defaultTheme="dark">
+    {/* This restores your original theme setup (light by default) */}
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <App />
     </ThemeProvider>
   </HelmetProvider>
