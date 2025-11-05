@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import jlmcsLogo from "@/assets/jlmcs-logo-optimized.webp";
+// import { ThemeToggle } from "@/components/ThemeToggle"; // <--- DELETE THIS LINE
 
 /**
  * Header (sticky)
@@ -64,6 +65,8 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* <--- The ThemeToggle component was here. It's now removed. */}
 
               <Button asChild className="ml-2 2xl:ml-3">
                 {/* Update this URL if you use a different CTA route */}
@@ -75,7 +78,8 @@ const Header = () => {
           </nav>
 
           {/* Mobile menu toggle */}
-          <div className="xl:hidden flex items-center">
+          {/* <--- The ThemeToggle component was here. It's now removed. */}
+          <div className="xl:hidden flex items-center"> 
             <Button
               type="button"
               variant="outline"

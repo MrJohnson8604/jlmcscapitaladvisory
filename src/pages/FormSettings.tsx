@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -104,287 +105,294 @@ const FormSettings = () => {
   }
 
   return (
-    <div className="min-h-screen bg-muted/50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3 mb-2">
-                <Settings className="h-8 w-8 text-primary" />
-                <div>
-                  <h1 className="text-4xl font-display font-bold text-primary">
-                    Form Settings
-                  </h1>
-                  <p className="text-muted-foreground text-lg">
-                    Configure your form behavior, content, and analytics settings.
-                  </p>
+    <>
+      <Helmet>
+        <title>Form Settings | JLMCS Capital Advisory</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      
+      <div className="min-h-screen bg-muted/50">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto">
+            {/* Header */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3 mb-2">
+                  <Settings className="h-8 w-8 text-primary" />
+                  <div>
+                    <h1 className="text-4xl font-display font-bold text-primary">
+                      Form Settings
+                    </h1>
+                    <p className="text-muted-foreground text-lg">
+                      Configure your form behavior, content, and analytics settings.
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <div className="text-sm text-muted-foreground">Signed in as</div>
-                  <div className="font-medium">{user.email}</div>
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <div className="text-sm text-muted-foreground">Signed in as</div>
+                    <div className="font-medium">{user.email}</div>
+                  </div>
+                  <Button variant="outline" onClick={handleSignOut}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </Button>
                 </div>
-                <Button variant="outline" onClick={handleSignOut}>
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Sign Out
-                </Button>
               </div>
             </div>
-          </div>
 
-          <Tabs defaultValue="quick-intake" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="quick-intake" className="flex items-center gap-2">
-                <FormInput className="h-4 w-4" />
-                Quick Intake
-              </TabsTrigger>
-              <TabsTrigger value="referral" className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                Referral Form
-              </TabsTrigger>
-              <TabsTrigger value="submissions" className="flex items-center gap-2">
-                <BarChart3 className="h-4 w-4" />
-                Submissions
-              </TabsTrigger>
-              <TabsTrigger value="analytics" className="flex items-center gap-2">
-                <BarChart3 className="h-4 w-4" />
-                Analytics
-              </TabsTrigger>
-            </TabsList>
+            <Tabs defaultValue="quick-intake" className="space-y-6">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="quick-intake" className="flex items-center gap-2">
+                  <FormInput className="h-4 w-4" />
+                  Quick Intake
+                </TabsTrigger>
+                <TabsTrigger value="referral" className="flex items-center gap-2">
+                  <Users className="h-4 w-4" />
+                  Referral Form
+                </TabsTrigger>
+                <TabsTrigger value="submissions" className="flex items-center gap-2">
+                  <BarChart3 className="h-4 w-4" />
+                  Submissions
+                </TabsTrigger>
+                <TabsTrigger value="analytics" className="flex items-center gap-2">
+                  <BarChart3 className="h-4 w-4" />
+                  Analytics
+                </TabsTrigger>
+              </TabsList>
 
-            {/* Quick Intake Settings */}
-            <TabsContent value="quick-intake" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Deal Intake Form</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label className="text-base font-medium">Enable Form</Label>
-                      <p className="text-sm text-muted-foreground">Show the quick intake form on your homepage</p>
-                    </div>
-                    <Switch 
-                      checked={quickIntakeSettings.enabled}
-                      onCheckedChange={(checked) => 
-                        setQuickIntakeSettings(prev => ({ ...prev, enabled: checked }))
-                      }
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="quick-title">Form Title</Label>
-                      <Input
-                        id="quick-title"
-                        value={quickIntakeSettings.title}
-                        onChange={(e) => 
-                          setQuickIntakeSettings(prev => ({ ...prev, title: e.target.value }))
+              {/* Quick Intake Settings */}
+              <TabsContent value="quick-intake" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Quick Deal Intake Form</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Label className="text-base font-medium">Enable Form</Label>
+                        <p className="text-sm text-muted-foreground">Show the quick intake form on your homepage</p>
+                      </div>
+                      <Switch 
+                        checked={quickIntakeSettings.enabled}
+                        onCheckedChange={(checked) => 
+                          setQuickIntakeSettings(prev => ({ ...prev, enabled: checked }))
                         }
                       />
                     </div>
 
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="quick-title">Form Title</Label>
+                        <Input
+                          id="quick-title"
+                          value={quickIntakeSettings.title}
+                          onChange={(e) => 
+                            setQuickIntakeSettings(prev => ({ ...prev, title: e.target.value }))
+                          }
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="quick-button">Submit Button Text</Label>
+                        <Input
+                          id="quick-button"
+                          value={quickIntakeSettings.submitButtonText}
+                          onChange={(e) => 
+                            setQuickIntakeSettings(prev => ({ ...prev, submitButtonText: e.target.value }))
+                          }
+                        />
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="quick-button">Submit Button Text</Label>
-                      <Input
-                        id="quick-button"
-                        value={quickIntakeSettings.submitButtonText}
+                      <Label htmlFor="quick-description">Form Description</Label>
+                      <Textarea
+                        id="quick-description"
+                        value={quickIntakeSettings.description}
                         onChange={(e) => 
-                          setQuickIntakeSettings(prev => ({ ...prev, submitButtonText: e.target.value }))
+                          setQuickIntakeSettings(prev => ({ ...prev, description: e.target.value }))
                         }
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="quick-description">Form Description</Label>
-                    <Textarea
-                      id="quick-description"
-                      value={quickIntakeSettings.description}
-                      onChange={(e) => 
-                        setQuickIntakeSettings(prev => ({ ...prev, description: e.target.value }))
-                      }
-                      rows={3}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="quick-success">Success Message</Label>
-                    <Textarea
-                      id="quick-success"
-                      value={quickIntakeSettings.successMessage}
-                      onChange={(e) => 
-                        setQuickIntakeSettings(prev => ({ ...prev, successMessage: e.target.value }))
-                      }
-                      rows={3}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label className="text-base font-medium">Require Consent Checkbox</Label>
-                      <p className="text-sm text-muted-foreground">Require users to agree to terms before submitting</p>
-                    </div>
-                    <Switch 
-                      checked={quickIntakeSettings.requireConsent}
-                      onCheckedChange={(checked) => 
-                        setQuickIntakeSettings(prev => ({ ...prev, requireConsent: checked }))
-                      }
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label className="text-base font-medium">Enable Analytics</Label>
-                      <p className="text-sm text-muted-foreground">Track form views, submissions, and conversion rates</p>
-                    </div>
-                    <Switch 
-                      checked={quickIntakeSettings.enableAnalytics}
-                      onCheckedChange={(checked) => 
-                        setQuickIntakeSettings(prev => ({ ...prev, enableAnalytics: checked }))
-                      }
-                    />
-                  </div>
-
-                  <Button onClick={handleSaveQuickIntake} className="w-full">
-                    Save Quick Intake Settings
-                  </Button>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Referral Form Settings */}
-            <TabsContent value="referral" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Referral Form</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label className="text-base font-medium">Enable Form</Label>
-                      <p className="text-sm text-muted-foreground">Show the referral form at /refer-deal</p>
-                    </div>
-                    <Switch 
-                      checked={referralSettings.enabled}
-                      onCheckedChange={(checked) => 
-                        setReferralSettings(prev => ({ ...prev, enabled: checked }))
-                      }
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="referral-title">Form Title</Label>
-                      <Input
-                        id="referral-title"
-                        value={referralSettings.title}
-                        onChange={(e) => 
-                          setReferralSettings(prev => ({ ...prev, title: e.target.value }))
-                        }
+                        rows={3}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="referral-button">Submit Button Text</Label>
-                      <Input
-                        id="referral-button"
-                        value={referralSettings.submitButtonText}
+                      <Label htmlFor="quick-success">Success Message</Label>
+                      <Textarea
+                        id="quick-success"
+                        value={quickIntakeSettings.successMessage}
                         onChange={(e) => 
-                          setReferralSettings(prev => ({ ...prev, submitButtonText: e.target.value }))
+                          setQuickIntakeSettings(prev => ({ ...prev, successMessage: e.target.value }))
+                        }
+                        rows={3}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Label className="text-base font-medium">Require Consent Checkbox</Label>
+                        <p className="text-sm text-muted-foreground">Require users to agree to terms before submitting</p>
+                      </div>
+                      <Switch 
+                        checked={quickIntakeSettings.requireConsent}
+                        onCheckedChange={(checked) => 
+                          setQuickIntakeSettings(prev => ({ ...prev, requireConsent: checked }))
                         }
                       />
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="referral-description">Form Description</Label>
-                    <Textarea
-                      id="referral-description"
-                      value={referralSettings.description}
-                      onChange={(e) => 
-                        setReferralSettings(prev => ({ ...prev, description: e.target.value }))
-                      }
-                      rows={3}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="referral-success">Success Message</Label>
-                    <Textarea
-                      id="referral-success"
-                      value={referralSettings.successMessage}
-                      onChange={(e) => 
-                        setReferralSettings(prev => ({ ...prev, successMessage: e.target.value }))
-                      }
-                      rows={3}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label className="text-base font-medium">Require Consent Checkbox</Label>
-                      <p className="text-sm text-muted-foreground">Require users to agree to terms before submitting</p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Label className="text-base font-medium">Enable Analytics</Label>
+                        <p className="text-sm text-muted-foreground">Track form views, submissions, and conversion rates</p>
+                      </div>
+                      <Switch 
+                        checked={quickIntakeSettings.enableAnalytics}
+                        onCheckedChange={(checked) => 
+                          setQuickIntakeSettings(prev => ({ ...prev, enableAnalytics: checked }))
+                        }
+                      />
                     </div>
-                    <Switch 
-                      checked={referralSettings.requireConsent}
-                      onCheckedChange={(checked) => 
-                        setReferralSettings(prev => ({ ...prev, requireConsent: checked }))
-                      }
-                    />
-                  </div>
 
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <Label className="text-base font-medium">Enable Analytics</Label>
-                      <p className="text-sm text-muted-foreground">Track form views, submissions, and conversion rates</p>
-                    </div>
-                    <Switch 
-                      checked={referralSettings.enableAnalytics}
-                      onCheckedChange={(checked) => 
-                        setReferralSettings(prev => ({ ...prev, enableAnalytics: checked }))
-                      }
-                    />
-                  </div>
-
-                  <Button onClick={handleSaveReferral} className="w-full">
-                    Save Referral Settings
-                  </Button>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Submissions Tab */}
-            <TabsContent value="submissions" className="space-y-6">
-              <SubmissionsDashboard />
-            </TabsContent>
-
-            {/* Analytics Tab */}
-            <TabsContent value="analytics" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Form Analytics</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-12">
-                    <BarChart3 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">Analytics Dashboard</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Track form performance, conversion rates, and user behavior.
-                    </p>
-                    <Button variant="outline">
-                      Enable Analytics Tracking
+                    <Button onClick={handleSaveQuickIntake} className="w-full">
+                      Save Quick Intake Settings
                     </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Referral Form Settings */}
+              <TabsContent value="referral" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Referral Form</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Label className="text-base font-medium">Enable Form</Label>
+                        <p className="text-sm text-muted-foreground">Show the referral form at /refer-deal</p>
+                      </div>
+                      <Switch 
+                        checked={referralSettings.enabled}
+                        onCheckedChange={(checked) => 
+                          setReferralSettings(prev => ({ ...prev, enabled: checked }))
+                        }
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="referral-title">Form Title</Label>
+                        <Input
+                          id="referral-title"
+                          value={referralSettings.title}
+                          onChange={(e) => 
+                            setReferralSettings(prev => ({ ...prev, title: e.target.value }))
+                          }
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="referral-button">Submit Button Text</Label>
+                        <Input
+                          id="referral-button"
+                          value={referralSettings.submitButtonText}
+                          onChange={(e) => 
+                            setReferralSettings(prev => ({ ...prev, submitButtonText: e.target.value }))
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="referral-description">Form Description</Label>
+                      <Textarea
+                        id="referral-description"
+                        value={referralSettings.description}
+                        onChange={(e) => 
+                          setReferralSettings(prev => ({ ...prev, description: e.target.value }))
+                        }
+                        rows={3}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="referral-success">Success Message</Label>
+                      <Textarea
+                        id="referral-success"
+                        value={referralSettings.successMessage}
+                        onChange={(e) => 
+                          setReferralSettings(prev => ({ ...prev, successMessage: e.target.value }))
+                        }
+                        rows={3}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Label className="text-base font-medium">Require Consent Checkbox</Label>
+                        <p className="text-sm text-muted-foreground">Require users to agree to terms before submitting</p>
+                      </div>
+                      <Switch 
+                        checked={referralSettings.requireConsent}
+                        onCheckedChange={(checked) => 
+                          setReferralSettings(prev => ({ ...prev, requireConsent: checked }))
+                        }
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <Label className="text-base font-medium">Enable Analytics</Label>
+                        <p className="text-sm text-muted-foreground">Track form views, submissions, and conversion rates</p>
+                      </div>
+                      <Switch 
+                        checked={referralSettings.enableAnalytics}
+                        onCheckedChange={(checked) => 
+                          setReferralSettings(prev => ({ ...prev, enableAnalytics: checked }))
+                        }
+                      />
+                    </div>
+
+                    <Button onClick={handleSaveReferral} className="w-full">
+                      Save Referral Settings
+                    </Button>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Submissions Tab */}
+              <TabsContent value="submissions" className="space-y-6">
+                <SubmissionsDashboard />
+              </TabsContent>
+
+              {/* Analytics Tab */}
+              <TabsContent value="analytics" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Form Analytics</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-center py-12">
+                      <BarChart3 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold mb-2">Analytics Dashboard</h3>
+                      <p className="text-muted-foreground mb-6">
+                        Track form performance, conversion rates, and user behavior.
+                      </p>
+                      <Button variant="outline">
+                        Enable Analytics Tracking
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

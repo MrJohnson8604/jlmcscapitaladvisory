@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,17 +39,24 @@ const CalculatorPage = () => {
   const calculatorUrl = '/tools/tool-term-sheet.html';
 
   return (
-    // We remove flex properties to allow the content to define the height naturally
-    <div className="w-full">
-      <iframe
-        ref={iframeRef}
-        src={calculatorUrl}
-        title="ROI & Term Sheet Calculator"
-        className="w-full border-0"
-        style={{ height: iframeHeight, transition: 'height 0.3s ease-in-out' }}
-        scrolling="no" // We turn off the iframe's scrollbar
-      />
-    </div>
+    <>
+      <Helmet>
+        <title>ROI Calculator | JLMCS Capital Advisory</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      
+      {/* We remove flex properties to allow the content to define the height naturally */}
+      <div className="w-full">
+        <iframe
+          ref={iframeRef}
+          src={calculatorUrl}
+          title="ROI & Term Sheet Calculator"
+          className="w-full border-0"
+          style={{ height: iframeHeight, transition: 'height 0.3s ease-in-out' }}
+          scrolling="no" // We turn off the iframe's scrollbar
+        />
+      </div>
+    </>
   );
 };
 

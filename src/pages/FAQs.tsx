@@ -1,5 +1,7 @@
+import { Helmet } from "react-helmet-async";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+
 const FAQs = () => {
   const faqs = [{
     question: "Do you require appraisals or surveys?",
@@ -23,66 +25,81 @@ const FAQs = () => {
     question: "What fees should I expect?",
     answer: "All fees disclosed up front before you sign—complete transparency, no surprises."
   }];
-  return <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-primary text-primary-foreground py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-xl mb-8 opacity-90">
-              Clear answers to common questions about our lending process and programs.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
-              {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`} className="border-border">
-                  <AccordionTrigger className="text-left font-display font-semibold text-primary hover:text-amber">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>)}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
-      {/* Still Have Questions */}
-      <section className="py-16 text-white" style={{
-      backgroundColor: '#111827'
-    }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-display font-bold mb-6">
-              Still Have Questions?
-            </h2>
-            <p className="text-xl mb-8 opacity-90">
-              Every deal is unique. Let's discuss your specific situation and requirements.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="btn-hero-white-outline text-base font-semibold">
-                <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
-                  Schedule a Call
-                </a>
-              </Button>
-              <Button className="btn-hero-white-outline text-base font-semibold">
-                <a href="mailto:chris.johnson@jlmcsfunding.com">
-                  Send an Email
-                </a>
-              </Button>
+  
+  return (
+    <>
+      <Helmet>
+        <title>FAQs | JLMCS Capital Advisory</title>
+        <meta 
+          name="description" 
+          content="Find clear answers to common questions about our asset-based lending programs, appraisals, credit, and closing processes." 
+        />
+        <meta property="og:title" content="FAQs | JLMCS Capital Advisory" />
+        <meta property="og:description" content="Find clear answers to common questions about our asset-based lending programs, appraisals, credit, and closing processes." />
+      </Helmet>
+      
+      <div className="min-h-screen">
+        {/* Hero Section */}
+        <section className="bg-primary text-primary-foreground py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
+                Frequently Asked Questions
+              </h1>
+              <p className="text-xl mb-8 opacity-90">
+                Clear answers to common questions about our lending process and programs.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
-    </div>;
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+              <Accordion type="single" collapsible className="w-full">
+                {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`} className="border-border">
+                    <AccordionTrigger className="text-left font-display font-semibold text-primary hover:text-amber">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>)}
+              </Accordion>
+            </div>
+          </div>
+        </section>
+
+        {/* Still Have Questions */}
+        <section className="py-16 text-white" style={{
+        backgroundColor: '#111827'
+      }}>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl font-display font-bold mb-6">
+                Still Have Questions?
+              </h2>
+              <p className="text-xl mb-8 opacity-90">
+                Every deal is unique. Let's discuss your specific situation and requirements.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button className="btn-hero-white-outline text-base font-semibold">
+                  <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
+                    Schedule a Call
+                  </a>
+                </Button>
+                <Button className="btn-hero-white-outline text-base font-semibold">
+                  <a href="mailto:chris.johnson@jlmcsfunding.com">
+                    Send an Email
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
 };
 export default FAQs;

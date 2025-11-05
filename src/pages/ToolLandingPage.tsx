@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom"; // No longer needed
 import { Button } from "@/components/ui/button";
@@ -69,77 +70,89 @@ const ToolLandingPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 max-w-4xl">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        {/* Left Side: Value Proposition */}
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Analyze Real Estate Deals in Seconds
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Our free ROI & Term Sheet Calculator is a professional-grade tool designed for investors and wholesalers to find the true profit in any fix-and-flip deal.
-          </p>
-          <ul className="mt-8 space-y-4 text-muted-foreground">
-            <li className="flex items-center gap-3">
-              <CheckIcon /> Instantly find your Cash-to-Close and ROI.
-            </li>
-            <li className="flex items-center gap-3">
-              <CheckIcon /> Compare different hold scenarios (6, 9, 12 months).
-            </li>
-            <li className="flex items-center gap-3">
-              <CheckIcon /> Understand complex terms like "Dutch Interest" and "Cost of Capital."
-            </li>
-          </ul>
-        </div>
+    <>
+      <Helmet>
+        <title>Free ROI & Term Sheet Calculator | JLMCS Capital Advisory</title>
+        <meta 
+          name="description" 
+          content="Get free access to our professional-grade ROI & Term Sheet Calculator to analyze fix-and-flip deals in seconds." 
+        />
+        <meta property="og:title" content="Free ROI & Term Sheet Calculator | JLMCS Capital Advisory" />
+        <meta property="og:description" content="Get free access to our professional-grade ROI & Term Sheet Calculator to analyze fix-and-flip deals in seconds." />
+      </Helmet>
+      
+      <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 max-w-4xl">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Side: Value Proposition */}
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+              Analyze Real Estate Deals in Seconds
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">
+              Our free ROI & Term Sheet Calculator is a professional-grade tool designed for investors and wholesalers to find the true profit in any fix-and-flip deal.
+            </p>
+            <ul className="mt-8 space-y-4 text-muted-foreground">
+              <li className="flex items-center gap-3">
+                <CheckIcon /> Instantly find your Cash-to-Close and ROI.
+              </li>
+              <li className="flex items-center gap-3">
+                <CheckIcon /> Compare different hold scenarios (6, 9, 12 months).
+              </li>
+              <li className="flex items-center gap-3">
+                <CheckIcon /> Understand complex terms like "Dutch Interest" and "Cost of Capital."
+              </li>
+            </ul>
+          </div>
 
-        {/* Right Side: Lead Capture Form */}
-        <div className="bg-background p-8 rounded-lg border shadow-sm">
-          <h2 className="text-2xl font-semibold text-center text-foreground">Get Free Access Now</h2>
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="firstName">First Name</Label>
-                <Input id="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="John" required />
+          {/* Right Side: Lead Capture Form */}
+          <div className="bg-background p-8 rounded-lg border shadow-sm">
+            <h2 className="text-2xl font-semibold text-center text-foreground">Get Free Access Now</h2>
+            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="firstName">First Name</Label>
+                  <Input id="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="John" required />
+                </div>
+                <div>
+                  <Label htmlFor="lastName">Last Name</Label>
+                  <Input id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Doe" required />
+                </div>
               </div>
               <div>
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Doe" required />
+                <Label htmlFor="email">Email Address</Label>
+                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" required />
               </div>
-            </div>
-            <div>
-              <Label htmlFor="email">Email Address</Label>
-              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" required />
-            </div>
-            <div>
-              <Label htmlFor="role">I am a...</Label>
-              <Select onValueChange={setRole} required>
-                <SelectTrigger id="role"><SelectValue placeholder="Select your primary role" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Real Estate Investor">Real Estate Investor</SelectItem>
-                  <SelectItem value="Wholesaler">Wholesaler</SelectItem>
-                  <SelectItem value="Real Estate Agent">Real Estate Agent</SelectItem>
-                  <SelectItem value="Mortgage Broker">Mortgage Broker</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+              <div>
+                <Label htmlFor="role">I am a...</Label>
+                <Select onValueChange={setRole} required>
+                  <SelectTrigger id="role"><SelectValue placeholder="Select your primary role" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Real Estate Investor">Real Estate Investor</SelectItem>
+                    <SelectItem value="Wholesaler">Wholesaler</SelectItem>
+                    <SelectItem value="Real Estate Agent">Real Estate Agent</SelectItem>
+                    <SelectItem value="Mortgage Broker">Mortgage Broker</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-            <div className="flex items-center space-x-2 pt-2">
-              <Checkbox id="marketing" onCheckedChange={(checked) => setMarketingConsent(checked as boolean)} />
-              <Label htmlFor="marketing" className="text-sm font-normal text-muted-foreground">
-                Yes, send me occasional emails with real estate tips and new tools.
-              </Label>
-            </div>
+              <div className="flex items-center space-x-2 pt-2">
+                <Checkbox id="marketing" onCheckedChange={(checked) => setMarketingConsent(checked as boolean)} />
+                <Label htmlFor="marketing" className="text-sm font-normal text-muted-foreground">
+                  Yes, send me occasional emails with real estate tips and new tools.
+                </Label>
+              </div>
 
-            {error && <p className="text-sm text-red-600 pt-2">{error}</p>}
+              {error && <p className="text-sm text-red-600 pt-2">{error}</p>}
 
-            <Button type="submit" className="w-full btn-amber" disabled={isLoading}>
-              {isLoading ? 'Accessing...' : 'Access the Calculator'}
-            </Button>
-          </form>
+              <Button type="submit" className="w-full btn-amber" disabled={isLoading}>
+                {isLoading ? 'Accessing...' : 'Access the Calculator'}
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
