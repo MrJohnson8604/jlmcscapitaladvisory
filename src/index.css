@@ -22,7 +22,6 @@
     --primary: 218 70% 8%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Light Slate #E5E7EB */
     --secondary: 220 13% 91%;
     --secondary-foreground: 218 70% 8%;
 
@@ -37,7 +36,7 @@
     /* Amber CTAs #F59E0B */
     --amber: 43 96% 56%;
     --amber-hover: 31 91% 44%;
-    --amber-foreground: 218 70% 8%;
+    --amber-foreground: 218 70% 8%; /* Dark text for amber bg */
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
@@ -83,6 +82,7 @@
   }
 
   .dark {
+    /* CORRECTED DARK THEME */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
@@ -92,8 +92,9 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* FIX: --primary is the dark header bg, --primary-foreground is the light header text */
+    --primary: 218 70% 8%; 
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -109,7 +110,13 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 43 96% 56%;
+
+    /* Amber CTAs #F59E0B */
+    --amber: 43 96% 56%;
+    --amber-hover: 31 91% 44%;
+    --amber-foreground: 218 70% 8%; /* dark text for amber bg */
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -140,6 +147,9 @@
   }
 }
 
+/* THIS SECTION IS NOW RESTORED 
+  It contains all your custom button hover logic
+*/
 @layer components {
   /* Button Variants */
   .btn-amber {
@@ -215,7 +225,7 @@
   /* Primary filled Amber buttons — invert on hover for contrast */
   .btn-primary-amber, a.button.primary-amber {
     background: #F59E0B !important;
-    color: #FFFFFF !important;
+    color: #0f172a !important; /* Use dark text */
     border-color: #F59E0B !important;
   }
   .btn-primary-amber:hover, a.button.primary-amber:hover {

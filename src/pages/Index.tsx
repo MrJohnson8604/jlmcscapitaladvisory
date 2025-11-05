@@ -71,6 +71,7 @@ const Index = () => {
             className="absolute top-0 left-0 w-full h-full object-cover z-0"
             src={heroVideoUrl}
           />
+          {/* This overlay now correctly uses the dark --primary variable */}
           <div className="absolute top-0 left-0 w-full h-full bg-primary/70 z-10"></div>
 
           <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8 flex-grow flex flex-col justify-center py-8 sm:py-12">
@@ -82,11 +83,11 @@ const Index = () => {
                 Asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—options including no-appraisal/no-survey or BPO-only (lender-ordered).
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-2">
-                {/* FIX: Replaced conflicting Tailwind classes with the "btn-primary-amber" class from index.css 
-                  Kept sizing and layout classes.
+                {/* FIX: RESTORED the "btn-primary-amber" class.
+                  This will now have the correct hover effect (amber bg -> white bg, dark text -> amber text).
                 */}
                 <Button 
-                  className="btn-primary-amber border-2 rounded-xl text-base sm:text-lg px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto"
+                  className="btn-primary-amber border-2 border-amber-500 rounded-xl text-base sm:text-lg px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto"
                   asChild
                 >
                   <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
@@ -94,7 +95,7 @@ const Index = () => {
                   </a>
                 </Button>
                 <Button 
-                  className="btn-primary-amber border-2 rounded-xl text-base sm:text-lg px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto"
+                  className="btn-primary-amber border-2 border-amber-500 rounded-xl text-base sm:text-lg px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto"
                   asChild
                 >
                   <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
@@ -285,8 +286,11 @@ const Index = () => {
               Get pre-qualified or schedule a consultation to discuss your specific project.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
+              {/* FIX: RESTORED the "btn-hero-outline-white" class.
+                This will now have the correct hover effect.
+              */}
               <Button 
-                className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl font-semibold text-base px-6 py-4 w-full sm:w-auto"
+                className="btn-hero-outline-white text-base px-6 py-4 w-full sm:w-auto"
                 asChild
               >
                 <a href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call" target="_blank" rel="noopener noreferrer">
@@ -294,7 +298,7 @@ const Index = () => {
                 </a>
               </Button>
               <Button 
-                className="border-2 border-white text-white bg-transparent hover:bg-white/10 hover:text-amber-500 active:bg-white/16 active:text-amber-500 focus:ring-white/50 rounded-xl font-semibold text-base px-6 py-4 w-full sm:w-auto"
+                className="btn-hero-outline-white text-base px-6 py-4 w-full sm:w-auto"
                 asChild
               >
                 <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">

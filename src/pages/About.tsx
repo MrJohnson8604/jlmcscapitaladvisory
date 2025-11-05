@@ -120,6 +120,9 @@ const About = () => {
               Send the basics. I’ll come back with a plan — a real path, not a pitch.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              {/* FIX: RESTORED the "btn-hero-outline-white" class.
+                This will now have the correct hover effect.
+              */}
               <Button asChild className="btn-hero-outline-white">
                 <a
                   href="https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call"
