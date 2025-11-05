@@ -14,7 +14,7 @@ const AnnouncementBar = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-amber-500 text-white">
+    <div className="bg-amber-500 text-amber-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* NOTE: changed p-2 -> py-1 sm:py-2 to tighten height on phones */}
         <div className="relative flex items-center justify-center py-1 sm:py-2 text-sm font-medium">
@@ -23,11 +23,11 @@ const AnnouncementBar = () => {
           <div className="text-center">
             <Link
               to="/resources/roi-calculator"
-              className="underline font-semibold hover:text-white/90"
+              className="underline font-semibold hover:text-amber-foreground/90"
             >
               Try our FREE ROI & Term Sheet Calculator
             </Link>{" "}
-            — Analyze your next deal in seconds.
+            <span className="text-amber-foreground/90">— Analyze your next deal in seconds.</span>
           </div>
 
           {/* Dismiss button */}

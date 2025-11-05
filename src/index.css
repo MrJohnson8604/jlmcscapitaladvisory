@@ -28,7 +28,7 @@
 
     /* Muted */
     --muted: 220 13% 91%;
-    --muted-foreground: 215 16% 47%;
+    --muted-foreground: 215 16% 30%; /* <-- CHANGED FROM 47% to 30% */
 
     /* Accent - Charcoal #0B0F19 */
     --accent: 228 46% 8%;

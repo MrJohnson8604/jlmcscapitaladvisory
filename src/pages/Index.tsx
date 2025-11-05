@@ -76,7 +76,7 @@ const Index = () => {
           <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8 flex-grow flex flex-col justify-center py-8 sm:py-12">
             <div className="w-full max-w-4xl mx-auto">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold mb-4 sm:mb-6 text-white leading-tight px-2">
-                Get Your Next Real Estate Deal Funded. Fast!
+                Get Your Next Real Estate Deal Funded.Fast!
               </h1>
               <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed px-2">
                 Asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—options including no-appraisal/no-survey or BPO-only (lender-ordered).
@@ -175,7 +175,7 @@ const Index = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {processSteps.map((step, index) => <Card key={index} className="shadow-medium text-center">
                   <CardContent className="p-6 sm:p-8">
-                    <div className="text-3xl sm:text-4xl font-display font-bold text-amber mb-4 sm:mb-6">
+                    <div className="text-3xl sm:text-4xl font-display font-bold text-primary mb-4 sm:mb-6">
                       {step.step}
                     </div>
                     <h3 className="text-xl sm:text-2xl font-display font-semibold mb-3 sm:mb-4 text-primary">
@@ -217,6 +217,8 @@ const Index = () => {
                       src={sanAntonioFlip} 
                       alt="Funded — San Antonio, TX — property exterior" 
                       className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
+                      width="800"
+                      height="600"
                     />
                   </div>
                   <p className="text-sm text-foreground leading-relaxed line-clamp-2">
@@ -240,6 +242,8 @@ const Index = () => {
                       src={houstonCompleted} 
                       alt="Funded — Houston, TX — exterior" 
                       className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
+                      width="800"
+                      height="600"
                     />
                   </div>
                   <p className="text-sm text-foreground leading-relaxed line-clamp-2">
@@ -263,6 +267,8 @@ const Index = () => {
                       src={houstonFlipInterior} 
                       alt="Funded — Houston, TX — interior renovation" 
                       className="w-full aspect-[3/2] object-cover rounded-2xl shadow-medium"
+                      width="800"
+                      height="600"
                     />
                   </div>
                   <p className="text-sm text-foreground leading-relaxed line-clamp-2">

@@ -74,6 +74,8 @@ const About = () => {
                     src={founderImageUrl}
                     alt="Christopher Johnson, Founder of JLMCS Capital Advisory"
                     className="rounded-lg shadow-xl aspect-square object-cover w-full object-top"
+                    width="800"
+                    height="800"
                   />
                   <figcaption className="mt-4 text-center font-display font-bold text-primary tracking-wide">
                     Principal Owner - Chris Johnson

@@ -45,6 +45,8 @@ const Header = () => {
                 className="h-6 sm:h-7 lg:h-8 w-auto"
                 loading="eager"
                 decoding="async"
+                width="300"
+                height="60"
               />
             </Link>
           </div>
@@ -58,7 +60,7 @@ const Header = () => {
                   to={item.href}
                   className={`px-2 2xl:px-3 py-2 text-sm 2xl:text-base font-medium transition-colors whitespace-nowrap ${
                     isActive(item.href)
-                      ? "text-amber border-b-2 border-amber"
+                      ? "text-primary border-b-2 border-amber"
                       : "text-foreground/80 hover:text-foreground"
                   }`}
                 >
@@ -105,7 +107,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className={`block px-2 py-2 rounded-md text-sm font-medium ${
                     isActive(item.href)
-                      ? "text-amber bg-amber-50"
+                      ? "text-primary font-bold bg-amber-50"
                       : "text-foreground/90 hover:bg-muted"
                   }`}
                 >
