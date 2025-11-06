@@ -6,11 +6,21 @@
     CALENDLY_URL: "https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call",
     JOTFORM_URL: "https://www.jotform.com/251521627688060",
     SHOW_DELAY_MS: 3000, /* 3 seconds */
+    DISMISS_DAYS: 7,
     BUSINESS_EMAIL: "chris.johnson@jlmcsfunding.com",
     BUSINESS_PHONE: "281-615-9951"
   };
 
   function mount(){
+    // If dismissed recently, skip mounting — but always show during local development
+    try{
+      var isLocal = (location && (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:'));
+      var force = (location && location.search && location.search.indexOf('jlmcs_force_widget=1')!==-1);
+      if (!isLocal && !force){
+        var until = localStorage.getItem('jlmcs_dq_dismiss_until');
+        if (until && Number(until) > Date.now()) return;
+      }
+    }catch(e){}
     var host = document.createElement('div');
     host.id = 'jlmcs-dq-host';
     host.style.position = 'fixed';
@@ -49,6 +59,8 @@
     var card = document.createElement('div');
     card.id = 'dq-card';
     card.className = 'hide';
+  card.setAttribute('role','dialog');
+  card.setAttribute('aria-label','Deal qualifier');
 
     var header = document.createElement('header');
     var dot = document.createElement('span'); dot.className='dot'; dot.setAttribute('aria-hidden','true');
@@ -93,15 +105,20 @@
       leadStatus:"unqualified", disqReason:"",
       pageURL: window.location.href, timestamp: new Date().toISOString()
     };
+    // UI sending guard to avoid duplicate submits
+    state.sending = false;
 
     function selectRow(label, opts, next){
       body.innerHTML = '';
       var p = document.createElement('p'); p.appendChild(document.createTextNode(label)); body.appendChild(p);
       var row = document.createElement('div'); row.className='row';
       var sel = document.createElement('select'); var empty = document.createElement('option'); empty.value=''; empty.appendChild(document.createTextNode('Select')); sel.appendChild(empty);
+      sel.setAttribute('aria-label', label);
       for (var i=0;i<opts.length;i++){ var o=document.createElement('option'); o.value=opts[i].value; o.appendChild(document.createTextNode(opts[i].label)); sel.appendChild(o); }
       var btn = document.createElement('button'); btn.className='cta'; btn.appendChild(document.createTextNode('Continue'));
       row.appendChild(sel); row.appendChild(btn); body.appendChild(row);
+      // focus the select for keyboard users
+      setTimeout(function(){ try{ sel.focus(); }catch(e){} }, 50);
       btn.onclick = function(){ next(sel.value||''); };
     }
 
@@ -142,21 +159,30 @@
       body.innerHTML = '';
       var p = document.createElement('p'); p.appendChild(document.createTextNode('Great — last step: how can we contact you?')); body.appendChild(p);
       var row = document.createElement('div'); row.className='row';
-      var f1=document.createElement('input'); f1.placeholder='Full name';
-      var f2=document.createElement('input'); f2.placeholder='Email';
-      var f3=document.createElement('input'); f3.placeholder='Phone';
+      var f1=document.createElement('input'); f1.placeholder='Full name'; f1.setAttribute('aria-label','Full name');
+      var f2=document.createElement('input'); f2.placeholder='Email'; f2.setAttribute('aria-label','Email');
+      var f3=document.createElement('input'); f3.placeholder='Phone'; f3.setAttribute('aria-label','Phone');
       var btn=document.createElement('button'); btn.className='cta'; btn.appendChild(document.createTextNode('Submit'));
       row.appendChild(f1); row.appendChild(f2); row.appendChild(f3); row.appendChild(btn); body.appendChild(row);
-      btn.onclick=function(){ state.name=(f1.value||'').trim(); state.email=(f2.value||'').trim(); state.phone=(f3.value||'').trim(); finalize(); };
+      btn.onclick=function(){
+        if (state.sending) return;
+        state.name=(f1.value||'').trim(); state.email=(f2.value||'').trim(); state.phone=(f3.value||'').trim();
+        state.sending = true;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        try{ f1.disabled=true; f2.disabled=true; f3.disabled=true; }catch(e){}
+        finalize();
+      };
+      // focus the first input
+      setTimeout(function(){ try{ f1.focus(); }catch(e){} }, 50);
     }
     function politeDQFollowup(){
       body.innerHTML = '';
       var p1=document.createElement('p'); p1.appendChild(document.createTextNode('Thank you for sharing. At this time, we typically require at least $10,000 in liquid reserves.')); body.appendChild(p1);
       var p2=document.createElement('p'); p2.appendChild(document.createTextNode('Please leave your contact info so we can follow up as your situation progresses — we’re happy to revisit options.')); body.appendChild(p2);
       var row=document.createElement('div'); row.className='row';
-      var f1=document.createElement('input'); f1.placeholder='Full name';
-      var f2=document.createElement('input'); f2.placeholder='Email';
-      var f3=document.createElement('input'); f3.placeholder='Phone';
+      var f1=document.createElement('input'); f1.placeholder='Full name'; f1.setAttribute('aria-label','Full name');
+      var f2=document.createElement('input'); f2.placeholder='Email'; f2.setAttribute('aria-label','Email');
+      var f3=document.createElement('input'); f3.placeholder='Phone'; f3.setAttribute('aria-label','Phone');
       var btn=document.createElement('button'); btn.className='cta'; btn.appendChild(document.createTextNode('Send'));
       row.appendChild(f1); row.appendChild(f2); row.appendChild(f3); row.appendChild(btn); body.appendChild(row);
       var p3=document.createElement('p'); p3.className='small';
@@ -164,14 +190,22 @@
       var a=document.createElement('a'); a.className='link'; a.href='mailto:'+CONFIG.BUSINESS_EMAIL; a.appendChild(document.createTextNode(CONFIG.BUSINESS_EMAIL));
       p3.appendChild(a); body.appendChild(p3);
       btn.onclick=function(){
+        if (state.sending) return;
         state.name=(f1.value||'').trim(); state.email=(f2.value||'').trim(); state.phone=(f3.value||'').trim();
-        sendToMake().then(function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; });
+        state.sending = true;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        try{ f1.disabled=true; f2.disabled=true; f3.disabled=true; }catch(e){}
+        sendToMake().then(function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; }, function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; });
       };
+      // focus the first input
+      setTimeout(function(){ try{ f1.focus(); }catch(e){} }, 50);
     }
     function routeAndFinish(){
       var hot=(state.closeTimeline==='ASAP'||state.closeTimeline==='7-14 days');
       var routeURL= hot?CONFIG.CALENDLY_URL:CONFIG.JOTFORM_URL;
       state.leadStatus='qualified'; state.disqReason='';
+      if (state.sending) return;
+      state.sending = true;
       sendToMake().then(function(){
         body.innerHTML='';
         var p=document.createElement('p'); p.appendChild(document.createTextNode("You're all set. Continue here:")); body.appendChild(p);
@@ -245,11 +279,40 @@
     }
     /* ---------- /LOCAL-FRIENDLY WEBHOOK SENDER ---------- */
 
-    card.addEventListener('click', function(e){
-      var id = e.target && e.target.id;
-      if (id==='dq-btn-deal'){ state.path='deal'; askExperience(function(){ askDealType(function(){ askReserves(function(){ askCredit(function(){ askTimeline(function(){ contactForm(routeAndFinish); }); }); }); }); }); }
-      if (id==='dq-btn-pre'){  state.path='pre';  askExperience(function(){ askReserves(function(){ askCredit(function(){ contactForm(routeAndFinish); }); }); }); }
-      if (id==='dq-dismiss'){ hide(); }
+    // Prefer explicit listeners (more robust than relying on event target ids)
+    bDeal.addEventListener('click', function(){
+      state.path = 'deal';
+      askExperience(function(){
+        askDealType(function(){
+          askReserves(function(){
+            askCredit(function(){
+              askTimeline(function(){
+                contactForm(routeAndFinish);
+              });
+            });
+          });
+        });
+      });
+    });
+
+    bPre.addEventListener('click', function(){
+      state.path = 'pre';
+      askExperience(function(){
+        askReserves(function(){
+          askCredit(function(){
+            contactForm(routeAndFinish);
+          });
+        });
+      });
+    });
+
+    bDismiss.addEventListener('click', function(){
+      // persist dismissal until DISMISS_DAYS from now
+      try{
+        var until = Date.now() + (CONFIG.DISMISS_DAYS||0) * 24 * 60 * 60 * 1000;
+        localStorage.setItem('jlmcs_dq_dismiss_until', String(until));
+      }catch(e){ }
+      hide();
     });
 
     setTimeout(show, CONFIG.SHOW_DELAY_MS);
