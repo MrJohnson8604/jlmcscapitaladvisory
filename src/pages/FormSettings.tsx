@@ -8,7 +8,14 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Settings, FormInput, Users, BarChart3, LogOut, Loader2 } from "lucide-react";
+import { Settings, FormInput, Users, BarChart3, LogOut, Loader2, FileText } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import SubmissionsDashboard from "@/components/SubmissionsDashboard";
@@ -37,6 +44,68 @@ const FormSettings = () => {
     requireConsent: true,
     enableAnalytics: true,
   });
+
+  // Manage Content form state
+  const [resTitle, setResTitle] = useState("");
+  const [resUrl, setResUrl] = useState("");
+  const [resThumbnail, setResThumbnail] = useState("");
+  const [resDescription, setResDescription] = useState("");
+  const [resCategory, setResCategory] = useState("Video");
+  const [isSubmittingResource, setIsSubmittingResource] = useState(false);
+
+  const handleAddResource = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!resTitle || !resUrl) {
+      toast(
+        {
+          title: "Missing fields",
+          description: "Title and URL are required.",
+          variant: "destructive",
+        }
+      );
+      return;
+    }
+
+    setIsSubmittingResource(true);
+    try {
+      const payload = {
+        title: resTitle,
+        url: resUrl,
+        thumbnail_url: resThumbnail || null,
+        description: resDescription || null,
+        category: resCategory,
+      };
+
+      // Call Supabase Edge Function to insert resource using service role key (keeps keys server-side)
+      const FUNCTIONS_URL = "https://zfypycrqovozdegxcooz.supabase.co/functions/v1/submit-resource";
+      const resp = await fetch(FUNCTIONS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const json = await resp.json().catch(() => ({ success: false, error: "Invalid JSON response" }));
+
+      if (!resp.ok || !json || json.success === false) {
+        console.error("Function error:", json);
+        const msg = (json && json.error) ? json.error : "Failed to add resource";
+        toast({ title: "Error", description: String(msg), variant: "destructive" });
+      } else {
+        toast.success("Resource added successfully");
+        // Clear form
+        setResTitle("");
+        setResUrl("");
+        setResThumbnail("");
+        setResDescription("");
+        setResCategory("Video");
+      }
+    } catch (err: any) {
+      console.error("Unexpected error adding resource:", err);
+      toast({ title: "Error", description: "Unexpected error. See console.", variant: "destructive" });
+    } finally {
+      setIsSubmittingResource(false);
+    }
+  };
 
   useEffect(() => {
     // Check authentication
@@ -142,10 +211,14 @@ const FormSettings = () => {
             </div>
 
             <Tabs defaultValue="quick-intake" className="space-y-6">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="quick-intake" className="flex items-center gap-2">
                   <FormInput className="h-4 w-4" />
                   Quick Intake
+                </TabsTrigger>
+                <TabsTrigger value="content" className="flex items-center gap-2">
+                  <FileText className="h-4 w-4" />
+                  Manage Content
                 </TabsTrigger>
                 <TabsTrigger value="referral" className="flex items-center gap-2">
                   <Users className="h-4 w-4" />
@@ -258,6 +331,59 @@ const FormSettings = () => {
                     <Button onClick={handleSaveQuickIntake} className="w-full">
                       Save Quick Intake Settings
                     </Button>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Content Management Tab */}
+              <TabsContent value="content" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Manage Content</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleAddResource} className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="res-title">Title</Label>
+                          <Input id="res-title" value={resTitle} onChange={(e) => setResTitle(e.target.value)} />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="res-url">URL</Label>
+                          <Input id="res-url" value={resUrl} onChange={(e) => setResUrl(e.target.value)} />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="res-thumbnail">Thumbnail URL</Label>
+                        <Input id="res-thumbnail" value={resThumbnail} onChange={(e) => setResThumbnail(e.target.value)} />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="res-description">Description</Label>
+                        <Textarea id="res-description" value={resDescription} onChange={(e) => setResDescription(e.target.value)} rows={4} />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="res-category">Category</Label>
+                        <Select onValueChange={(val) => setResCategory(val)}>
+                          <SelectTrigger id="res-category">
+                            <SelectValue>{resCategory}</SelectValue>
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Video">Video</SelectItem>
+                            <SelectItem value="Tool">Tool</SelectItem>
+                            <SelectItem value="Premium">Premium</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="pt-4">
+                        <Button type="submit" className="w-full" disabled={isSubmittingResource}>
+                          {isSubmittingResource ? "Submitting..." : "Submit"}
+                        </Button>
+                      </div>
+                    </form>
                   </CardContent>
                 </Card>
               </TabsContent>
