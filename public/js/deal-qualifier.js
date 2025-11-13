@@ -6,6 +6,7 @@
     CALENDLY_URL: "https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call",
     JOTFORM_URL: "https://www.jotform.com/251521627688060",
     SHOW_DELAY_MS: 3000, /* 3 seconds */
+    FORCE_WIDGET_SHOW: true,
     DISMISS_DAYS: 7,
     BUSINESS_EMAIL: "chris.johnson@jlmcsfunding.com",
     BUSINESS_PHONE: "281-615-9951"
@@ -15,7 +16,8 @@
     // If dismissed recently, skip mounting — but always show during local development
     try{
       var isLocal = (location && (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:'));
-      var force = (location && location.search && location.search.indexOf('jlmcs_force_widget=1')!==-1);
+      var forceQuery = (location && location.search && location.search.indexOf('jlmcs_force_widget=1')!==-1);
+      var force = CONFIG.FORCE_WIDGET_SHOW || forceQuery;
       if (!isLocal && !force){
         var until = localStorage.getItem('jlmcs_dq_dismiss_until');
         if (until && Number(until) > Date.now()) return;
