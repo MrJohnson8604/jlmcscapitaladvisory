@@ -2,7 +2,7 @@
   if (window.__jlmcsDQMounted) return; window.__jlmcsDQMounted = true;
 
   var CONFIG = {
-    MAKE_WEBHOOK_URL: "https://ynf19pl7dqvvqaytsycxuey3j9vposs4.hook.us2.make.com",
+    SUPABASE_FUNCTION_URL: "https://zfypycrqovozdegxcooz.supabase.co/functions/v1/submit-deal-qualifier",
     CALENDLY_URL: "https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call",
     JOTFORM_URL: "https://www.jotform.com/251521627688060",
     SHOW_DELAY_MS: 3000, /* 3 seconds */
@@ -197,7 +197,7 @@
         state.sending = true;
         btn.disabled = true; btn.textContent = 'Sending…';
         try{ f1.disabled=true; f2.disabled=true; f3.disabled=true; }catch(e){}
-        sendToMake().then(function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; }, function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; });
+        sendToSupabase().then(function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; }, function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; });
       };
       // focus the first input
       setTimeout(function(){ try{ f1.focus(); }catch(e){} }, 50);
@@ -208,7 +208,7 @@
       state.leadStatus='qualified'; state.disqReason='';
       if (state.sending) return;
       state.sending = true;
-      sendToMake().then(function(){
+      sendToSupabase().then(function(){
         body.innerHTML='';
         var p=document.createElement('p'); p.appendChild(document.createTextNode("You're all set. Continue here:")); body.appendChild(p);
         var btns=document.createElement('div'); btns.className='btns';
@@ -229,54 +229,29 @@
     }
 
     /* ---------- LOCAL-FRIENDLY WEBHOOK SENDER (with fallbacks) ---------- */
-    function sendToMake(){
+    function sendToSupabase(){
       var payload = {
-        name: state.name, email: state.email, phone: state.phone,
-        experience: state.experience, dealType: state.dealType,
-        liquidReserves: state.liquidReserves, creditBand: state.creditBand,
-        closeTimeline: state.closeTimeline, interestType: state.interestType,
-        leadStatus: state.leadStatus, disqReason: state.disqReason,
-        pageURL: state.pageURL, timestamp: state.timestamp, source: 'localdev'
+        name: state.name,
+        email: state.email,
+        phone: state.phone,
+        experience: state.experience,
+        dealType: state.dealType,
+        liquidReserves: state.liquidReserves,
+        creditBand: state.creditBand,
+        closeTimeline: state.closeTimeline,
+        interestType: state.interestType,
+        leadStatus: state.leadStatus,
+        disqReason: state.disqReason,
+        pageURL: state.pageURL,
+        timestamp: state.timestamp,
+        source: 'deal-qualifier',
       };
       var bodyJSON = JSON.stringify(payload);
 
-      // Attempt 1: Standard JSON POST
-      return fetch(CONFIG.MAKE_WEBHOOK_URL, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: bodyJSON
-      }).then(function(res){
-        console.log('[DQ] Webhook JSON POST ok, status:', res.status);
-        return res;
-      }).catch(function(err){
-        console.warn('[DQ] JSON POST failed, trying text/plain…', err);
-
-        // Attempt 2: text/plain (often avoids preflight)
-        return fetch(CONFIG.MAKE_WEBHOOK_URL, {
-          method:'POST',
-          headers:{'Content-Type':'text/plain;charset=UTF-8'},
-          body: bodyJSON
-        }).then(function(res2){
-          console.log('[DQ] Webhook text/plain POST ok, status:', res2.status);
-          return res2;
-        }).catch(function(err2){
-          console.warn('[DQ] text/plain POST failed, trying sendBeacon…', err2);
-
-          // Attempt 3: sendBeacon (no CORS restrictions)
-          try {
-            var sent = navigator.sendBeacon(CONFIG.MAKE_WEBHOOK_URL, new Blob([bodyJSON], {type:'text/plain'}));
-            console.log('[DQ] sendBeacon sent:', sent);
-            if (sent) return Promise.resolve();
-          } catch(e){ console.warn('[DQ] sendBeacon error:', e); }
-
-          // Attempt 4: no-cors (fire-and-forget)
-          console.warn('[DQ] falling back to no-cors fetch…');
-          return fetch(CONFIG.MAKE_WEBHOOK_URL, {
-            method:'POST',
-            mode:'no-cors',
-            body: bodyJSON
-          });
-        });
+      return fetch(CONFIG.SUPABASE_FUNCTION_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: bodyJSON,
       });
     }
     /* ---------- /LOCAL-FRIENDLY WEBHOOK SENDER ---------- */

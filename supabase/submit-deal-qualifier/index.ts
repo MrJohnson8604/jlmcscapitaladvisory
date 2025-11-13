@@ -14,46 +14,63 @@ interface DealQualifierData {
   leadStatus: string;
   disqReason?: string;
   pageURL: string;
+  interestType?: string;
+  timestamp?: string;
 }
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
-    return new Response("ok", { 
-      headers: { 
-        "Access-Control-Allow-Origin": "*", 
-        "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type" 
-      } 
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization,Content-Type",
+        "Access-Control-Allow-Methods": "POST,OPTIONS",
+      },
+    });
+  }
+
+  if (req.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
   }
 
   try {
     const data: DealQualifierData = await req.json();
 
-    const AIRTABLE_API_KEY = Deno.env.get("patDJarijXUG0LQo9.bfb7cc8c633eada0ae4ae4b694933227c8fd64e148322b8e7d80e7e7d73a8e57Tu");
-    const AIRTABLE_BASE_ID = Deno.env.get("appFjOAmBllTOuC4Y");
-    // You'll need to add this new variable in Supabase settings
-    const AIRTABLE_TABLE_NAME = Deno.env.get("Deal Qualifier Leads"); 
+    const AIRTABLE_API_KEY = Deno.env.get("AIRTABLE_API_KEY");
+    const AIRTABLE_BASE_ID = Deno.env.get("AIRTABLE_BASE_ID");
+    const AIRTABLE_TABLE_NAME = Deno.env.get("AIRTABLE_TABLE_NAME");
 
     if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID || !AIRTABLE_TABLE_NAME) {
       throw new Error("Airtable environment variables are not set.");
     }
 
-    const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+    const airtableUrl = `https://api.airtable.com/v0/${encodeURIComponent(
+      AIRTABLE_BASE_ID,
+    )}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`;
 
     const airtableData = {
       records: [
         {
           fields: {
-            "Name": data.name,
-            "Email": data.email,
-            "Phone": data.phone,
-            "Experience": data.experience,
+            Name: data.name,
+            Email: data.email,
+            Phone: data.phone,
+            Experience: data.experience,
             "Deal Type": data.dealType,
             "Liquid Reserves": data.liquidReserves,
             "Credit Band": data.creditBand,
             "Close Timeline": data.closeTimeline,
             "Lead Status": data.leadStatus,
+            "Disqualification Reason": data.disqReason || "",
             "Source Page": data.pageURL,
+            "Interest Type": data.interestType || "",
+            "Submitted At": new Date().toISOString(),
           },
         },
       ],
@@ -74,13 +91,19 @@ serve(async (req) => {
     }
 
     return new Response(JSON.stringify({ success: true }), {
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       status: 200,
     });
   } catch (error) {
     console.error("Error caught in function:", error);
     return new Response(JSON.stringify({ error: error.message }), {
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       status: 500,
     });
   }
