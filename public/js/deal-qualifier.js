@@ -197,7 +197,12 @@
         state.sending = true;
         btn.disabled = true; btn.textContent = 'Sending…';
         try{ f1.disabled=true; f2.disabled=true; f3.disabled=true; }catch(e){}
-        sendToSupabase().then(function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; }, function(){ body.innerHTML='<p>Thanks — we’ve got your info. We’ll follow up.</p>'; });
+        sendToSupabase().then(function(){
+          body.innerHTML='<p style="color:#22c55e;font-weight:600;">✓ Success! We've received your info and will follow up soon.</p>';
+        }, function(err){
+          console.error('[DQ] politeDQ submission failed:', err);
+          body.innerHTML='<p style="color:#ef4444;">Submission failed. Please email <a href="mailto:'+CONFIG.BUSINESS_EMAIL+'" class="link">'+CONFIG.BUSINESS_EMAIL+'</a> or call '+CONFIG.BUSINESS_PHONE+'.</p>';
+        });
       };
       // focus the first input
       setTimeout(function(){ try{ f1.focus(); }catch(e){} }, 50);
@@ -209,15 +214,20 @@
       if (state.sending) return;
       state.sending = true;
       sendToSupabase().then(function(){
+        console.log('[DQ] Qualified lead submitted successfully');
         body.innerHTML='';
-        var p=document.createElement('p'); p.appendChild(document.createTextNode("You're all set. Continue here:")); body.appendChild(p);
+        var pSuccess=document.createElement('p'); pSuccess.style.color='#22c55e'; pSuccess.style.fontWeight='600'; pSuccess.appendChild(document.createTextNode('✓ Success! Your info has been submitted.'));
+        body.appendChild(pSuccess);
+        var p=document.createElement('p'); p.appendChild(document.createTextNode("Continue here:")); body.appendChild(p);
         var btns=document.createElement('div'); btns.className='btns';
         var a=document.createElement('a'); a.target='_blank'; a.rel='noopener'; a.href=routeURL;
         var b=document.createElement('button'); b.className='cta'; b.appendChild(document.createTextNode('Open '+(hot?'Calendly':'Jotform')));
         a.appendChild(b); btns.appendChild(a); body.appendChild(btns);
       }, function(){
+        console.error('[DQ] Qualified lead submission failed');
         body.innerHTML='';
-        var p=document.createElement('p'); p.appendChild(document.createTextNode('We couldn’t reach our system, but you can still proceed:')); body.appendChild(p);
+        var pErr=document.createElement('p'); pErr.style.color='#ef4444'; pErr.style.fontWeight='600'; pErr.appendChild(document.createTextNode('⚠ Submission failed, but you can still proceed:'));
+        body.appendChild(pErr);
         var btns=document.createElement('div'); btns.className='btns';
         var a=document.createElement('a'); a.target='_blank'; a.rel='noopener'; a.href=routeURL;
         var b=document.createElement('button'); b.className='cta'; b.appendChild(document.createTextNode('Open '+(hot?'Calendly':'Jotform')));
@@ -248,10 +258,30 @@
       };
       var bodyJSON = JSON.stringify(payload);
 
+      console.log('[DQ] Sending to Supabase:', CONFIG.SUPABASE_FUNCTION_URL, payload);
+
       return fetch(CONFIG.SUPABASE_FUNCTION_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: bodyJSON,
+      }).then(function(res){
+        console.log('[DQ] Response status:', res.status);
+        if (!res.ok) {
+          return res.text().then(function(errText){
+            console.error('[DQ] Error response:', errText);
+            throw new Error('Server returned ' + res.status + ': ' + errText);
+          });
+        }
+        return res.json().then(function(data){
+          console.log('[DQ] Success response:', data);
+          if (!data.success) {
+            throw new Error(data.error || 'Submission failed');
+          }
+          return data;
+        });
+      }).catch(function(err){
+        console.error('[DQ] Fetch error:', err);
+        throw err;
       });
     }
     /* ---------- /LOCAL-FRIENDLY WEBHOOK SENDER ---------- */
