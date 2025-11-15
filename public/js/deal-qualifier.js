@@ -147,7 +147,7 @@
       });
     }
     function askCredit(next){
-      selectRow('What\'s your estimated credit band?', [
+      selectRow("What's your estimated credit band?", [
         {value:'500-599',label:'500–599'},{value:'600-639',label:'600–639'},
         {value:'640-679',label:'640–679'},{value:'680-719',label:'680–719'},{value:'720+',label:'720+'}
       ], function(v){ state.creditBand=v; next(); });
@@ -180,7 +180,7 @@
     function politeDQFollowup(){
       body.innerHTML = '';
       var p1=document.createElement('p'); p1.appendChild(document.createTextNode('Thank you for sharing. At this time, we typically require at least $10,000 in liquid reserves.')); body.appendChild(p1);
-      var p2=document.createElement('p'); p2.appendChild(document.createTextNode('Please leave your contact info so we can follow up as your situation progresses — we\'re happy to revisit options.')); body.appendChild(p2);
+      var p2=document.createElement('p'); p2.appendChild(document.createTextNode("Please leave your contact info so we can follow up as your situation progresses — we're happy to revisit options.")); body.appendChild(p2);
       var row=document.createElement('div'); row.className='row';
       var f1=document.createElement('input'); f1.placeholder='Full name'; f1.setAttribute('aria-label','Full name');
       var f2=document.createElement('input'); f2.placeholder='Email'; f2.setAttribute('aria-label','Email');
