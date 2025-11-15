@@ -46,7 +46,7 @@
       'button:hover{background:#374151}',
       '.cta{background:#2563eb}.cta:hover{background:#1d4ed8}',
       '.row{display:grid;gap:6px;margin-top:8px}',
-      'input,select{width:100%;border:1px solid #334155;background:#0b1220;color:#fff;border-radius:10px;padding:10px 12px;font-size:14px}',
+      'input,select{width:100%;box-sizing:border-box;border:1px solid #334155;background:#0b1220;color:#fff;border-radius:10px;padding:10px 12px;font-size:14px}',
       '.foot{padding:10px 16px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:flex-end}',
       '#dq-dismiss{background:transparent;color:#9ca3af;border:0;font-size:12px;cursor:pointer}',
       'a.link{color:#93c5fd;text-decoration:underline}',
@@ -202,6 +202,9 @@
         }, function(err){
           console.error('[DQ] politeDQ submission failed:', err);
           body.innerHTML='<p style="color:#ef4444;">Submission failed. Please email <a href="mailto:'+CONFIG.BUSINESS_EMAIL+'" class="link">'+CONFIG.BUSINESS_EMAIL+'</a> or call '+CONFIG.BUSINESS_PHONE+'.</p>';
+        }).finally(function(){
+          state.sending = false;
+          try{ f1.disabled=false; f2.disabled=false; f3.disabled=false; btn.disabled=false; }catch(e){}
         });
       };
       // focus the first input
@@ -235,6 +238,8 @@
         var p2=document.createElement('p'); p2.className='small'; p2.appendChild(document.createTextNode('Or email '));
         var a2=document.createElement('a'); a2.className='link'; a2.href='mailto:'+CONFIG.BUSINESS_EMAIL; a2.appendChild(document.createTextNode(CONFIG.BUSINESS_EMAIL));
         p2.appendChild(a2); body.appendChild(p2);
+      }).finally(function(){
+        state.sending = false;
       });
     }
 
