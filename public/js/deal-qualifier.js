@@ -45,8 +45,9 @@
       'button{border:0;border-radius:10px;padding:10px 12px;background:#1f2937;color:#fff;font-size:14px;cursor:pointer}',
       'button:hover{background:#374151}',
       '.cta{background:#2563eb}.cta:hover{background:#1d4ed8}',
+      'button:disabled{opacity:0.7;cursor:not-allowed}', // /* Added disabled style */
       '.row{display:grid;gap:6px;margin-top:8px}',
-      'input,select{width:100%;box-sizing:border-box;border:1px solid #334155;background:#0b1220;color:#fff;border-radius:10px;padding:10px 12px;font-size:14px}',
+      'input,select{width:100%;border:1px solid #334155;background:#0b1220;color:#fff;border-radius:10px;padding:10px 12px;font-size:14px;box-sizing:border-box;}', // /* FIX 1: Added box-sizing */
       '.foot{padding:10px 16px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:flex-end}',
       '#dq-dismiss{background:transparent;color:#9ca3af;border:0;font-size:12px;cursor:pointer}',
       'a.link{color:#93c5fd;text-decoration:underline}',
@@ -61,8 +62,8 @@
     var card = document.createElement('div');
     card.id = 'dq-card';
     card.className = 'hide';
-  card.setAttribute('role','dialog');
-  card.setAttribute('aria-label','Deal qualifier');
+    card.setAttribute('role','dialog');
+    card.setAttribute('aria-label','Deal qualifier');
 
     var header = document.createElement('header');
     var dot = document.createElement('span'); dot.className='dot'; dot.setAttribute('aria-hidden','true');
@@ -147,6 +148,7 @@
       });
     }
     function askCredit(next){
+      // FIX 2: Used double quotes for the string
       selectRow("What's your estimated credit band?", [
         {value:'500-599',label:'500–599'},{value:'600-639',label:'600–639'},
         {value:'640-679',label:'640–679'},{value:'680-719',label:'680–719'},{value:'720+',label:'720+'}
@@ -172,7 +174,7 @@
         state.sending = true;
         btn.disabled = true; btn.textContent = 'Sending…';
         try{ f1.disabled=true; f2.disabled=true; f3.disabled=true; }catch(e){}
-        finalize();
+        finalize(f1, f2, f3, btn); // Pass controls to finalize
       };
       // focus the first input
       setTimeout(function(){ try{ f1.focus(); }catch(e){} }, 50);
@@ -180,6 +182,7 @@
     function politeDQFollowup(){
       body.innerHTML = '';
       var p1=document.createElement('p'); p1.appendChild(document.createTextNode('Thank you for sharing. At this time, we typically require at least $10,000 in liquid reserves.')); body.appendChild(p1);
+      // FIX 3: Used double quotes for the string
       var p2=document.createElement('p'); p2.appendChild(document.createTextNode("Please leave your contact info so we can follow up as your situation progresses — we're happy to revisit options.")); body.appendChild(p2);
       var row=document.createElement('div'); row.className='row';
       var f1=document.createElement('input'); f1.placeholder='Full name'; f1.setAttribute('aria-label','Full name');
@@ -197,25 +200,33 @@
         state.sending = true;
         btn.disabled = true; btn.textContent = 'Sending…';
         try{ f1.disabled=true; f2.disabled=true; f3.disabled=true; }catch(e){}
+        
+        /* FIX 4: Added .finally() and error handling */
         sendToSupabase().then(function(){
           body.innerHTML="<p style=\"color:#22c55e;font-weight:600;\">✓ Success! We have received your info and will follow up soon.</p>";
         }, function(err){
           console.error('[DQ] politeDQ submission failed:', err);
           body.innerHTML='<p style="color:#ef4444;">Submission failed. Please email <a href="mailto:'+CONFIG.BUSINESS_EMAIL+'" class="link">'+CONFIG.BUSINESS_EMAIL+'</a> or call '+CONFIG.BUSINESS_PHONE+'.</p>';
-        }).finally(function(){
-          state.sending = false;
-          try{ f1.disabled=false; f2.disabled=false; f3.disabled=false; btn.disabled=false; }catch(e){}
+          // Re-enable form on failure
+          btn.disabled = false; btn.textContent = 'Send';
+          try{ f1.disabled=false; f2.disabled=false; f3.disabled=false; }catch(e){}
+        }).finally(function() {
+          state.sending = false; // Reset sending state on success or failure
         });
       };
       // focus the first input
       setTimeout(function(){ try{ f1.focus(); }catch(e){} }, 50);
     }
-    function routeAndFinish(){
+    
+    // FIX 5: Pass controls to this function
+    function routeAndFinish(f1, f2, f3, btn){
       var hot=(state.closeTimeline==='ASAP'||state.closeTimeline==='7-14 days');
       var routeURL= hot?CONFIG.CALENDLY_URL:CONFIG.JOTFORM_URL;
       state.leadStatus='qualified'; state.disqReason='';
       if (state.sending) return;
       state.sending = true;
+      
+      /* FIX 6: Added .finally() and error handling */
       sendToSupabase().then(function(){
         console.log('[DQ] Qualified lead submitted successfully');
         body.innerHTML='';
@@ -226,20 +237,20 @@
         var a=document.createElement('a'); a.target='_blank'; a.rel='noopener'; a.href=routeURL;
         var b=document.createElement('button'); b.className='cta'; b.appendChild(document.createTextNode('Open '+(hot?'Calendly':'Jotform')));
         a.appendChild(b); btns.appendChild(a); body.appendChild(btns);
-      }, function(){
-        console.error('[DQ] Qualified lead submission failed');
+      }, function(err){
+        console.error('[DQ] Qualified lead submission failed:', err);
         body.innerHTML='';
-        var pErr=document.createElement('p'); pErr.style.color='#ef4444'; pErr.style.fontWeight='600'; pErr.appendChild(document.createTextNode('⚠ Submission failed, but you can still proceed:'));
+        var pErr=document.createElement('p'); pErr.style.color='#ef4444'; pErr.style.fontWeight='600'; pErr.appendChild(document.createTextNode('⚠ Submission failed. Please try again.'));
         body.appendChild(pErr);
-        var btns=document.createElement('div'); btns.className='btns';
-        var a=document.createElement('a'); a.target='_blank'; a.rel='noopener'; a.href=routeURL;
-        var b=document.createElement('button'); b.className='cta'; b.appendChild(document.createTextNode('Open '+(hot?'Calendly':'Jotform')));
-        a.appendChild(b); btns.appendChild(a); body.appendChild(btns);
+        // Re-enable form on failure
+        btn.disabled = false; btn.textContent = 'Submit';
+        try{ f1.disabled=false; f2.disabled=false; f3.disabled=false; }catch(e){}
+
         var p2=document.createElement('p'); p2.className='small'; p2.appendChild(document.createTextNode('Or email '));
         var a2=document.createElement('a'); a2.className='link'; a2.href='mailto:'+CONFIG.BUSINESS_EMAIL; a2.appendChild(document.createTextNode(CONFIG.BUSINESS_EMAIL));
         p2.appendChild(a2); body.appendChild(p2);
-      }).finally(function(){
-        state.sending = false;
+      }).finally(function() {
+        state.sending = false; // Reset sending state on success or failure
       });
     }
 
