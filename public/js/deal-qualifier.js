@@ -198,7 +198,7 @@
         btn.disabled = true; btn.textContent = 'Sending…';
         try{ f1.disabled=true; f2.disabled=true; f3.disabled=true; }catch(e){}
         sendToSupabase().then(function(){
-          body.innerHTML="<p style=\"color:#22c55e;font-weight:600;\">✓ Success! We\'ve received your info and will follow up soon.</p>";
+          body.innerHTML="<p style=\"color:#22c55e;font-weight:600;\">✓ Success! We've received your info and will follow up soon.</p>";
         }, function(err){
           console.error('[DQ] politeDQ submission failed:', err);
           body.innerHTML='<p style="color:#ef4444;">Submission failed. Please email <a href="mailto:'+CONFIG.BUSINESS_EMAIL+'" class="link">'+CONFIG.BUSINESS_EMAIL+'</a> or call '+CONFIG.BUSINESS_PHONE+'.</p>';
