@@ -32,13 +32,13 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About JLMCS Capital Advisory | Real Estate Financing Expertise</title>
+        <title>About JLMCS Funding | Real Estate Financing Expertise</title>
         <meta 
           name="description" 
-          content="Learn about JLMCS Capital Advisory and our mission to bridge the gap between real estate investors and the right capital solutions." 
+          content="Learn about JLMCS Funding and our mission to bridge the gap between real estate investors and the right capital solutions." 
         />
-        <meta property="og:title" content="About JLMCS Capital Advisory | Real Estate Financing Expertise" />
-        <meta property="og:description" content="Learn about JLMCS Capital Advisory and our mission to bridge the gap between real estate investors and the right capital solutions." />
+        <meta property="og:title" content="About JLMCS Funding | Real Estate Financing Expertise" />
+        <meta property="og:description" content="Learn about JLMCS Funding and our mission to bridge the gap between real estate investors and the right capital solutions." />
       </Helmet>
       
       <div className="min-h-screen bg-background">
@@ -72,7 +72,7 @@ const About = () => {
                 <figure className="w-full max-w-xs sm:max-w-sm">
                   <img
                     src={founderImageUrl}
-                    alt="Christopher Johnson, Founder of JLMCS Capital Advisory"
+                    alt="Christopher Johnson, Founder of JLMCS Funding"
                     className="rounded-lg shadow-xl aspect-square object-cover w-full object-top"
                     width="800"
                     height="800"

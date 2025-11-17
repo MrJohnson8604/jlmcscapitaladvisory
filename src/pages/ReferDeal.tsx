@@ -114,13 +114,13 @@ const ReferDeal = () => {
   return (
     <>
       <Helmet>
-        <title>Refer a Deal & Earn $500 | JLMCS Capital Advisory</title>
+        <title>Refer a Deal & Earn $500 | JLMCS Funding</title>
         <meta 
           name="description" 
-          content="Know someone who needs financing? Refer a deal to JLMCS Capital Advisory and earn $500 upon successful funding." 
+          content="Know someone who needs financing? Refer a deal to JLMCS Funding and earn $500 upon successful funding." 
         />
-        <meta property="og:title" content="Refer a Deal & Earn $500 | JLMCS Capital Advisory" />
-        <meta property="og:description" content="Know someone who needs financing? Refer a deal to JLMCS Capital Advisory and earn $500 upon successful funding." />
+        <meta property="og:title" content="Refer a Deal & Earn $500 | JLMCS Funding" />
+        <meta property="og:description" content="Know someone who needs financing? Refer a deal to JLMCS Funding and earn $500 upon successful funding." />
       </Helmet>
 
       <div className="min-h-screen">
@@ -306,7 +306,7 @@ const ReferDeal = () => {
                           onCheckedChange={(checked) => setValue('agreedToTerms', !!checked)}
                         />
                         <Label htmlFor="consent" className="text-sm">
-                          I consent to JLMCS Capital Advisory contacting this referral and understand 
+                          I consent to JLMCS Funding contacting this referral and understand 
                           that referral fees are paid only upon funding and where permitted by law. *
                         </Label>
                       </div>

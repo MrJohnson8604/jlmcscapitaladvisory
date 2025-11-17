@@ -52,12 +52,12 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>JLMCS Capital Advisory — Asset-Based Real Estate Financing</title>
+        <title>JLMCS Funding — Asset-Based Real Estate Financing</title>
         <meta 
           name="description" 
           content="Licensed, asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—fast, realistic approvals including no-appraisal/no-survey or BPO-only options nationwide." 
         />
-        <meta property="og:title" content="JLMCS Capital Advisory — Asset-Based Real Estate Financing" />
+        <meta property="og:title" content="JLMCS Funding — Asset-Based Real Estate Financing" />
         <meta property="og:description" content="Licensed, asset-based lenders for Fix & Flip, DSCR, New Construction, and Commercial Bridge—fast, realistic approvals including no-appraisal/no-survey or BPO-only options nationwide." />
       </Helmet>
       
@@ -146,7 +146,7 @@ const Index = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-center mb-10 sm:mb-12 lg:mb-16 text-primary px-2">
-                Why JLMCS Capital Advisory
+                Why JLMCS Funding
               </h2>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 {whyJLMCS.map((benefit, index) => <div key={index} className="flex items-start space-x-3 sm:space-x-4">

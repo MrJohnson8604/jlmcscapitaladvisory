@@ -32,13 +32,13 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Us | JLMCS Capital Advisory</title>
+        <title>Contact Us | JLMCS Funding</title>
         <meta 
           name="description" 
-          content="Contact JLMCS Capital Advisory to discuss your financing needs. Schedule a call or send us a message for a same-day response." 
+          content="Contact JLMCS Funding to discuss your financing needs. Schedule a call or send us a message for a same-day response." 
         />
-        <meta property="og:title" content="Contact Us | JLMCS Capital Advisory" />
-        <meta property="og:description" content="Contact JLMCS Capital Advisory to discuss your financing needs. Schedule a call or send us a message for a same-day response." />
+        <meta property="og:title" content="Contact Us | JLMCS Funding" />
+        <meta property="og:description" content="Contact JLMCS Funding to discuss your financing needs. Schedule a call or send us a message for a same-day response." />
       </Helmet>
       
       <div className="min-h-screen">

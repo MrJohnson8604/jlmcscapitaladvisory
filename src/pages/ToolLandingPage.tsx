@@ -72,12 +72,12 @@ const ToolLandingPage = () => {
   return (
     <>
       <Helmet>
-        <title>Free ROI & Term Sheet Calculator | JLMCS Capital Advisory</title>
+        <title>Free ROI & Term Sheet Calculator | JLMCS Funding</title>
         <meta 
           name="description" 
           content="Get free access to our professional-grade ROI & Term Sheet Calculator to analyze fix-and-flip deals in seconds." 
         />
-        <meta property="og:title" content="Free ROI & Term Sheet Calculator | JLMCS Capital Advisory" />
+        <meta property="og:title" content="Free ROI & Term Sheet Calculator | JLMCS Funding" />
         <meta property="og:description" content="Get free access to our professional-grade ROI & Term Sheet Calculator to analyze fix-and-flip deals in seconds." />
       </Helmet>
       

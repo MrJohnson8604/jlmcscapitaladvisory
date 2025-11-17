@@ -12,7 +12,7 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>Page Not Found | JLMCS Capital Advisory</title>
+        <title>Page Not Found | JLMCS Funding</title>
         <meta name="robots" content="noindex" />
       </Helmet>
       

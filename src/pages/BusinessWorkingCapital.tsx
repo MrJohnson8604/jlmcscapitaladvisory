@@ -5,12 +5,12 @@ const BusinessWorkingCapital = () => {
   return (
     <>
       <Helmet>
-        <title>Business Working Capital | JLMCS Capital Advisory</title>
+        <title>Business Working Capital | JLMCS Funding</title>
         <meta 
           name="description" 
           content="Explore options for business working capital, available upon request to help establish business credit and achieve your objectives." 
         />
-        <meta property="og:title" content="Business Working Capital | JLMCS Capital Advisory" />
+        <meta property="og:title" content="Business Working Capital | JLMCS Funding" />
         <meta property="og:description" content="Explore options for business working capital, available upon request to help establish business credit and achieve your objectives." />
       </Helmet>
       

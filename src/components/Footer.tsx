@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Copyright notice on the left */}
           <p className="text-xs text-primary-foreground/60 order-2 md:order-1">
-            © {new Date().getFullYear()} JLMCS Capital Advisory. All rights reserved.
+            © {new Date().getFullYear()} JLMCS Funding. All rights reserved.
           </p>
           
           {/* Navigation links on the right.

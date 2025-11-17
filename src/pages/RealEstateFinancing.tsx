@@ -26,12 +26,12 @@ const RealEstateFinancing = () => {
   return (
     <>
       <Helmet>
-        <title>Real Estate Financing Solutions | JLMCS Capital Advisory</title>
+        <title>Real Estate Financing Solutions | JLMCS Funding</title>
         <meta 
           name="description" 
           content="Explore our asset-based real estate financing for Fix & Flip, DSCR Rentals, New Construction, and Commercial Bridge loans." 
         />
-        <meta property="og:title" content="Real Estate Financing Solutions | JLMCS Capital Advisory" />
+        <meta property="og:title" content="Real Estate Financing Solutions | JLMCS Funding" />
         <meta property="og:description" content="Explore our asset-based real estate financing for Fix & Flip, DSCR Rentals, New Construction, and Commercial Bridge loans." />
       </Helmet>
       

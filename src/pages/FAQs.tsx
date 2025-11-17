@@ -29,12 +29,12 @@ const FAQs = () => {
   return (
     <>
       <Helmet>
-        <title>FAQs | JLMCS Capital Advisory</title>
+        <title>FAQs | JLMCS Funding</title>
         <meta 
           name="description" 
           content="Find clear answers to common questions about our asset-based lending programs, appraisals, credit, and closing processes." 
         />
-        <meta property="og:title" content="FAQs | JLMCS Capital Advisory" />
+        <meta property="og:title" content="FAQs | JLMCS Funding" />
         <meta property="og:description" content="Find clear answers to common questions about our asset-based lending programs, appraisals, credit, and closing processes." />
       </Helmet>
       

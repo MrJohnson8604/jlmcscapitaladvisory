@@ -176,7 +176,7 @@ const FormSettings = () => {
   return (
     <>
       <Helmet>
-        <title>Form Settings | JLMCS Capital Advisory</title>
+        <title>Form Settings | JLMCS Funding</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       

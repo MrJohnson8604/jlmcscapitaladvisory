@@ -41,7 +41,7 @@ const CalculatorPage = () => {
   return (
     <>
       <Helmet>
-        <title>ROI Calculator | JLMCS Capital Advisory</title>
+        <title>ROI Calculator | JLMCS Funding</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       

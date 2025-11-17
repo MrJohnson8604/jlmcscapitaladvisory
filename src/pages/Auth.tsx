@@ -97,7 +97,7 @@ const Auth = () => {
   return (
     <>
       <Helmet>
-        <title>Admin Access | JLMCS Capital Advisory</title>
+        <title>Admin Access | JLMCS Funding</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
