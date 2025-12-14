@@ -134,7 +134,7 @@ const About = () => {
               </Button>
               <Button asChild className="btn-hero-outline-white">
                 <a
-                  href="https://form.jotform.com/251521627688060"
+                  href="https://intake.jlmcsfunding.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

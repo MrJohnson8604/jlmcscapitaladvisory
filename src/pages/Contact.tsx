@@ -215,7 +215,7 @@ const Contact = () => {
                     </p>
                     <Button className="btn-amber">
                       <a 
-                        href="https://form.jotform.com/251521627688060"
+                        href="https://intake.jlmcsfunding.com/"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

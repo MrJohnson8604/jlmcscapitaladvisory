@@ -79,7 +79,7 @@ const ConfirmationPanel = ({ onClose }: ConfirmationPanelProps) => (
         className="bg-amber-500 text-gray-900 border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/45 rounded-xl px-6 py-3 font-semibold" 
         asChild
       >
-        <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
+        <a href="https://intake.jlmcsfunding.com/" target="_blank" rel="noopener noreferrer">
           Continue to Full Intake Form
         </a>
       </Button>
@@ -453,7 +453,7 @@ export const QuickIntakeForm = () => {
                       className="bg-amber-500 text-gray-900 border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/45 rounded-xl px-6 py-3 font-semibold" 
                       asChild
                     >
-                      <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
+                      <a href="https://intake.jlmcsfunding.com/" target="_blank" rel="noopener noreferrer">
                         Continue to Full Intake Form
                       </a>
                     </Button>

@@ -58,7 +58,7 @@ const RealEstateFinancing = () => {
                 </Button>
                 <Button className="btn-hero-outline-white">
                   <a 
-                    href="https://form.jotform.com/251521627688060"
+                    href="https://intake.jlmcsfunding.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -163,7 +163,7 @@ const RealEstateFinancing = () => {
               </Button>
               <Button className="btn-hero-white-outline">
                 <a 
-                  href="https://form.jotform.com/251521627688060"
+                  href="https://intake.jlmcsfunding.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

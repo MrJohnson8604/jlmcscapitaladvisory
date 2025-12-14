@@ -95,7 +95,7 @@ const Index = () => {
                   className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl text-base sm:text-lg px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto"
                   asChild
                 >
-                  <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
+                  <a href="https://intake.jlmcsfunding.com/" target="_blank" rel="noopener noreferrer">
                     Get Pre-Qualified
                   </a>
                 </Button>
@@ -302,7 +302,7 @@ const Index = () => {
                 className="btn-hero-outline-white text-base font-semibold"
                 asChild
               >
-                <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
+                <a href="https://intake.jlmcsfunding.com/" target="_blank" rel="noopener noreferrer">
                   Get Pre-Qualified
                 </a>
               </Button>
