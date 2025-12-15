@@ -57,11 +57,7 @@ const RealEstateFinancing = () => {
                   </a>
                 </Button>
                 <Button className="btn-hero-outline-white">
-                  <a 
-                    href="https://intake.jlmcsfunding.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="/intake-form">
                     Get Pre-Qualified
                   </a>
                 </Button>

@@ -214,11 +214,7 @@ const Contact = () => {
                       Already know your numbers? Get pre-qualified instantly with our online form.
                     </p>
                     <Button className="btn-amber">
-                      <a 
-                        href="https://intake.jlmcsfunding.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href="/intake-form">
                         Get Pre-Qualified
                       </a>
                     </Button>

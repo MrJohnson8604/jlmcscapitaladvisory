@@ -133,11 +133,7 @@ const About = () => {
                 </a>
               </Button>
               <Button asChild className="btn-hero-outline-white">
-                <a
-                  href="https://intake.jlmcsfunding.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="/intake-form">
                   Quick Intake Form
                 </a>
               </Button>

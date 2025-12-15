@@ -4,7 +4,7 @@
   var CONFIG = {
     SUPABASE_FUNCTION_URL: "https://zfypycrqovozdegxcooz.supabase.co/functions/v1/submit-deal-qualifier",
     CALENDLY_URL: "https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call",
-    JOTFORM_URL: "https://intake.jlmcsfunding.com/",
+    JOTFORM_URL: "/intake-form",
     SHOW_DELAY_MS: 3000, /* 3 seconds */
     FORCE_WIDGET_SHOW: true,
     DISMISS_DAYS: 7,
