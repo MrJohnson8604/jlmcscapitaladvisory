@@ -4,7 +4,7 @@
   var CONFIG = {
     SUPABASE_FUNCTION_URL: "https://zfypycrqovozdegxcooz.supabase.co/functions/v1/submit-deal-qualifier",
     CALENDLY_URL: "https://calendly.com/chris-johnson-jlmcsfunding/investor-consulting-call",
-    JOTFORM_URL: "/intake-form",
+    JOTFORM_URL: "https://www.jotform.com/251521627688060",
     SHOW_DELAY_MS: 3000, /* 3 seconds */
     FORCE_WIDGET_SHOW: true,
     DISMISS_DAYS: 7,
@@ -235,7 +235,7 @@
         var p=document.createElement('p'); p.appendChild(document.createTextNode("Continue here:")); body.appendChild(p);
         var btns=document.createElement('div'); btns.className='btns';
         var a=document.createElement('a'); a.target='_blank'; a.rel='noopener'; a.href=routeURL;
-        var b=document.createElement('button'); b.className='cta'; b.appendChild(document.createTextNode('Open '+(hot?'Calendly':'Intake Form')));
+        var b=document.createElement('button'); b.className='cta'; b.appendChild(document.createTextNode('Open '+(hot?'Calendly':'Jotform')));
         a.appendChild(b); btns.appendChild(a); body.appendChild(btns);
       }, function(err){
         console.error('[DQ] Qualified lead submission failed:', err);

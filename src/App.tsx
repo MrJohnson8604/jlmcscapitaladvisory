@@ -17,7 +17,6 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import ToolLandingPage from "./pages/ToolLandingPage";
 import CalculatorPage from "./pages/CalculatorPage";
-import IntakeForm from "./pages/IntakeForm";
 
 // Your Component Imports
 import Header from "./components/Header";
@@ -49,7 +48,6 @@ const App = () => (
                 <Route path="/refer-deal" element={<ReferDeal />} />
                 <Route path="/form-settings" element={<FormSettings />} />
                 <Route path="/auth" element={<Auth />} />
-                <Route path="/intake-form" element={<IntakeForm />} />
                 
                 {/* Tool Routes */}
                 <Route path="/resources/roi-calculator" element={<ToolLandingPage />} />

@@ -214,7 +214,11 @@ const Contact = () => {
                       Already know your numbers? Get pre-qualified instantly with our online form.
                     </p>
                     <Button className="btn-amber">
-                      <a href="/intake-form">
+                      <a 
+                        href="https://form.jotform.com/251521627688060"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Get Pre-Qualified
                       </a>
                     </Button>
