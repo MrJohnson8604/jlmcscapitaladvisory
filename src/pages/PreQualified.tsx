@@ -25,8 +25,8 @@ const PreQualified = () => {
         <meta property="og:description" content="Get pre-qualified for real estate financing. Fill out our intake form to get matched with the right lender for your deal." />
       </Helmet>
       
-      <div className="min-h-screen">
-        <section className="pt-20 pb-32 bg-slate-50">
+      <div className="w-full bg-slate-50">
+        <section className="pt-20 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
@@ -37,12 +37,12 @@ const PreQualified = () => {
                   Fill out our intake form to get matched with the right lender for your deal.
                 </p>
               </div>
-              <Card className="rounded-xl shadow-soft mb-8">
+              <Card className="rounded-xl shadow-soft mb-12">
                 <CardContent className="p-8">
-                  <div style={{ width: '100%', height: '800px' }}>
+                  <div style={{ width: '100%', minHeight: '1600px', height: 'auto' }}>
                     <iframe
                       src="https://api.leadconnectorhq.com/widget/form/ULAT3WIK2EAt13xnmM3Y"
-                      style={{ width: '100%', height: '100%', border: 'none', borderRadius: '3px' }}
+                      style={{ width: '100%', minHeight: '1600px', height: '100%', border: 'none', borderRadius: '3px' }}
                       id="inline-ULAT3WIK2EAt13xnmM3Y"
                       data-layout="{'id':'INLINE'}"
                       data-trigger-type="alwaysShow"
@@ -63,6 +63,8 @@ const PreQualified = () => {
             </div>
           </div>
         </section>
+        {/* Large spacer to push footer down below the form */}
+        <div className="h-48 bg-slate-50"></div>
       </div>
     </>
   );
