@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, TrendingUp, Users, Clock, Shield } from "lucide-react";
-import { FormIframe } from "@/components/FormIframe";
+import { QuickIntakeForm } from "@/components/QuickIntakeForm";
 import sanAntonioFlip from "@/assets/san-antonio-flip-optimized.webp";
 import houstonCompleted from "@/assets/houston-completed-optimized.webp";
 import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
@@ -95,7 +95,7 @@ const Index = () => {
                   className="bg-amber-500 text-white border-2 border-amber-500 hover:bg-white hover:text-amber-500 active:bg-white active:text-amber-500 focus:ring-amber-500/50 rounded-xl text-base sm:text-lg px-6 sm:px-10 py-4 sm:py-5 w-full sm:w-auto"
                   asChild
                 >
-                  <a href="https://form.jotform.com/251521627688060" target="_blank" rel="noopener noreferrer">
+                  <a href="/get-pre-qualified">
                     Get Pre-Qualified
                   </a>
                 </Button>
@@ -113,25 +113,7 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="quick-intake-section" className="py-20 bg-slate-50">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-2xl mx-auto">
-              <div className="text-center mb-10">
-                <h2 className="text-4xl font-display font-bold mb-4 text-primary">
-                  Quick Deal Intake
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  Share the basics—get matched to a lender fast.
-                </p>
-              </div>
-              <Card className="rounded-xl shadow-soft">
-                <CardContent className="p-8">
-                  <FormIframe height="800px" />
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
+        <QuickIntakeForm />
 
         <section className="py-12 sm:py-16 lg:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,10 +1,33 @@
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, Mail, Clock } from "lucide-react";
-import { FormIframe } from "@/components/FormIframe";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+      title: "Message Sent!",
+      description: "We'll get back to you within 24 hours.",
+    });
+    
+    setIsSubmitting(false);
+    (e.target as HTMLFormElement).reset();
+  };
 
   return (
     <>
@@ -53,7 +76,65 @@ const Contact = () => {
                 </h2>
                 <Card className="shadow-medium">
                   <CardContent className="p-6">
-                    <FormIframe height="800px" />
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="name">Name *</Label>
+                          <Input id="name" name="name" required />
+                        </div>
+                        <div>
+                          <Label htmlFor="email">Email *</Label>
+                          <Input id="email" name="email" type="email" required />
+                        </div>
+                      </div>
+                      
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="phone">Phone</Label>
+                          <Input id="phone" name="phone" type="tel" />
+                        </div>
+                        <div>
+                          <Label htmlFor="state">State</Label>
+                          <Input id="state" name="state" placeholder="e.g., FL, TX, CA" />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="dealType">Deal Type</Label>
+                          <Select name="dealType">
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select deal type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="fix-flip">Fix & Flip</SelectItem>
+                              <SelectItem value="dscr">DSCR Rental</SelectItem>
+                              <SelectItem value="new-construction">New Construction</SelectItem>
+                              <SelectItem value="commercial">Commercial Bridge</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="loanAmount">Estimated Loan Amount</Label>
+                          <Input id="loanAmount" name="loanAmount" placeholder="e.g., $250,000" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="message">Message</Label>
+                        <Textarea 
+                          id="message" 
+                          name="message" 
+                          rows={4}
+                          placeholder="Tell us about your project..."
+                        />
+                      </div>
+
+                      <Button type="submit" disabled={isSubmitting} className="btn-amber w-full">
+                        {isSubmitting ? "Sending..." : "Send Message"}
+                      </Button>
+                    </form>
                   </CardContent>
                 </Card>
               </div>
@@ -133,11 +214,7 @@ const Contact = () => {
                       Already know your numbers? Get pre-qualified instantly with our online form.
                     </p>
                     <Button className="btn-amber">
-                      <a 
-                        href="https://form.jotform.com/251521627688060"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href="/get-pre-qualified">
                         Get Pre-Qualified
                       </a>
                     </Button>

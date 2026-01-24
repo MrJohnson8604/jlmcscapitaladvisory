@@ -57,11 +57,7 @@ const RealEstateFinancing = () => {
                   </a>
                 </Button>
                 <Button className="btn-hero-outline-white">
-                  <a 
-                    href="https://form.jotform.com/251521627688060"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="/get-pre-qualified">
                     Get Pre-Qualified
                   </a>
                 </Button>

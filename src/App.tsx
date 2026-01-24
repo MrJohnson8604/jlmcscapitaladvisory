@@ -17,6 +17,7 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import ToolLandingPage from "./pages/ToolLandingPage";
 import CalculatorPage from "./pages/CalculatorPage";
+import PreQualified from "./pages/PreQualified";
 
 // Your Component Imports
 import Header from "./components/Header";
@@ -47,6 +48,7 @@ const App = () => (
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/refer-deal" element={<ReferDeal />} />
                 <Route path="/form-settings" element={<FormSettings />} />
+                <Route path="/get-pre-qualified" element={<PreQualified />} />
                 <Route path="/auth" element={<Auth />} />
                 
                 {/* Tool Routes */}
