@@ -26,7 +26,7 @@ const PreQualified = () => {
       </Helmet>
       
       <div className="min-h-screen">
-        <section className="py-20 bg-slate-50">
+        <section className="pt-20 pb-32 bg-slate-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
@@ -37,7 +37,7 @@ const PreQualified = () => {
                   Fill out our intake form to get matched with the right lender for your deal.
                 </p>
               </div>
-              <Card className="rounded-xl shadow-soft">
+              <Card className="rounded-xl shadow-soft mb-8">
                 <CardContent className="p-8">
                   <div style={{ width: '100%', height: '800px' }}>
                     <iframe
