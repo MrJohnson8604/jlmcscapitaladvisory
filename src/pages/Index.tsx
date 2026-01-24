@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, TrendingUp, Users, Clock, Shield } from "lucide-react";
-import { QuickIntakeForm } from "@/components/QuickIntakeForm";
+import { FormIframe } from "@/components/FormIframe";
 import sanAntonioFlip from "@/assets/san-antonio-flip-optimized.webp";
 import houstonCompleted from "@/assets/houston-completed-optimized.webp";
 import houstonFlipInterior from "@/assets/houston-flip-interior-optimized.webp";
@@ -113,7 +113,25 @@ const Index = () => {
           </div>
         </section>
 
-        <QuickIntakeForm />
+        <section id="quick-intake-section" className="py-20 bg-slate-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-4xl font-display font-bold mb-4 text-primary">
+                  Quick Deal Intake
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  Share the basics—get matched to a lender fast.
+                </p>
+              </div>
+              <Card className="rounded-xl shadow-soft">
+                <CardContent className="p-8">
+                  <FormIframe height="800px" />
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
 
         <section className="py-12 sm:py-16 lg:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
